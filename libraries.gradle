@@ -1,0 +1,68 @@
+/*
+ * libraries.gradle 2020. 4. 22
+ *
+ * Copyright 2020 BasicBug. All rights Reserved.
+ *
+ */
+
+ext {
+    def retrofit_version = '2.7.1'
+    def gson_version = '2.5.0'
+    def recyclerview_version = '1.1.0'
+    def glide_version = '4.11.0'
+    def room_version = '2.2.4'
+    def stetho_version = '1.5.1'
+    def material_version = '1.1.0'
+    def firebase_analytics_version = '17.2.2'
+    def firebase_messaging_version = '20.1.0'
+    def naver_id_login_version = '4.2.6'
+    def design_version = '27.1.1'
+    def rx_version = '3.0.0'
+    def lifecycle_version = '1.1.0'
+
+
+    webservice_libraries = [
+            gson                   : "com.google.code.gson:gson:$gson_version",
+            retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
+            retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
+    ]
+    image_loadLibraries = [
+            glide           : "com.github.bumptech.glide:glide:$glide_version",
+            glide_annotation: "com.github.bumptech.glide:compiler:$glide_version",
+
+    ]
+    database_ibraries = [
+            room           : "androidx.room:room-runtime:$room_version",
+            room_annotation: "androidx.room:room-compiler:$room_version",
+    ]
+    listview_libraries = [
+            recyclerview: "androidx.recyclerview:recyclerview:$recyclerview_version",
+    ]
+    debugger_libraries = [
+            stetho_main: "com.facebook.stetho:stetho-okhttp3:$stetho_version",
+            stetho     : "com.facebook.stetho:stetho-okhttp3:$stetho_version",
+    ]
+
+    firebase_libraries = [
+            firebase_analytics: "com.google.firebase:firebase-analytics:$firebase_analytics_version",
+            firebase_messaging: "com.google.firebase:firebase-messaging:$firebase_messaging_version"
+    ]
+
+    login_libraries = [
+            naver_id_Login: "com.naver.nid:naveridlogin-android-sdk:$naver_id_login_version"
+    ]
+
+    design_libraries = [
+            design    : "com.android.support:design:$design_version",
+            navigation: "com.google.android.material:material:$material_version",
+    ]
+
+    rx_java_libraries = [
+            rx_java   : "io.reactivex.rxjava3:rxandroid:$rx_version",
+            rx_android: "io.reactivex.rxjava3:rxjava:$rx_version",
+    ]
+
+    lifecycle_libraries = [
+            lifecycle: "android.arch.lifecycle:extensions:$lifecycle_version",
+    ]
+}
