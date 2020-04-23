@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Messenger</string>
+    <string name="chat_hint">메세지를 입력하세요.</string>
+    <string name="chat_button">보내기</string>
+    <string name="sample_message">sample message</string>
+    <string name="base_friend_name">Unknown</string>
+    <string name="logout">로그아웃</string>
 </resources>
