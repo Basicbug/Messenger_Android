@@ -25,6 +25,7 @@ ext {
             gson                   : "com.google.code.gson:gson:$gson_version",
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
+            retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
     ]
     image_loadLibraries = [
             glide           : "com.github.bumptech.glide:glide:$glide_version",
