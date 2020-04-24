@@ -8,7 +8,8 @@
 package com.example.messenger.network.service
 
 import com.example.messenger.repository.model.Sample
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
+
 import retrofit2.http.GET
 
 /**
@@ -16,6 +17,6 @@ import retrofit2.http.GET
  */
 
 interface SampleService {
-    @GET("")
+    @GET("/test/json")
     fun getSample(): Single<Sample>
 }

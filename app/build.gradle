@@ -2,11 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: '../libraries.gradle'
-
+apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
-
     defaultConfig {
         applicationId "com.example.messenger"
         minSdkVersion 26
@@ -27,6 +26,15 @@ android {
     dataBinding {
         enabled = true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
 
 }
 
@@ -47,9 +55,10 @@ dependencies {
     annotationProcessor image_loadLibraries.glide_annotation
 
     implementation database_ibraries.room
-    annotationProcessor database_ibraries.room_annotation
+    kapt database_ibraries.room_annotation
+    implementation database_ibraries.room_kotline
 
-    implementation listview_libraries.values()
+    implementation view_libraries.values()
 
     implementation debugger_libraries.values()
 

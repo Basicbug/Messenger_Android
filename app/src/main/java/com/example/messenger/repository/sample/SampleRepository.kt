@@ -7,13 +7,13 @@
 
 package com.example.messenger.repository.sample
 
-import com.example.messenger.repository.model.Sample
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.Single
+
 
 /**
  * @author MyeongKi
  */
 
 interface SampleRepository {
-    fun getSample(): Single<Sample>
+    fun getSample(): Single<String>
 }

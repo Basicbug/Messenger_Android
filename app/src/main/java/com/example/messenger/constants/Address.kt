@@ -11,4 +11,4 @@ package com.example.messenger.constants
  * @author MyeongKi
  */
 
-const val BASE_URL: String = ""
+const val BASE_URL: String = "https://fast-garden-84224.herokuapp.com"

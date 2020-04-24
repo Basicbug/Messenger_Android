@@ -8,6 +8,7 @@
 package com.example.messenger
 
 import android.app.Application
+import android.content.Context
 
 /**
  * @author MyeongKi
@@ -15,4 +16,16 @@ import android.app.Application
 
 class MessengerApp : Application() {
 
+    init {
+        instance = this
+
+    }
+
+
+    companion object {
+        private var instance: MessengerApp? = null
+        fun applicationContext(): Context {
+            return instance!!.applicationContext
+        }
+    }
 }

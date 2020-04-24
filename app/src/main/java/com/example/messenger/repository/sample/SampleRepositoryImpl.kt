@@ -7,22 +7,42 @@
 
 package com.example.messenger.repository.sample
 
+import android.content.Context
+import com.example.messenger.database.sample.SampleDatabase
 import com.example.messenger.network.ApiHelper
 import com.example.messenger.network.service.SampleService
-import com.example.messenger.repository.model.Sample
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * @author MyeongKi
  */
 
-class SampleRepositoryImpl : SampleRepository {
+class SampleRepositoryImpl(context: Context) : SampleRepository {
 
-    override fun getSample(): Single<Sample> {
-        return ApiHelper.createApiByService(SampleService::class).getSample().subscribeOn(Schedulers.io())
+    val sampleDao = SampleDatabase.getDatabase(context).sampleDao()
+
+    override fun getSample(): Single<String> {
+        return ApiHelper
+            .createApiByService(SampleService::class)
+            .getSample()
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .map { it.email }
+
     }
 
+
+    companion object {
+
+        // For Singleton instantiation
+        @Volatile
+        private var instance: SampleRepositoryImpl? = null
+
+        fun getInstance(context: Context) =
+            instance ?: synchronized(this) {
+                instance ?: SampleRepositoryImpl(context).also { instance = it }
+            }
+    }
 }
