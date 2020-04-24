@@ -7,12 +7,14 @@
 
 package com.example.messenger.repository.model
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 /**
  * @author MyeongKi
  */
 
+@Entity
 data class Sample(
     @SerializedName("testResult") val testResult: String?
 )

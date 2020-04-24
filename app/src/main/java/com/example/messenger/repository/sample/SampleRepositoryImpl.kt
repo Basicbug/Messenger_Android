@@ -21,7 +21,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 class SampleRepositoryImpl : SampleRepository {
 
     override fun getSample(): Single<Sample> {
-
         return ApiHelper.createApiByService(SampleService::class).getSample().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
