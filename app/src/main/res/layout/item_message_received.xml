@@ -11,47 +11,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/imageFriend"
-        android:layout_width="32sp"
-        android:layout_height="32sp"
+        android:id="@+id/image_friend"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:background="@drawable/circle"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8sp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textFriendName"
+        android:id="@+id/text_friend_name"
         android:text="@string/base_friend_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        app:layout_constraintLeft_toRightOf="@+id/imageFriend"
-        android:layout_marginLeft="8sp"
+        app:layout_constraintStart_toEndOf="@+id/image_friend"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="4sp" />
+        android:layout_marginTop="4dp" />
 
     <TextView
-        android:id="@+id/textMessageBody"
+        android:id="@+id/text_message_body"
         android:text="@string/sample_message"
         android:background="@drawable/rounded_rectangle_grey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="240sp"
-        android:padding="8sp"
+        android:maxWidth="240dp"
+        android:padding="8dp"
         android:textColor="#ffffff"
-        android:layout_marginTop="4sp"
-        app:layout_constraintTop_toBottomOf="@+id/textFriendName"
-        app:layout_constraintLeft_toRightOf="@+id/imageFriend"
-        android:layout_marginLeft="8sp" />
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_friend_name"
+        app:layout_constraintStart_toEndOf="@+id/image_friend"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"/>
 
     <TextView
-        android:id="@+id/textMessageTime"
-        android:text="11:40"
+        android:id="@+id/text_message_time"
+        android:text="@string/sample_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        app:layout_constraintLeft_toRightOf="@+id/textMessageBody"
-        android:layout_marginLeft="4sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textMessageBody" />
+        app:layout_constraintStart_toEndOf="@+id/text_message_body"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_message_body" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
