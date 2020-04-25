@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ rounded_rectangle_grey.xml 2020. 4. 23
+  ~
+  ~ Copyright 2020 BasicBug. All rights Reserved.
+  -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@color/grey"/>
+    <corners android:topLeftRadius="5sp" android:radius="20sp"/>
+
+</shape>
