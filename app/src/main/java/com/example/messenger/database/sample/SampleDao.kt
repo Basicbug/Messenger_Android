@@ -7,12 +7,13 @@
 
 package com.example.messenger.database.sample
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.messenger.repository.model.Sample
+import io.reactivex.Completable
+import io.reactivex.Single
 
 /**
  * @author MyeongKi
@@ -20,8 +21,8 @@ import com.example.messenger.repository.model.Sample
 @Dao
 interface SampleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSample(sample: Sample)
+    fun insertSample(sample: Sample?): Completable
 
     @Query("SELECT * FROM sample")
-    fun getSample(): LiveData<List<Sample>>
+    fun getSample(): Single<List<Sample>>
 }

@@ -7,14 +7,12 @@
 
 package com.example.messenger.repository.sample
 
-import android.content.Context
-
 /**
  * @author MyeongKi
  */
 
 object SampleRepositoryInjector {
-    fun getSampleRepositoryImpl(context: Context):SampleRepositoryImpl{
-        return SampleRepositoryImpl.getInstance(context)
+    fun getSampleRepositoryImpl(): SampleRepositoryImpl {
+        return SampleRepositoryImpl.getInstance()
     }
 }

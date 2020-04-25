@@ -7,6 +7,8 @@
 
 package com.example.messenger.repository.sample
 
+import com.example.messenger.repository.model.Sample
+import io.reactivex.Completable
 import io.reactivex.Single
 
 
@@ -15,5 +17,7 @@ import io.reactivex.Single
  */
 
 interface SampleRepository {
-    fun getSample(): Single<String>
+    fun getSampleFromServer(): Single<Sample>
+    fun getSampleFromLocal(): Single<Sample>
+    fun saveSample(sample: Sample?): Completable
 }

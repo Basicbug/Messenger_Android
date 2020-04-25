@@ -27,15 +27,16 @@ ext {
             retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
             retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     ]
-    image_loadLibraries = [
+    image_libraries = [
             glide           : "com.github.bumptech.glide:glide:$glide_version",
             glide_annotation: "com.github.bumptech.glide:compiler:$glide_version",
 
     ]
-    database_ibraries = [
+    database_libraries = [
             room           : "androidx.room:room-runtime:$room_version",
             room_annotation: "androidx.room:room-compiler:$room_version",
-            room_kotline   : "androidx.room:room-ktx:$room_version"
+            room_kotline   : "androidx.room:room-ktx:$room_version",
+            room_rx_java   : "androidx.room:room-rxjava2:$room_version"
 
     ]
     view_libraries = [

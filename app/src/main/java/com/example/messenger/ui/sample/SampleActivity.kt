@@ -22,11 +22,11 @@ class SampleActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sampleViewModel =
-            SampleViewModelInjector.provideSampleViewModelFactor(this).create(SampleViewModel::class.java)
+            SampleViewModelInjector.provideSampleViewModelFactor().create(SampleViewModel::class.java)
 
         val binding: ActivitySampleBinding = DataBindingUtil.setContentView(this, R.layout.activity_sample)
         binding.lifecycleOwner = this
         binding.viewModel = sampleViewModel
-        sampleViewModel.loadSampleData()
+
     }
 }

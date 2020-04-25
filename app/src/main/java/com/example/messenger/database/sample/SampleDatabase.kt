@@ -7,10 +7,10 @@
 
 package com.example.messenger.database.sample
 
-import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.messenger.MessengerApp
 import com.example.messenger.repository.model.Sample
 
 /**
@@ -24,8 +24,8 @@ abstract class SampleDatabase : RoomDatabase() {
     companion object {
         private const val DB_NAME = "smaple.db"
         @JvmStatic
-        fun getDatabase(context: Context): SampleDatabase {
-            return Room.databaseBuilder(context, SampleDatabase::class.java, DB_NAME).build()
+        fun getDatabase(): SampleDatabase {
+            return Room.databaseBuilder(MessengerApp.applicationContext(), SampleDatabase::class.java, DB_NAME).build()
         }
     }
 }

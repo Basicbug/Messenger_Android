@@ -11,17 +11,81 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.loadSampleData()}"
+            android:text="load from server"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/save_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.saveSampleData()}"
+            android:text="save to local"
+            app:layout_constraintBottom_toTopOf="@+id/load"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/load_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.loadSampleDataFromLocal()}"
+            android:text="load from local"
+            app:layout_constraintBottom_toTopOf="@+id/save_local"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/title_load_server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="load from server"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sample_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/sample_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.sampleResult}"
+            android:text="@{viewModel.sampleResult.toString()}"
             android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/title_load_server"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/title_load_server"
+            app:layout_constraintTop_toTopOf="@id/title_load_server"></TextView>
+
+        <TextView
+            android:id="@+id/title_load_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="load from local"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/sample_text"
+            app:layout_constraintEnd_toStartOf="@+id/sample_text_local"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sample_text_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.sampleResultLocal.toString()}"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/title_load_local"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/title_load_local"
+            app:layout_constraintTop_toTopOf="@id/title_load_local"></TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

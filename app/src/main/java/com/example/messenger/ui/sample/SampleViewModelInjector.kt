@@ -7,7 +7,6 @@
 
 package com.example.messenger.ui.sample
 
-import android.content.Context
 import com.example.messenger.repository.sample.SampleRepositoryInjector
 
 /**
@@ -16,9 +15,8 @@ import com.example.messenger.repository.sample.SampleRepositoryInjector
 
 object SampleViewModelInjector {
     fun provideSampleViewModelFactor(
-        context: Context
     ): SampleViewModelFactory {
-        val repository = SampleRepositoryInjector.getSampleRepositoryImpl(context)
+        val repository = SampleRepositoryInjector.getSampleRepositoryImpl()
         return SampleViewModelFactory(repository)
     }
 }

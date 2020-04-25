@@ -7,10 +7,11 @@
 
 package com.example.messenger.repository.sample
 
-import android.content.Context
 import com.example.messenger.database.sample.SampleDatabase
 import com.example.messenger.network.ApiHelper
 import com.example.messenger.network.service.SampleService
+import com.example.messenger.repository.model.Sample
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -19,20 +20,31 @@ import io.reactivex.schedulers.Schedulers
  * @author MyeongKi
  */
 
-class SampleRepositoryImpl(context: Context) : SampleRepository {
+class SampleRepositoryImpl : SampleRepository {
 
-    val sampleDao = SampleDatabase.getDatabase(context).sampleDao()
+    private val sampleDao = SampleDatabase.getDatabase().sampleDao()
 
-    override fun getSample(): Single<String> {
+    override fun getSampleFromServer(): Single<Sample> {
         return ApiHelper
             .createApiByService(SampleService::class)
             .getSample()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.email }
 
     }
 
+    override fun getSampleFromLocal(): Single<Sample> {
+        return sampleDao.getSample()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()).map { it[0] }
+    }
+
+    override fun saveSample(sample: Sample?): Completable {
+        return sampleDao.insertSample(sample)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    }
 
     companion object {
 
@@ -40,9 +52,9 @@ class SampleRepositoryImpl(context: Context) : SampleRepository {
         @Volatile
         private var instance: SampleRepositoryImpl? = null
 
-        fun getInstance(context: Context) =
+        fun getInstance() =
             instance ?: synchronized(this) {
-                instance ?: SampleRepositoryImpl(context).also { instance = it }
+                instance ?: SampleRepositoryImpl().also { instance = it }
             }
     }
 }

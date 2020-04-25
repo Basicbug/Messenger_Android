@@ -51,13 +51,13 @@ dependencies {
 
     implementation webservice_libraries.values()
 
-    implementation image_loadLibraries.glide
-    annotationProcessor image_loadLibraries.glide_annotation
+    implementation image_libraries.glide
+    annotationProcessor image_libraries.glide_annotation
 
-    implementation database_ibraries.room
-    kapt database_ibraries.room_annotation
-    implementation database_ibraries.room_kotline
-
+    implementation database_libraries.room
+    kapt database_libraries.room_annotation
+    implementation database_libraries.room_kotline
+    implementation database_libraries.room_rx_java
     implementation view_libraries.values()
 
     implementation debugger_libraries.values()
