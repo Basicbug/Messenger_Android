@@ -1,5 +1,5 @@
 /*
- * Address.kt 2020. 4. 23
+ * IntentConstants.kt 2020. 4. 27
  *
  * Copyright 2020 BasicBug. All rights Reserved.
  *
@@ -11,4 +11,6 @@ package com.example.messenger.constants
  * @author MyeongKi
  */
 
-const val BASE_URL: String = "https://fast-garden-84224.herokuapp.com"
+object FcmConstants{
+    const val BUNDLE = "fcm_bundle"
+}
