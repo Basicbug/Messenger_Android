@@ -7,4 +7,5 @@
     <string name="login">네이버 아이디로 로그인</string>
     <string name="logout">로그아웃</string>
     <string name="sample_time">12:06</string>
+    <string name="channel_push_message">메시지</string>>
 </resources>
