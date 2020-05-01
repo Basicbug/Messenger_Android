@@ -9,7 +9,7 @@ package com.example.messenger.network
 
 import com.example.messenger.BuildConfig
 import com.example.messenger.MessengerApp
-import com.example.messenger.constants.BASE_URL
+import com.example.messenger.constants.NetworkConstants
 import com.facebook.stetho.Stetho
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -36,7 +36,7 @@ object ApiHelper {
         }
         return Retrofit
             .Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(NetworkConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
