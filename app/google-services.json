@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "521132984437",
+    "firebase_url": "https://basicbugmessenger.firebaseio.com",
+    "project_id": "basicbugmessenger",
+    "storage_bucket": "basicbugmessenger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521132984437:android:54fa5a7d76e3a95501503c",
+        "android_client_info": {
+          "package_name": "com.example.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521132984437-4tlavqplfbnqaasu6j0h48usfufv9gh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnxHbYQbvARrSoRtwTs9RxeSw12GzpZh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "521132984437-4tlavqplfbnqaasu6j0h48usfufv9gh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
