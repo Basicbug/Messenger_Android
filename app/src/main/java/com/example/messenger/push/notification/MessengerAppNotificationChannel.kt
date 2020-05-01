@@ -18,7 +18,7 @@ import com.example.messenger.R
  */
 
 enum class MessengerAppNotificationChannel(val id: String, private val nameId: Int, private val channelImportance: Int) {
-    MESSAGE("message_channel", R.string.channel_push_message, NotificationManager.IMPORTANCE_DEFAULT);
+    MESSAGE("message_channel", R.string.channel_push_message, NotificationManager.IMPORTANCE_HIGH);
 
     fun createNotificationChannel(notificationManager: NotificationManager) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
