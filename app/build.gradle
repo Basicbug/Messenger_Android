@@ -73,7 +73,4 @@ dependencies {
     implementation rx_java_libraries.values()
 
     implementation lifecycle_libraries.values()
-
-    implementation files('libs/naveridlogin_android_sdk_4.2.6.aar')
-    implementation support_libraries.values()
 }
