@@ -20,7 +20,7 @@ data class Message(
     val senderName: String,
     val receiverName: String,
     val messageType: MessageType,
-    val messageContents: String,
+    val messageContent: String,
     val messageTime: String
 ) : PushItem {
     override fun getTitle(): String {
@@ -30,10 +30,10 @@ data class Message(
     override fun getContent(): String {
         return when (messageType) {
             MessageType.MESSAGE -> {
-                messageContents
+                messageContent
             }
             MessageType.IMAGE -> {
-                MessengerApp.applicationContext().resources.getString(R.string.image_message_contents)
+                MessengerApp.applicationContext().resources.getString(R.string.image_message_content)
             }
             else -> {
                 ""

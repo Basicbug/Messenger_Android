@@ -8,7 +8,7 @@
     <string name="logout">로그아웃</string>
     <string name="sample_time">12:06</string>
     <string name="channel_push_message">메시지</string>
-    <string name ="image_message_contents">이미지</string>
+    <string name ="image_message_content">이미지</string>
 
     <string name="navigation_friends_item">친구</string>
     <string name="navigation_chatting_rooms_item">대화</string>

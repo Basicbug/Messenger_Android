@@ -18,9 +18,12 @@ import com.example.messenger.databinding.ActivityStartBinding
  */
 
 class StartActivity :BaseActivity(){
+    lateinit var binding: ActivityStartBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityStartBinding = DataBindingUtil.setContentView(this, R.layout.activity_start)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_start)
         binding.helper = StartBottomNavigationHelper(this)
     }
+
 }
