@@ -24,10 +24,13 @@ class StartBottomNavigationHelper(val activity: BaseActivity):BaseHelper{
 
         (view as BottomNavigationView).setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.action_one -> {
+                R.id.friends_item -> {
                     true
                 }
-                R.id.action_two -> {
+                R.id.chatting_rooms_item -> {
+                    true
+                }
+                R.id.settings_item -> {
                     true
                 }
                 else -> {

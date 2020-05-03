@@ -11,6 +11,8 @@
     <string name ="image_message_contents">이미지</string>
 
     <string name="navigation_friends_item">친구</string>
-    <string name="navigation_chat_room_item">대화</string>
+    <string name="navigation_chatting_rooms_item">대화</string>
+
+    <string name="navigation_settings_item">설정</string>
 
 </resources>
