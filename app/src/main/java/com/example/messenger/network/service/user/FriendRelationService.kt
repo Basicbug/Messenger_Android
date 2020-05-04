@@ -7,7 +7,7 @@
 
 package com.example.messenger.network.service.user
 
-import android.util.ArrayMap
+import com.example.messenger.repository.model.ApiDataList
 import com.example.messenger.repository.model.user.FriendRelation
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -18,5 +18,5 @@ import retrofit2.http.GET
 
 interface FriendRelationService {
     @GET("")
-    fun getFriendRelationList(userId: String): Single<ArrayMap<String, ArrayList<FriendRelation>>>
+    fun getFriendRelationList(userId: String): Single<ApiDataList<FriendRelation>>
 }

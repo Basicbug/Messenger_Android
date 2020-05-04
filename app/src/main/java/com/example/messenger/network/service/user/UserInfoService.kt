@@ -7,7 +7,7 @@
 
 package com.example.messenger.network.service.user
 
-import android.util.ArrayMap
+import com.example.messenger.repository.model.ApiData
 import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -18,5 +18,5 @@ import retrofit2.http.GET
 
 interface UserInfoService {
     @GET("")
-    fun getUserInfo(userId:String): Single<ArrayMap<String, UserInfo>>
+    fun getUserInfo(userId:String): Single<ApiData<UserInfo>>
 }
