@@ -1,0 +1,28 @@
+/*
+ * FriendRelation.kt 2020. 5. 5
+ *
+ * Copyright 2020 BasicBug. All rights Reserved.
+ *
+ */
+
+package com.example.messenger.repository.model.user
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
+/**
+ * @author MyeongKi
+ */
+@Entity
+data class FriendRelation(
+    @PrimaryKey
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("uid")
+    override val uid: String,
+    @SerializedName("frienduid")
+    val friendUid: String,
+    @SerializedName("meetAt")
+    val meetAt: String
+):User

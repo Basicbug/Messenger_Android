@@ -7,13 +7,14 @@
 
 package com.example.messenger.repository.user
 
-import com.example.messenger.repository.model.User
+import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.Single
 
 /**
  * @author MyeongKi
  */
 
-interface UserRepository {
-    fun getFriends(userId: String): Single<ArrayList<User>>
+interface UserInfoRepository {
+    fun getUserInfoFromServer(userId: String): Single<UserInfo>
+
 }

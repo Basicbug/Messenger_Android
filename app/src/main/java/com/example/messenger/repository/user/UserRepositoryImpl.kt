@@ -7,25 +7,18 @@
 
 package com.example.messenger.repository.user
 
-import com.example.messenger.network.ApiHelper
-import com.example.messenger.network.service.UserService
-import com.example.messenger.repository.model.User
+import com.example.messenger.database.user.UserDatabase
+import com.example.messenger.repository.model.user.FriendRelation
+import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 /**
  * @author MyeongKi
  */
-class UserRepositoryImpl : UserRepository {
+class UserRepositoryImpl : UserInfoRepository, FriendRelationRepository {
+    private val userInfoDao = UserDatabase.getDatabase().userInfoDao()
+    private val friendRelationDao = UserDatabase.getDatabase().friendRelationDao()
 
-    override fun getFriends(userId: String): Single<ArrayList<User>> {
-        return ApiHelper
-            .createApiByService(UserService::class)
-            .getFriends(userId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }//TODO 여기서 로컬 로직 추가...
 
     companion object {
 
@@ -37,6 +30,14 @@ class UserRepositoryImpl : UserRepository {
             instance ?: synchronized(this) {
                 instance ?: UserRepositoryImpl().also { instance = it }
             }
+    }
+
+    override fun getUserInfoFromServer(userId: String): Single<UserInfo> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getFriendRelationListFromServer(userId: String): Single<ArrayList<FriendRelation>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }
