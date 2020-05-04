@@ -1,9 +1,14 @@
-package com.example.messenger
+package com.example.messenger.ui.sample
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.example.messenger.NaverLoginManager
+import com.example.messenger.R
+import com.example.messenger.databinding.ActivityLoginBinding
+import com.example.messenger.ui.sample.helper.LoginActionHelper
 import com.nhn.android.naverlogin.ui.view.OAuthLoginButton
 
 /**
@@ -13,27 +18,28 @@ import com.nhn.android.naverlogin.ui.view.OAuthLoginButton
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginButton: OAuthLoginButton
-    lateinit var testButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        init()
-        testButton = findViewById(R.id.test_button)
-        testButton.setOnClickListener {
-            startActivityForResult(Intent(this, UserInfoActivity::class.java), 1)
-        }
+        val binding: ActivityLoginBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_login)
+
+        binding.loginActionHelper = LoginActionHelper()
+        binding.context = this
+
+        initView()
+    }
+
+    private fun initView() {
+        loginButton = findViewById(R.id.button_login)
+        loginButton.setOAuthLoginHandler(NaverLoginManager)
     }
 
     // for the test
     override fun startActivityForResult(intent: Intent?, requestCode: Int) {
         super.startActivityForResult(intent, requestCode)
-    }
-
-    fun init() {
-        loginButton = findViewById(R.id.button_login)
-        loginButton.setOAuthLoginHandler(NaverLoginManager.naverLoginHandler)
     }
 
 //    fun login() {
