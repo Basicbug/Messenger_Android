@@ -11,12 +11,15 @@ import com.example.messenger.repository.model.ApiDataList
 import com.example.messenger.repository.model.user.FriendRelation
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * @author MyeongKi
  */
 
 interface FriendRelationService {
-    @GET("")
-    fun getFriendRelationList(userId: String): Single<ApiDataList<FriendRelation>>
+    @GET("/v1/friends/{userId}")
+    fun getFriendRelationList(
+        @Path("userId") userId: String
+    ): Single<ApiDataList<FriendRelation>>
 }

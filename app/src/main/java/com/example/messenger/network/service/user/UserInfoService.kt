@@ -11,12 +11,15 @@ import com.example.messenger.repository.model.ApiData
 import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * @author MyeongKi
  */
 
 interface UserInfoService {
-    @GET("")
-    fun getUserInfo(userId:String): Single<ApiData<UserInfo>>
+    @GET("/v1/user/{userId}")
+    fun getUserInfo(
+        @Path("userId") userId: String
+    ): Single<ApiData<UserInfo>>
 }
