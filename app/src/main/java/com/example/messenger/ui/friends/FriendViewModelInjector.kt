@@ -7,6 +7,15 @@
 
 package com.example.messenger.ui.friends
 
+import com.example.messenger.repository.user.UserRepositoryInjector
+
 /**
  * @author MyeongKi
  */
+object FriendViewModelInjector {
+    fun provideFriendViewModelFactory(
+    ): FriendViewModelFactory {
+        val repository = UserRepositoryInjector.getUserRepositoryImpl()
+        return FriendViewModelFactory(repository)
+    }
+}

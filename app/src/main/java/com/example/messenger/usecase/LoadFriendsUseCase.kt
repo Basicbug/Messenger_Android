@@ -8,6 +8,7 @@
 package com.example.messenger.usecase
 
 import com.example.messenger.base.BaseUseCase
+import com.example.messenger.event.FriendEvent
 import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
@@ -32,7 +33,10 @@ class LoadFriendsUseCase(
                 .doOnSuccess {
                     insertFriendRelationListToLocal(it)
                     for (item in it) {
-                        getFriendInfoFromServer(item.friendUid)
+                        item.id?.let {
+                            friendUid:String->
+                            getFriendInfoFromServer(friendUid)
+                        }
                     }
                 }
                 .doOnError {
@@ -48,7 +52,10 @@ class LoadFriendsUseCase(
             userRepository.getFriendRelationListFromLocal()
                 .doOnSuccess {
                     for (item in it) {
-                        getFriendInfoFromLocal(item.friendUid)
+                        item.id?.let {
+                                friendUid:String->
+                            getFriendInfoFromLocal(friendUid)
+                        }
                     }
                 }
                 .subscribe()
@@ -59,7 +66,7 @@ class LoadFriendsUseCase(
         disposables.add(
             userRepository.getUserInfoFromLocal(userId)
                 .doOnSuccess {
-                    //TODO 이벤트로 보내기
+                    FriendEvent.addFriendToList(it)
                 }
                 .doOnError {
                     //TODO 스냅바로 실패
@@ -79,7 +86,7 @@ class LoadFriendsUseCase(
         disposables.add(
             userRepository.getUserInfoFromServer(userId)
                 .doOnSuccess {
-                    //TODO 이벤트로 보내기
+                    FriendEvent.addFriendToList(it)
                     insertFriendInfoToLocal(it)
                 }
                 .doOnError {

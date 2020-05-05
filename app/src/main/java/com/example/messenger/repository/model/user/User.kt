@@ -11,5 +11,5 @@ package com.example.messenger.repository.model.user
  * @author MyeongKi
  */
 interface User {
-    val uid:String
+    val uid:String?
 }

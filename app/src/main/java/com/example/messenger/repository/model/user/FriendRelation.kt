@@ -18,11 +18,11 @@ import com.google.gson.annotations.SerializedName
 data class FriendRelation(
     @PrimaryKey
     @SerializedName("id")
-    val id: String,
+    var id: String = "",
     @SerializedName("uid")
-    override val uid: String,
+    override var uid: String? = "",
     @SerializedName("frienduid")
-    val friendUid: String,
+    var friendUid: String? = "",
     @SerializedName("meetAt")
-    val meetAt: String
+    var meetAt: String? = ""
 ):User

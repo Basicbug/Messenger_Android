@@ -8,8 +8,10 @@
 package com.example.messenger.repository.model.user
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 /**
  * @author MyeongKi
@@ -18,17 +20,18 @@ import com.google.gson.annotations.SerializedName
 data class UserInfo(
     @PrimaryKey
     @SerializedName("id")
-    val id: String,
+    var id: String = "",
     @SerializedName("name")
-    val name: String,
+    var name: String? ="",
     @SerializedName("imageUrl")
-    val imageUrl: String,
+    var imageUrl: String? = "",
     @SerializedName("stateMessage")
-    val stateMessage: String,
+    var stateMessage: String? = "",
     @SerializedName("uid")
-    override val uid: String,
+    override var uid: String? = "",
     @SerializedName("roles")
-    val roles: List<String>,
+    @Ignore
+    val roles: List<String> = Collections.emptyList(),
     @SerializedName("provider")
-    val provider: String
+    var provider: String? = ""
  ):User
