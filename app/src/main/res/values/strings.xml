@@ -6,6 +6,9 @@
     <string name="base_friend_name">Unknown</string>
     <string name="login">네이버 아이디로 로그인</string>
     <string name="logout">로그아웃</string>
+    <string name="logout_message">로그아웃되었습니다.</string>
+    <string name="leave">탈퇴하기</string>
+    <string name="leave_message">탈퇴되었습니다.</string>
     <string name="sample_time">12:06</string>
     <string name="channel_push_message">메시지</string>
     <string name ="image_message_contents">이미지</string>
