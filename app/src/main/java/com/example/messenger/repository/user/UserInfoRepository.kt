@@ -8,6 +8,7 @@
 package com.example.messenger.repository.user
 
 import com.example.messenger.repository.model.user.UserInfo
+import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
@@ -16,5 +17,6 @@ import io.reactivex.Single
 
 interface UserInfoRepository {
     fun getUserInfoFromServer(userId: String): Single<UserInfo>
-
+    fun getUserInfoFromLocal(userId: String): Single<UserInfo>
+    fun insertUserInfo(item: UserInfo): Completable
 }

@@ -8,6 +8,7 @@
 package com.example.messenger.repository.user
 
 import com.example.messenger.repository.model.user.FriendRelation
+import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
@@ -15,5 +16,7 @@ import io.reactivex.Single
  */
 interface FriendRelationRepository {
     fun getFriendRelationListFromServer(userId: String): Single<ArrayList<FriendRelation>>
-
+    fun insertFriendRelationListToLocal(items: ArrayList<FriendRelation>): Completable
+    fun getFriendRelationListFromLocal(): Single<List<FriendRelation>>
+    fun deleteFriendRelationToLocal(item: FriendRelation): Completable
 }

@@ -29,4 +29,8 @@ interface UserInfoDao {
 
     @Query("SELECT * FROM UserInfo")
     fun getUserInfoList(): Single<List<UserInfo>>
+
+    @Query("SELECT * FROM UserInfo WHERE uid LIKE :userId")
+    fun getUserInfo(userId: String): Single<UserInfo>
+
 }

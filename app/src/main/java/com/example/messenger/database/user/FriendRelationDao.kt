@@ -7,10 +7,7 @@
 
 package com.example.messenger.database.user
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.messenger.repository.model.user.FriendRelation
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -29,4 +26,7 @@ interface FriendRelationDao {
 
     @Query("SELECT * FROM friendRelation")
     fun getFriendRelationList(): Single<List<FriendRelation>>
+
+    @Delete
+    fun deleteFriendRelation(friendRelation: FriendRelation?):Completable
 }
