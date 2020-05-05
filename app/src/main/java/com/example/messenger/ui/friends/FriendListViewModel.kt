@@ -10,9 +10,12 @@ package com.example.messenger.ui.friends
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.messenger.event.FriendEvent
+import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.usecase.LoadFriendsUseCase
 import io.reactivex.disposables.CompositeDisposable
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @author MyeongKi
@@ -24,12 +27,19 @@ class FriendListViewModel(
 ) : ViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
     val loadFriendsUseCase = LoadFriendsUseCase("ChoMk", userRepository, disposables)
-    val testResult = MutableLiveData<String>()//TODO 이벤트 발생 캐치 테스트
+    val friendList = MutableLiveData<ArrayList<UserInfo>>().apply {
+        value = ArrayList()
+    }
 
     init {
+        subscribeEvent()
+    }
+
+    private fun subscribeEvent(){
         disposables.add(
             FriendEvent.addFriendToListSubject.subscribe {
-                testResult.value += ("\n"+it.toString())
+                friendList.value?.add(it)
+                friendList.postValue(friendList.value)
             }
         )
     }
