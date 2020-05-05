@@ -56,7 +56,7 @@ class UserRepositoryImpl : UserInfoRepository, FriendRelationRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun insertUserInfo(item: UserInfo): Completable {
+    override fun insertUserInfoToLocal(item: UserInfo): Completable {
         return userInfoDao
             .insertUserInfo(item)
             .subscribeOn(Schedulers.io())
