@@ -4,46 +4,56 @@
   ~ Copyright 2020 BasicBug. All rights Reserved.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="70dp">
+<layout>
+    <data>
+        <variable
+            name="friendItemViewModel"
+            type="com.example.messenger.ui.friends.adapter.FriendItemViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
 
-    <ImageView
-        android:id="@+id/image_friend"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toStartOf="@+id/text_friend_name"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/image_friend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_friend_name"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_friend_name"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toTopOf="@id/text_friend_phone_number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="3"
-        app:layout_constraintStart_toEndOf="@+id/image_friend"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        <TextView
+            android:id="@+id/text_friend_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@{friendItemViewModel.name}"
+            app:layout_constraintBottom_toTopOf="@id/text_friend_state_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/image_friend"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_weight="1" />
 
-    <TextView
-        android:id="@+id/text_friend_phone_number"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/image_friend"
-        app:layout_constraintTop_toBottomOf="@id/text_friend_name"
-        app:layout_constraintVertical_weight="1" />
+        <TextView
+            android:id="@+id/text_friend_state_message"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@{friendItemViewModel.stateMessage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_friend"
+            app:layout_constraintTop_toBottomOf="@id/text_friend_name"
+            app:layout_constraintVertical_weight="1" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

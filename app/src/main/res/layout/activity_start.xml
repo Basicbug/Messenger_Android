@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ activity_start.xml 2020. 5. 3
+  ~
+  ~ Copyright 2020 BasicBug. All rights Reserved.
+  ~
+  -->
+<layout>
+    <data>
+        <variable
+            name="helper"
+            type="com.example.messenger.ui.start.StartBottomNavigationHelper" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:setOnListener="@{helper}"
+            android:background="@color/bottomBackground"
+            app:itemIconTint="@color/bottomIconText"
+            app:itemTextColor="@color/bottomIconText"
+            app:menu="@menu/navigation_item"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
