@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName
 data class FriendRelation(
     @PrimaryKey
     @SerializedName("id")
-    var id: String = "",
+    override var id: String = "",
     @SerializedName("uid")
     override var uid: String? = "",
     @SerializedName("frienduid")

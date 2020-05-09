@@ -12,4 +12,5 @@ package com.example.messenger.repository.model.user
  */
 interface User {
     val uid:String?
+    val id:String
 }
