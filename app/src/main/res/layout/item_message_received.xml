@@ -3,58 +3,67 @@
   ~
   ~ Copyright 2020 BasicBug. All rights Reserved.
   -->
+<layout>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <data>
 
-    <ImageView
-        android:id="@+id/image_friend"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/circle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="receivedItemViewModel"
+            type="com.example.messenger.ui.chattingroom.adapter.MessageReceivedItemViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/text_friend_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:text="@string/base_friend_name"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/image_friend"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_message_body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/rounded_rectangle_grey"
-        android:maxWidth="240dp"
-        android:padding="8dp"
-        android:text="@string/sample_message"
-        android:textColor="#ffffff"
-        app:layout_constraintStart_toEndOf="@+id/image_friend"
-        app:layout_constraintTop_toBottomOf="@+id/text_friend_name" />
+        <ImageView
+            android:id="@+id/image_friend"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_message_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:text="@string/sample_time"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/text_message_body"
-        app:layout_constraintStart_toEndOf="@+id/text_message_body" />
+        <TextView
+            android:id="@+id/text_friend_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@{receivedItemViewModel.senderName}"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/image_friend"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/text_message_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rounded_rectangle_grey"
+            android:maxWidth="240dp"
+            android:padding="8dp"
+            android:text="@{receivedItemViewModel.messageContent}"
+            android:textColor="#ffffff"
+            app:layout_constraintStart_toEndOf="@+id/image_friend"
+            app:layout_constraintTop_toBottomOf="@+id/text_friend_name" />
+
+        <TextView
+            android:id="@+id/text_message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="@{receivedItemViewModel.messageTime}"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_message_body"
+            app:layout_constraintStart_toEndOf="@+id/text_message_body" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
