@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName
  * @author MyeongKi
  */
 
-@Entity(tableName = "messages")
+@Entity(tableName = "messages", primaryKeys = ["room_id", "message_time"])
 data class Message(
     @SerializedName("room_id")
     val roomID: Int,
