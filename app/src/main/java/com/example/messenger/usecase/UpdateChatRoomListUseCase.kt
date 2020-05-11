@@ -11,4 +11,5 @@ package com.example.messenger.usecase
  * @author MyeongKi
  */
 
-//TODO 1. 푸시의 경우 -> 마크, 리스트 상단 이동
+//TODO 메시지 구독
+//TODO 발생 -> 상단으로 이동

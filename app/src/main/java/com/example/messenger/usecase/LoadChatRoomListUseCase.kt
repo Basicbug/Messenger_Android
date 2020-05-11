@@ -11,3 +11,4 @@ package com.example.messenger.usecase
  * @author MyeongKi
  */
 
+//TODO 채팅룸 리스트 불러오기
