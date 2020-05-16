@@ -8,19 +8,22 @@
 package com.example.messenger.tools
 
 import com.example.messenger.repository.model.Message
-import com.example.messenger.type.MessageType
+import com.google.gson.Gson
 
 /**
  * @author MyeongKi
 
  */
 
-fun convertMessageToJsonString(msg: Message): String {
-    //TODO json 스트링 로직 필요
-    return msg.toString()
+fun convertMessageToJsonString(msg: Message?): String? {
+    return msg?.let {
+        Gson().toJson(msg)
+    }
 }
 
-fun convertJsonStringToMessage(jsonString: String): Message {
-    //TODO string으로 받은 json을 메시지로 전환이 필요
-    return Message(1, "test", "test", MessageType.MESSAGE, "teststs", "")
+fun convertJsonStringToMessage(jsonString: String?): Message? {
+    return jsonString?.let {
+        Gson().fromJson<Message>(jsonString, Message::class.java)
+    }
+
 }
