@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import com.example.messenger.repository.model.Message
-import com.example.messenger.usecase.ChattingRoomUseCase
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -15,7 +14,7 @@ class ChattingRoomViewModel(
     val repository: MessageRepositoryImpl
 ) : ViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
-    val loadChattingRoomUseCase = ChattingRoomUseCase()
+        //val loadChattingRoomUseCase = ChattingRoomUseCase()
     val messageList = MutableLiveData<ArrayList<Message>>().apply {
         value = ArrayList()
     }

@@ -19,24 +19,7 @@ import com.google.firebase.messaging.RemoteMessage
 
 class FcmService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        //타입을 먼저 확인하고 이에 맞튼 json 파싱이 이루어줘야 할 듯?
-        when (remoteMessage.data["type"]) {
-            "message" -> {
-                //data에서 파싱 과정후 노티피케이션 호출...
-                val testMessage = Message(
-                    "sender", "receiver"
-                    , MessageType.MESSAGE, "안녕", ""
-                )
-                //파싱해서 만들었다고 가정
-                PushNotification(this, testMessage).show()
-            }
-            "system" -> {
 
-            }
-            else -> {
-
-            }
-        }
 
     }
 
