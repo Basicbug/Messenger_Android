@@ -13,4 +13,5 @@ package com.example.messenger.constants
 
 object NetworkConstants {
     const val BASE_URL: String = "https://fast-garden-84224.herokuapp.com"
+    const val SOCKET_URL: String = "ws://fast-garden-84224.herokuapp.com/stomp/sub/talk"
 }
