@@ -26,7 +26,7 @@ class FriendListViewModel(
     userRepository: UserRepositoryImpl
 ) : ViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
-    val loadFriendsUseCase = LoadFriendsUseCase("ChoMk", userRepository, disposables)
+    val loadFriendsUseCase = LoadFriendsUseCase(userRepository, disposables)
     val friendList = MutableLiveData<ArrayList<UserInfo>>().apply {
         value = ArrayList()
     }
@@ -35,7 +35,7 @@ class FriendListViewModel(
         subscribeEvent()
     }
 
-    private fun subscribeEvent(){
+    private fun subscribeEvent() {
         disposables.add(
             FriendEvent.addFriendToListSubject.subscribe {
                 friendList.value?.add(it)
