@@ -13,6 +13,6 @@ interface MessageRepository {
     fun insertMessageToLocal(msg: Message): Completable
     fun getMessageListFromLocal(roomID: Int): Single<List<Message>>
     fun subscribeChattingRoom(roomID: Int): Flowable<StompMessage>
-    fun sendMessageToServer(msg: Message): Completable
+    fun sendMessageToSocketServer(msg: Message): Completable
     fun getLatestFiftyMessages(roomID: Int, from: Int): Single<List<Message>>
 }

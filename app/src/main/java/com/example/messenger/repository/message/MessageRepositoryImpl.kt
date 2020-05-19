@@ -32,7 +32,7 @@ class MessageRepositoryImpl : MessageRepository {
 
     }
 
-    override fun sendMessageToServer(msg: Message): Completable {
+    override fun sendMessageToSocketServer(msg: Message): Completable {
         return SocketHelper
             .createMessageSendStream(msg)
             .subscribeOn(Schedulers.io())
