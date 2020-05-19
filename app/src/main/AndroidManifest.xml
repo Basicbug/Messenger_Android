@@ -14,15 +14,17 @@
         <activity android:name=".MainActivity"></activity>
 
         <activity android:name=".ui.start.StartActivity">
+
+        </activity>
+        <activity android:name=".ui.sample.LoginActivity"></activity>
+
+        <activity android:name=".ui.sample.UserInfoActivity"></activity>
+        <activity android:name=".ui.chattingroom.ChattingRoomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.sample.LoginActivity"></activity>
-
-        <activity android:name=".ui.sample.UserInfoActivity"></activity>
-
         <service android:name=".push.fcm.FcmService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

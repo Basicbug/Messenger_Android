@@ -20,8 +20,7 @@ class ChattingRoomActivity : BaseActivity() {
         chattingRoomViewModel =
             ChattingRoomViewModelInjector.provideSampleViewModelFactory()
                 .create(ChattingRoomViewModel::class.java)
-
-        binding.viewModel = chattingRoomViewModel
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting_room)
+        binding.viewModel = chattingRoomViewModel
     }
 }

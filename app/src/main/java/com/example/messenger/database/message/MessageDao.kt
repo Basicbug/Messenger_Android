@@ -19,4 +19,7 @@ interface MessageDao {
 
     @Query("SELECT * FROM messages WHERE room_id = :roomID ORDER BY message_time")
     fun getMessageList(roomID: Int): Single<List<Message>>
+    //TODO sql 수정 필요
+    @Query("SELECT * FROM messages WHERE room_id = :roomID ORDER BY message_time")
+    fun getLatestFiftyMessages(roomID: Int, from: Int): Single<List<Message>>
 }

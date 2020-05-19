@@ -37,7 +37,13 @@ class MessageRepositoryImpl : MessageRepository {
             .createMessageSendStream(msg)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+    }
 
+    override fun getLatestFiftyMessages(roomID: Int, from: Int): Single<List<Message>> {
+        return messageDao
+            .getLatestFiftyMessages(roomID, from)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun insertMessageToLocal(msg: Message): Completable {
