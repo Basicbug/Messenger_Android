@@ -16,22 +16,19 @@ class ChattingRoomUseCase(
 ) : BaseUseCase {
 
     override fun execute() {
-//        getMessageHistoryFromLocal(roomID)
-        getTestMessageHistoryInfoFromLocal()
+        getLatestFiftyMessages(0)
     }
 
-    private fun getMessageHistoryFromLocal() {
-//        disposables.add(
-//            messageRepository.getMessageListFromLocalBetweenTags(roomID)
-//                .doOnSuccess {
-//                    for (message in it) {
-//                        message.roomID?.let {
-//
-//                        }
-//                    }
-//                }
-//                .subscribe()
-//        )
+    private fun getLatestFiftyMessages(from: Int) {
+        disposables.add(
+            messageRepository.getLatestFiftyMessages(roomID, from)
+                .doOnSuccess {
+                    for (message in it) {
+                        ChattingRoomEvent.addMessageToList(message)
+                    }
+                }
+                .subscribe()
+        )
     }
 
     private fun getTestMessageHistoryInfoFromLocal() {
@@ -45,12 +42,5 @@ class ChattingRoomUseCase(
                 .subscribe()
         )
     }
-
-//    private fun insertMessageToLocal(message: Message) {
-//        disposables.add(
-//            messageRepository.insertMessageToLocal(message)
-//                .subscribe()
-//        )
-//    }
 
 }

@@ -6,6 +6,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 /**
  * @author bsgreentea
@@ -17,6 +18,13 @@ class MessageRepositoryImpl : MessageRepository {
     override fun getMessageListFromLocal(roomID: Int): Single<List<Message>> {
         return messageDao
             .getMessageList(roomID)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getLatestFiftyMessages(roomID: Int, from: Int): Single<List<Message>> {
+        return messageDao
+            .getLatestFiftyMessages(roomID, from)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
