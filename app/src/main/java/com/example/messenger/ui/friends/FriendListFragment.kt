@@ -28,16 +28,21 @@ class FriendListFragment : BaseFragment() {
     private lateinit var binding: FragmentFriendListBinding
     private lateinit var friendListViewModel: FriendListViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         friendListViewModel =
-            FriendViewModelInjector.provideFriendViewModelFactory().create(FriendListViewModel::class.java)
+            FriendViewModelInjector.provideFriendViewModelFactory()
+                .create(FriendListViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_friend_list, container, false)
         binding.friendListViewModel = friendListViewModel
         binding.lifecycleOwner = this
         val friendAdapter = FriendAdapter()
         binding.friends.adapter = friendAdapter
         subscribeFriendInfoList(friendAdapter)
-        friendListViewModel.loadFriendsUseCase.execute()
+        friendListViewModel.loadFriendsUseCase.loadFriends("ChoMK")
         return binding.root
     }
 

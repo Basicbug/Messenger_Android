@@ -7,7 +7,6 @@
 
 package com.example.messenger.usecase
 
-import com.example.messenger.base.BaseUseCase
 import com.example.messenger.event.FriendEvent
 import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
@@ -19,11 +18,10 @@ import io.reactivex.disposables.CompositeDisposable
  */
 
 class LoadFriendsUseCase(
-    private val userId: String,
     private val userRepository: UserRepositoryImpl,
     private val disposables: CompositeDisposable
-) : BaseUseCase {
-    override fun execute() {
+) {
+    fun loadFriends(userId: String) {
         getFriendRelationListFromServer(userId)
     }
 
@@ -33,8 +31,7 @@ class LoadFriendsUseCase(
                 .doOnSuccess {
                     insertFriendRelationListToLocal(it)
                     for (item in it) {
-                        item.id?.let {
-                            friendUid:String->
+                        item.id?.let { friendUid: String ->
                             getFriendInfoFromServer(friendUid)
                         }
                     }
@@ -52,8 +49,7 @@ class LoadFriendsUseCase(
             userRepository.getFriendRelationListFromLocal()
                 .doOnSuccess {
                     for (item in it) {
-                        item.id?.let {
-                                friendUid:String->
+                        item.id?.let { friendUid: String ->
                             getFriendInfoFromLocal(friendUid)
                         }
                     }
