@@ -5,17 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import com.example.messenger.repository.model.Message
-import com.example.messenger.usecase.ChattingRoomUseCase
+import com.example.messenger.usecase.LoadMessagesUseCase
 import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author bsgreentea
  */
 class ChattingRoomViewModel(
-    val repository: MessageRepositoryImpl
+    messageRepository: MessageRepositoryImpl
 ) : ViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
-    val loadChattingRoomUseCase = ChattingRoomUseCase()
+    val loadChattingRoomUseCase = LoadMessagesUseCase(messageRepository, disposables)
     val messageList = MutableLiveData<ArrayList<Message>>().apply {
         value = ArrayList()
     }
@@ -27,11 +27,11 @@ class ChattingRoomViewModel(
         messageToSend = ObservableField("")
     }
 
-    fun onClickSend() {
+    fun sendMessageToServer() {
 
     }
 
-    fun getText(): ObservableField<String>{
+    fun getText(): ObservableField<String> {
         return messageToSend
     }
 

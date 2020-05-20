@@ -1,27 +1,24 @@
 package com.example.messenger.usecase
 
-import com.example.messenger.base.BaseUseCase
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
-import com.example.messenger.repository.model.Message
 import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author bsgreentea
  */
-class ChattingRoomUseCase(
-    private val roomID: Int,
+class LoadMessagesUseCase(
     private val messageRepository: MessageRepositoryImpl,
     private val disposables: CompositeDisposable
-) : BaseUseCase {
+) {
 
-    override fun execute() {
-        getLatestFiftyMessages(0)
+    fun loadMessages(roomId: Int) {
+        getLatestFiftyMessages(roomId, 0)
     }
 
-    private fun getLatestFiftyMessages(from: Int) {
+    private fun getLatestFiftyMessages(roomId: Int, from: Int) {
         disposables.add(
-            messageRepository.getLatestFiftyMessages(roomID, from)
+            messageRepository.getLatestFiftyMessages(roomId, from)
                 .doOnSuccess {
                     for (message in it) {
                         ChattingRoomEvent.addMessageToList(message)
@@ -31,9 +28,9 @@ class ChattingRoomUseCase(
         )
     }
 
-    private fun getTestMessageHistoryInfoFromLocal() {
+    private fun getTestMessageHistoryInfoFromLocal(roomId: Int) {
         disposables.add(
-            messageRepository.getMessageListFromLocal(roomID)
+            messageRepository.getMessageListFromLocal(roomId)
                 .doOnSuccess {
                     for (message in it) {
                         ChattingRoomEvent.addMessageToList(message)
