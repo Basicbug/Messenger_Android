@@ -7,6 +7,7 @@
 
 package com.example.messenger.repository.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import com.example.messenger.MessengerApp
 import com.example.messenger.R
@@ -21,7 +22,8 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "messages", primaryKeys = ["room_id", "message_time"])
 data class Message(
     @SerializedName("room_id")
-    val roomID: Int,
+    @ColumnInfo(name = "room_id")
+    val roomId: Int,
     @SerializedName("sender_name")
     val senderName: String,
     @SerializedName("receiver_name")
@@ -30,7 +32,10 @@ data class Message(
     val messageType: MessageType,
     @SerializedName("message_content")
     val messageContent: String,
+    @SerializedName("message_tag")
+    val messageTag: Long,
     @SerializedName("message_time")
+    @ColumnInfo(name = "message_time")
     val messageTime: String
 ) : PushItem {
     override fun getTitle(): String {

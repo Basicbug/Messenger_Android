@@ -10,6 +10,6 @@ import java.util.*
  */
 interface MessageRepository {
     fun insertMessageToLocal(msg: Message): Completable
-    fun getMessageListFromLocal(roomID: Int): Single<List<Message>>
-    fun getLatestFiftyMessages(roomID: Int, from: Int): Single<List<Message>>
+    fun getMessageListFromLocal(roomId: Int): Single<List<Message>>
+    fun getLatestFiftyMessages(roomId: Int, from: Int): Single<List<Message>>
 }
