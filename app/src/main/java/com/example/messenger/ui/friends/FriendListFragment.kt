@@ -37,7 +37,7 @@ class FriendListFragment : BaseFragment() {
         val friendAdapter = FriendAdapter()
         binding.friends.adapter = friendAdapter
         subscribeFriendInfoList(friendAdapter)
-        friendListViewModel.loadFriendsUseCase.execute()
+        friendListViewModel.loadFriendsUseCase.loadFriends("ChoMk")
         return binding.root
     }
 
