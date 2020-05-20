@@ -17,6 +17,9 @@ interface MessageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMessage(message: Message): Completable
 
-    @Query("SELECT * FROM messages WHERE roomID = :roomID ORDER BY messageTime")
-    fun getMessageList(roomID: Int): Single<List<Message>>
+    @Query("SELECT * FROM messages WHERE room_id = :roomId ORDER BY message_time")
+    fun getMessageList(roomId: Int): Single<List<Message>>
+
+    @Query("SELECT * FROM messages WHERE room_id =:roomId ORDER BY message_time DESC LIMIT 50 OFFSET :from")
+    fun getLatestFiftyMessages(roomId: Int, from: Int): Single<List<Message>>
 }
