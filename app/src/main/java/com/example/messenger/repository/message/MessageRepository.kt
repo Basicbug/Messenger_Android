@@ -11,8 +11,8 @@ import ua.naiksoftware.stomp.dto.StompMessage
  */
 interface MessageRepository {
     fun insertMessageToLocal(msg: Message): Completable
-    fun getMessageListFromLocal(roomID: Int): Single<List<Message>>
-    fun subscribeChattingRoom(roomID: Int): Flowable<StompMessage>
+    fun getMessageListFromLocal(roomID: String): Single<List<Message>>
+    fun subscribeChattingRoom(roomID: String): Flowable<StompMessage>
     fun sendMessageToSocketServer(msg: Message): Completable
-    fun getLatestFiftyMessages(roomID: Int, from: Int): Single<List<Message>>
+
 }

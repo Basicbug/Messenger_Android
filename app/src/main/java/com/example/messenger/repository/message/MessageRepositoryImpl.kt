@@ -17,14 +17,14 @@ class MessageRepositoryImpl : MessageRepository {
 
     private val messageDao = MessageDatabase.getDatabase().messageDao()
 
-    override fun getMessageListFromLocal(roomID: Int): Single<List<Message>> {
+    override fun getMessageListFromLocal(roomID: String): Single<List<Message>> {
         return messageDao
             .getMessageList(roomID)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun subscribeChattingRoom(roomID: Int): Flowable<StompMessage> {
+    override fun subscribeChattingRoom(roomID: String): Flowable<StompMessage> {
         return SocketHelper
             .createChattingRoomStream(roomID)
             .subscribeOn(Schedulers.io())
@@ -39,12 +39,7 @@ class MessageRepositoryImpl : MessageRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getLatestFiftyMessages(roomID: Int, from: Int): Single<List<Message>> {
-        return messageDao
-            .getLatestFiftyMessages(roomID, from)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
+
 
     override fun insertMessageToLocal(msg: Message): Completable {
         return messageDao

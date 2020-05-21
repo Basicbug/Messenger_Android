@@ -21,7 +21,7 @@ class ReceiveMessageUseCase(
     private val messageRepositoryImpl: MessageRepositoryImpl,
     private val disposables: CompositeDisposable
 ) {
-    fun subscribeChattingRoom(roomID: Int) {
+    fun subscribeChattingRoom(roomID: String) {
         disposables.add(
             messageRepositoryImpl.subscribeChattingRoom(roomID)
                 .subscribe(
@@ -30,7 +30,9 @@ class ReceiveMessageUseCase(
                         notifyMessage(msg)
                         //TODO 로컬 저장이나 기타 나머지 시나리오...
                     },
-                    { err -> Log.e(this.javaClass.simpleName, err.toString()) })
+                    {
+                            err -> Log.e(this.javaClass.simpleName, err.toString())
+                    })
         )
     }
 

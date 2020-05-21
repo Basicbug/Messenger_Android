@@ -22,5 +22,6 @@ class ChattingRoomActivity : BaseActivity() {
                 .create(ChattingRoomViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting_room)
         binding.viewModel = chattingRoomViewModel
+
     }
 }

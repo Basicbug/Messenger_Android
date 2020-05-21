@@ -25,11 +25,11 @@ object SocketHelper {
         SOCKET_URL
     )
 
-    fun createChattingRoomStream(roomID: Int): Flowable<StompMessage> {
-        return stompClient.topic("/room/$roomID")
+    fun createChattingRoomStream(roomID: String): Flowable<StompMessage> {
+        return stompClient.topic("/sub/talk/room/$roomID")
     }
 
     fun createMessageSendStream(msg: Message): Completable {
-        return stompClient.send("/message", convertMessageToJsonString(msg))
+        return stompClient.send("/pub/talk/room", convertMessageToJsonString(msg))
     }
 }
