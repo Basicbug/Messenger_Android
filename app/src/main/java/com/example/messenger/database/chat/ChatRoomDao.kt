@@ -7,11 +7,9 @@
 
 package com.example.messenger.database.chat
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.messenger.repository.model.chat.ChatRoom
+import com.example.messenger.repository.model.user.FriendRelation
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -32,4 +30,6 @@ interface ChatRoomDao {
     @Query("SELECT * FROM ChatRoom WHERE roomId LIKE :roomId")
     fun getChatRoom(roomId: String): Single<ChatRoom>
 
+    @Delete
+    fun deleteChatRoom(chatRoom: ChatRoom?):Completable
 }
