@@ -3,6 +3,7 @@ package com.example.messenger.ui.chattingroom.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
 import com.example.messenger.repository.model.Message
@@ -10,7 +11,9 @@ import com.example.messenger.repository.model.Message
 /**
  * @author bsgreentea
  */
-class MessageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
+    MessageDiffCallback()
+) {
 
     companion object {
         private const val RECEIVED = 1

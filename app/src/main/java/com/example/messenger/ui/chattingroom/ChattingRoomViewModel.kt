@@ -3,6 +3,7 @@ package com.example.messenger.ui.chattingroom
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import com.example.messenger.repository.model.Message
 import com.example.messenger.usecase.LoadMessagesUseCase
@@ -15,7 +16,7 @@ class ChattingRoomViewModel(
     messageRepository: MessageRepositoryImpl
 ) : ViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
-    val loadChattingRoomUseCase = LoadMessagesUseCase(messageRepository, disposables)
+    val loadMessageUseCase = LoadMessagesUseCase(messageRepository, disposables)
     val messageList = MutableLiveData<ArrayList<Message>>().apply {
         value = ArrayList()
     }
@@ -36,7 +37,12 @@ class ChattingRoomViewModel(
     }
 
     private fun subscribeEvent() {
-
+        disposables.add(
+            ChattingRoomEvent.addMessageToListSubject.subscribe {
+                messageList.value?.add(it)
+                messageList.postValue(messageList.value)
+            }
+        )
     }
 
 
