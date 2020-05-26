@@ -14,14 +14,14 @@ class MessageRepositoryImpl : MessageRepository {
 
     private val messageDao = MessageDatabase.getDatabase().messageDao()
 
-    override fun getMessageListFromLocal(roomId: Int): Single<List<Message>> {
+    override fun getMessageListFromLocal(roomId: String): Single<List<Message>> {
         return messageDao
             .getMessageList(roomId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getLatestFiftyMessages(roomId: Int, from: Int): Single<List<Message>> {
+    override fun getLatestFiftyMessages(roomId: String, from: Int): Single<List<Message>> {
         return messageDao
             .getLatestFiftyMessages(roomId, from)
             .subscribeOn(Schedulers.io())

@@ -18,8 +18,8 @@ interface MessageDao {
     fun insertMessage(message: Message): Completable
 
     @Query("SELECT * FROM messages WHERE room_id = :roomId ORDER BY message_time")
-    fun getMessageList(roomId: Int): Single<List<Message>>
+    fun getMessageList(roomId: String): Single<List<Message>>
 
     @Query("SELECT * FROM messages WHERE room_id =:roomId ORDER BY message_time DESC LIMIT 50 OFFSET :from")
-    fun getLatestFiftyMessages(roomId: Int, from: Int): Single<List<Message>>
+    fun getLatestFiftyMessages(roomId: String, from: Int): Single<List<Message>>
 }

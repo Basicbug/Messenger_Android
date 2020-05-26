@@ -12,11 +12,11 @@ class LoadMessagesUseCase(
     private val disposables: CompositeDisposable
 ) {
 
-    fun loadMessages(roomId: Int) {
-        getLatestFiftyMessages(roomId, 0)
+    fun loadMessages(roomId: String, from: Int) {
+        loadLatestFiftyMessages(roomId, from)
     }
 
-    private fun getLatestFiftyMessages(roomId: Int, from: Int) {
+    private fun loadLatestFiftyMessages(roomId: String, from: Int) {
         disposables.add(
             messageRepository.getLatestFiftyMessages(roomId, from)
                 .doOnSuccess {
@@ -28,7 +28,7 @@ class LoadMessagesUseCase(
         )
     }
 
-    private fun getTestMessageHistoryInfoFromLocal(roomId: Int) {
+    private fun getTestMessageHistoryInfoFromLocal(roomId: String) {
         disposables.add(
             messageRepository.getMessageListFromLocal(roomId)
                 .doOnSuccess {
