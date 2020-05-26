@@ -45,6 +45,7 @@ class ChattingRoomViewModel(
         )
     }
 
+    // TODO 메세지 로드하기???
 
     override fun onCleared() {
         super.onCleared()
