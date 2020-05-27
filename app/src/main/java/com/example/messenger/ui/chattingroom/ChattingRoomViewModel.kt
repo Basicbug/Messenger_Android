@@ -31,7 +31,7 @@ class ChattingRoomViewModel(
     }
 
     fun onClickSend() {
-        sendMessageUseCase.sendMessage(Message("6957eeaf-ccc8-4ace-be8a-cde3656c2061", "mk", "jw", MessageType.MESSAGE, "test", "time"))
+        sendMessageUseCase.sendMessage(Message("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e", "mk", "jw", MessageType.MESSAGE, "test", "time"))
 
     }
 
@@ -40,7 +40,7 @@ class ChattingRoomViewModel(
     }
 
     private fun subscribeEvent() {
-        receiveMessageUseCase.subscribeChattingRoom("6957eeaf-ccc8-4ace-be8a-cde3656c2061")
+        receiveMessageUseCase.subscribeChattingRoom("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e")
     }
 
 

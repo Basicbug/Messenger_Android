@@ -8,6 +8,7 @@
 package com.example.messenger.usecase
 
 import android.util.Log
+import com.example.messenger.network.SocketHelper
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import com.example.messenger.repository.model.Message
 import com.example.messenger.tools.convertJsonStringToMessage
@@ -22,6 +23,7 @@ class ReceiveMessageUseCase(
     private val disposables: CompositeDisposable
 ) {
     fun subscribeChattingRoom(roomID: String) {
+        SocketHelper.stompClient.connect()
         disposables.add(
             messageRepositoryImpl.subscribeChattingRoom(roomID)
                 .subscribe(

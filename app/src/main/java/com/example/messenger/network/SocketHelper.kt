@@ -20,7 +20,7 @@ import ua.naiksoftware.stomp.dto.StompMessage
  * @author MyeongKi
  */
 object SocketHelper {
-    private val stompClient: StompClient = Stomp.over(
+    val stompClient: StompClient = Stomp.over(
         Stomp.ConnectionProvider.JWS,
         SOCKET_URL
     )
@@ -30,6 +30,6 @@ object SocketHelper {
     }
 
     fun createMessageSendStream(msg: Message): Completable {
-        return stompClient.send("/pub/talk/room", convertMessageToJsonString(msg))
+        return stompClient.send("/pub/talk/message", convertMessageToJsonString(msg))
     }
 }

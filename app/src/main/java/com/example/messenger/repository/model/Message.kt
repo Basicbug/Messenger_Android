@@ -24,16 +24,16 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "messages", primaryKeys = ["room_id", "message_time"])
 @TypeConverters(MessageTypeConverters::class)
 data class Message(
-    @SerializedName("room_id")
+    @SerializedName("roomId")
     @ColumnInfo(name = "room_id")
     val roomID: String,
-    @SerializedName("sender_name")
+    @SerializedName("senderUid")
     val senderName: String,
     @SerializedName("receiver_name")
     val receiverName: String,
     @SerializedName("message_type")
     var messageType: MessageType,
-    @SerializedName("message_content")
+    @SerializedName("message")
     val messageContent: String,
     @SerializedName("message_time")
     @ColumnInfo(name = "message_time")
