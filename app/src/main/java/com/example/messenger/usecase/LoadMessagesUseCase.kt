@@ -32,7 +32,7 @@ class LoadMessagesUseCase(
         disposables.add(
             messageRepository.getMessageListFromLocal(roomId)
                 .doOnSuccess {
-                    for (message in it) {
+                    it.forEach { message ->
                         ChattingRoomEvent.addMessageToList(message)
                     }
                 }
