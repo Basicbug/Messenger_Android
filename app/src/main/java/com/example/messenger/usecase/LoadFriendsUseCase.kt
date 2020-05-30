@@ -8,7 +8,7 @@
 package com.example.messenger.usecase
 
 import com.example.messenger.base.BaseUseCase
-import com.example.messenger.event.FriendEvent
+import com.example.messenger.event.UserEvent
 import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
@@ -66,7 +66,7 @@ class LoadFriendsUseCase(
         disposables.add(
             userRepository.getUserInfoFromLocal(userId)
                 .doOnSuccess {
-                    FriendEvent.addFriendToList(it)
+                    UserEvent.addFriendToList(it)
                 }
                 .doOnError {
                     //TODO 스냅바로 실패
@@ -86,7 +86,7 @@ class LoadFriendsUseCase(
         disposables.add(
             userRepository.getUserInfoFromServer(userId)
                 .doOnSuccess {
-                    FriendEvent.addFriendToList(it)
+                    UserEvent.addFriendToList(it)
                     insertFriendInfoToLocal(it)
                 }
                 .doOnError {

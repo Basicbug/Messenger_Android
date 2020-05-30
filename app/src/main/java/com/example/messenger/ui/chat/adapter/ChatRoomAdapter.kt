@@ -7,6 +7,29 @@
 
 package com.example.messenger.ui.chat.adapter
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ListAdapter
+import com.example.messenger.R
+import com.example.messenger.repository.model.chat.ChatRoom
+
 /**
  * @author MyeongKi
  */
+class ChatRoomAdapter : ListAdapter<ChatRoom, ChatRoomViewHolder>(
+    ChatRoomDiffCallback()
+) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatRoomViewHolder {
+        return ChatRoomViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_chat_room, parent, false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: ChatRoomViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+}

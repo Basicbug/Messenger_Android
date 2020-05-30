@@ -7,8 +7,20 @@
 
 package com.example.messenger.usecase
 
+import com.example.messenger.repository.chat.ChatRoomRepositoryImpl
+import com.example.messenger.repository.user.UserRepositoryImpl
+import io.reactivex.disposables.CompositeDisposable
+
 /**
  * @author MyeongKi
  */
 
-//TODO 채팅룸 리스트 불러오기
+class LoadChatRoomListUseCase(
+    private val userId: String,
+    private val chatRoomRepositoryImpl: ChatRoomRepositoryImpl,
+    private val disposables: CompositeDisposable
+) {
+    fun loadChatRoomList(){
+
+    }
+}

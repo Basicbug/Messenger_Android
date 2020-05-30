@@ -11,14 +11,16 @@ import com.example.messenger.repository.model.ApiDataList
 import com.example.messenger.repository.model.chat.ChatRoom
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 /**
  * @author MyeongKi
  */
 interface ChatRoomService {
-    @GET("")
+    @POST("/v1/talk/room/list")
     fun getChatRoomList(
-        @Path("userId") userId: String
+        @Query("uid") userId: String
     ): Single<ApiDataList<ChatRoom>>
 }

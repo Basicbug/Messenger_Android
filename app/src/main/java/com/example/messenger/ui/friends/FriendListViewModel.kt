@@ -9,12 +9,11 @@ package com.example.messenger.ui.friends
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.messenger.event.FriendEvent
+import com.example.messenger.event.UserEvent
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.usecase.LoadFriendsUseCase
 import io.reactivex.disposables.CompositeDisposable
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -37,7 +36,7 @@ class FriendListViewModel(
 
     private fun subscribeEvent(){
         disposables.add(
-            FriendEvent.addFriendToListSubject.subscribe {
+            UserEvent.addFriendToListSubject.subscribe {
                 friendList.value?.add(it)
                 friendList.postValue(friendList.value)
             }
