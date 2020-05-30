@@ -4,12 +4,13 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.messenger.R
 import com.example.messenger.base.BaseActivity
+import com.example.messenger.base.BaseSocketActivity
 import com.example.messenger.databinding.ActivityChattingRoomBinding
 
 /**
  * @author bsgreentea
  */
-class ChattingRoomActivity : BaseActivity() {
+class ChattingRoomActivity : BaseSocketActivity() {
 
     lateinit var binding: ActivityChattingRoomBinding
     private lateinit var chattingRoomViewModel: ChattingRoomViewModel

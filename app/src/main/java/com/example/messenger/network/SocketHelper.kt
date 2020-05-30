@@ -20,10 +20,18 @@ import ua.naiksoftware.stomp.dto.StompMessage
  * @author MyeongKi
  */
 object SocketHelper {
-    val stompClient: StompClient = Stomp.over(
+    private val stompClient: StompClient = Stomp.over(
         Stomp.ConnectionProvider.JWS,
         SOCKET_URL
     )
+
+    fun connectSocket() {
+        stompClient.connect()
+    }
+
+    fun disconnectSocket() {
+        stompClient.disconnect()
+    }
 
     fun createChattingRoomStream(roomID: String): Flowable<StompMessage> {
         return stompClient.topic("/sub/talk/room/$roomID")

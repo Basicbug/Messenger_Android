@@ -23,7 +23,6 @@ class ReceiveMessageUseCase(
     private val disposables: CompositeDisposable
 ) {
     fun subscribeChattingRoom(roomID: String) {
-        SocketHelper.stompClient.connect()
         disposables.add(
             messageRepositoryImpl.subscribeChattingRoom(roomID)
                 .subscribe(
