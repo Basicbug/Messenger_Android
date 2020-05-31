@@ -37,12 +37,9 @@ class ChatRoomListViewModel(
         disposables.add(
             ChatEvent.addChatRoomToListSubject.subscribe {
                 chatRoomTable[it.roomId] = it
-                val newItemList = mutableListOf<ChatRoom>()
-                for (item in chatRoomTable) {
-                    newItemList.add(item.value)
-                }
+
                 //TODO 시간순으로 정렬 로직 넣자...
-                chatRoomList.postValue(newItemList)
+                chatRoomList.postValue(chatRoomTable.values.toMutableList())
 
             }
         )
