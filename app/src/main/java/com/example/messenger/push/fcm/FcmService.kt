@@ -7,6 +7,7 @@
 
 package com.example.messenger.push.fcm
 
+import com.example.messenger.event.ChatEvent
 import com.example.messenger.push.notification.PushNotification
 import com.example.messenger.repository.model.Message
 import com.example.messenger.type.MessageType
@@ -28,6 +29,7 @@ class FcmService : FirebaseMessagingService() {
                     , MessageType.MESSAGE, "안녕", ""
                 )
                 //파싱해서 만들었다고 가정
+                ChatEvent.messagePushed(testMessage)
                 PushNotification(this, testMessage).show()
             }
             "system" -> {

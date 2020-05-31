@@ -23,7 +23,7 @@ import com.example.messenger.ui.chat.adapter.ChatRoomAdapter
  * @author MyeongKi
  */
 
-class ChatRoomListFragment :BaseFragment(){
+class ChatRoomListFragment : BaseFragment() {
     private lateinit var binding: FragmentChatRoomListBinding
     private lateinit var chatRoomListViewModel: ChatRoomListViewModel
 
@@ -41,8 +41,8 @@ class ChatRoomListFragment :BaseFragment(){
     }
 
     private fun subscribeFriendInfoList(adapter: ChatRoomAdapter) {
-        chatRoomListViewModel.chatRoomList.observe(viewLifecycleOwner) { result: ArrayList<ChatRoom> ->
-            adapter.submitList(result.toMutableList())
+        chatRoomListViewModel.chatRoomList.observe(viewLifecycleOwner) { result: MutableList<ChatRoom> ->
+            adapter.submitList(result)
         }
     }
 }

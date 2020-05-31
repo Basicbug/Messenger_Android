@@ -7,8 +7,9 @@
 
 package com.example.messenger.usecase
 
+import com.example.messenger.event.ChatEvent
 import com.example.messenger.repository.chat.ChatRoomRepositoryImpl
-import com.example.messenger.repository.user.UserRepositoryImpl
+import com.example.messenger.repository.model.chat.ChatRoom
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -20,7 +21,43 @@ class LoadChatRoomListUseCase(
     private val chatRoomRepositoryImpl: ChatRoomRepositoryImpl,
     private val disposables: CompositeDisposable
 ) {
-    fun loadChatRoomList(){
+    fun loadChatRoomList() {
+        getChatRoomListFromServer(userId)
+    }
 
+    private fun getChatRoomListFromServer(userId: String) {
+        disposables.add(
+            chatRoomRepositoryImpl.getChatRoomListFromServer(userId)
+                .doOnSuccess {
+                    insertChatRoomListToLocal(it)
+                    it.forEach { chatRoom ->
+                        ChatEvent.addChatRoomToList(chatRoom)
+                    }
+                }
+                .doOnError {
+                    //TODO 스냅바로 실패 보여주기
+                    getChatRoomListFromLocal()
+                }
+                .subscribe()
+        )
+    }
+
+    private fun getChatRoomListFromLocal() {
+        disposables.add(
+            chatRoomRepositoryImpl.getChatRoomListFromLocal()
+                .doOnSuccess {
+                    it.forEach { chatRoom ->
+                        ChatEvent.addChatRoomToList(chatRoom)
+                    }
+                }
+                .subscribe()
+        )
+    }
+
+    private fun insertChatRoomListToLocal(items: ArrayList<ChatRoom>) {
+        disposables.add(
+            chatRoomRepositoryImpl.insertChatRoomListToLocal(items)
+                .subscribe()
+        )
     }
 }
