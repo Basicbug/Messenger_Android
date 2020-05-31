@@ -16,7 +16,7 @@ class ChattingRoomViewModel(
     messageRepository: MessageRepositoryImpl
 ) : ViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
-    private val loadMessageUseCase = LoadMessagesUseCase(messageRepository, disposables)
+    val loadMessageUseCase = LoadMessagesUseCase(messageRepository, disposables)
     val messageList = MutableLiveData<ArrayList<Message>>().apply {
         value = ArrayList()
     }
