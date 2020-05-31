@@ -39,11 +39,7 @@ class FriendListViewModel(
         disposables.add(
             FriendEvent.addFriendToListSubject.subscribe {
                 friendTable[it.id] = it
-                val newItemList = mutableListOf<UserInfo>()
-                for (item in friendTable) {
-                    newItemList.add(item.value)
-                }
-                friendList.postValue(newItemList)
+                friendList.postValue(friendTable.values.toMutableList())
             }
         )
     }
