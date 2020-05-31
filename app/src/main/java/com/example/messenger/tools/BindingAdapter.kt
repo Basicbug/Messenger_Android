@@ -10,6 +10,7 @@ package com.example.messenger.tools
 import android.view.View
 import androidx.databinding.BindingAdapter
 import com.example.messenger.base.BaseHelper
+import com.example.messenger.base.BaseViewModel
 
 
 /**
@@ -23,5 +24,13 @@ object BindingAdapter {
         view: View, helper: BaseHelper
     ) {
         helper.setOnListener(view)
+    }
+
+    @JvmStatic
+    @BindingAdapter("setOnListener")
+    fun setOnListener(
+        view: View, viewModel: BaseViewModel
+    ) {
+        viewModel.setOnListener(view)
     }
 }

@@ -6,6 +6,13 @@
 
 <layout>
 
+    <data>
+
+        <variable
+            name="chatRoomViewModel"
+            type="com.example.messenger.ui.chattingroom.ChattingRoomViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -18,7 +25,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:setOnListener="@{chatRoomViewModel.chatListViewModel}" />
 
         <View
             android:layout_width="0dp"
@@ -40,7 +48,7 @@
             android:hint="@string/chat_hint"
             android:maxLines="6"
             android:minHeight="48dp"
-            android:text="@={viewModel.text}"
+            android:text="@={chatRoomViewModel.text}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_send"
             app:layout_constraintStart_toStartOf="parent" />
@@ -53,7 +61,7 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:gravity="center"
-            android:onClick="@{()->viewModel.sendMessageToServer()}"
+            android:onClick="@{()->chatRoomViewModel.sendMessageToServer()}"
             android:text="@string/chat_button"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -61,11 +69,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.example.messenger.ui.chattingroom.ChattingRoomViewModel" />
-
-    </data>
 </layout>

@@ -25,7 +25,7 @@ class ChattingRoomActivity : BaseActivity() {
             ChattingRoomViewModelInjector.provideSampleViewModelFactory()
                 .create(ChattingRoomViewModel::class.java)
 
-        binding.viewModel = chattingRoomViewModel
+        binding.chatRoomViewModel = chattingRoomViewModel
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting_room)
         binding.lifecycleOwner = this
 

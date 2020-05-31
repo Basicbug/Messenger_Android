@@ -2,11 +2,16 @@ package com.example.messenger.ui.chattingroom.adapter
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.messenger.usecase.LoadMessagesUseCase
 
 /**
  * @author bsgreentea
  */
-object MessageRecyclerViewListener : RecyclerView.OnScrollListener() {
+
+class MessageRecyclerViewListener(
+    private val loadMessagesUseCase: LoadMessagesUseCase,
+    private val roomId: String
+) : RecyclerView.OnScrollListener() {
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
@@ -17,7 +22,7 @@ object MessageRecyclerViewListener : RecyclerView.OnScrollListener() {
 
         if (itemTotalCount != null) {
             if (lastVisibleItemPosition == 0) {
-                // TODO 메세지 더 불러오기
+                loadMessagesUseCase.loadMessages(roomId, itemTotalCount)
 //                recyclerView.smoothScrollToPosition(?)
             }
         }
