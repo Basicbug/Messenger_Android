@@ -9,7 +9,10 @@ package com.example.messenger.repository.model.chat
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.messenger.repository.model.convertor.DateTypeConverter
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 /**
  * @author MyeongKi
@@ -20,5 +23,7 @@ data class ChatRoom(
     @SerializedName("roomId")
     var roomId: String = "",
     @SerializedName("name")
-    var name: String? = ""
+    var name: String? = "",
+    @SerializedName("lastMessageTime")
+    var lastMessageTime: Date? = Date()
 )

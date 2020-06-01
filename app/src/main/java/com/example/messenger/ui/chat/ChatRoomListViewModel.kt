@@ -39,7 +39,12 @@ class ChatRoomListViewModel(
                 chatRoomTable[it.roomId] = it
 
                 //TODO 시간순으로 정렬 로직 넣자...
-                chatRoomList.postValue(chatRoomTable.values.toMutableList())
+                chatRoomList.postValue(chatRoomTable.values
+                    .toMutableList()
+                    .also { list ->
+                        list.sortBy { chatRoom -> chatRoom.lastMessageTime }
+                    }
+                )
 
             }
         )
