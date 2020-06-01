@@ -3,11 +3,9 @@ package com.example.messenger.ui.chattingroom
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import com.example.messenger.R
 import com.example.messenger.base.BaseActivity
 import com.example.messenger.databinding.ActivityChattingRoomBinding
-import com.example.messenger.repository.model.Message
 import com.example.messenger.ui.chattingroom.adapter.MessageAdapter
 
 /**
@@ -22,7 +20,7 @@ class ChattingRoomActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         chattingRoomViewModel =
-            ChattingRoomViewModelInjector.provideSampleViewModelFactory()
+            ChattingRoomViewModelInjector.provideSampleViewModelFactory("1")
                 .create(ChattingRoomViewModel::class.java)
 
         binding.chatRoomViewModel = chattingRoomViewModel

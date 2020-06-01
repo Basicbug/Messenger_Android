@@ -8,11 +8,12 @@ import com.example.messenger.repository.message.MessageRepositoryImpl
  * @author bsgreentea
  */
 class ChattingRoomViewModelFactory(
-    val repository: MessageRepositoryImpl
+    val repository: MessageRepositoryImpl,
+    val roomId: String
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return ChattingRoomViewModel(repository) as T
+        return ChattingRoomViewModel(repository, roomId) as T
     }
 }

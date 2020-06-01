@@ -13,7 +13,8 @@ import io.reactivex.disposables.CompositeDisposable
  * @author bsgreentea
  */
 class ChattingRoomViewModel(
-    messageRepository: MessageRepositoryImpl
+    messageRepository: MessageRepositoryImpl,
+    roomId: String
 ) : ViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
     val loadMessageUseCase = LoadMessagesUseCase(messageRepository, disposables)
@@ -21,7 +22,7 @@ class ChattingRoomViewModel(
         value = ArrayList()
     }
 
-//    private val chatListViewModel = ChatListViewModel(loadMessageUseCase)
+    private val chatListViewModel = ChatListViewModel(loadMessageUseCase, roomId)
 
     private var messageToSend: ObservableField<String>
 

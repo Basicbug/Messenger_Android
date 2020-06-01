@@ -7,8 +7,9 @@ import com.example.messenger.repository.message.MessageRepositoryInjector
  */
 object ChattingRoomViewModelInjector {
     fun provideSampleViewModelFactory(
+        roomId: String
     ): ChattingRoomViewModelFactory {
         val repository = MessageRepositoryInjector.getMessageRepositoryImpl()
-        return ChattingRoomViewModelFactory(repository)
+        return ChattingRoomViewModelFactory(repository, roomId)
     }
 }
