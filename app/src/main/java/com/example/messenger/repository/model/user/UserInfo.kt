@@ -20,7 +20,7 @@ import java.util.*
 data class UserInfo(
     @PrimaryKey
     @SerializedName("id")
-    var id: String = "",
+    override var id: String = "",
     @SerializedName("name")
     var name: String? ="",
     @SerializedName("imageUrl")

@@ -7,6 +7,7 @@
 
 package com.example.messenger.ui.friends
 
+import android.util.ArrayMap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.messenger.event.FriendEvent
@@ -27,9 +28,9 @@ class FriendListViewModel(
 ) : ViewModel() {
     private val disposables: CompositeDisposable = CompositeDisposable()
     val loadFriendsUseCase = LoadFriendsUseCase(userRepository, disposables)
-    val friendList = MutableLiveData<ArrayList<UserInfo>>().apply {
-        value = ArrayList()
-    }
+
+    val friendList = MutableLiveData<MutableList<UserInfo>>()
+    private val friendTable = ArrayMap<String, UserInfo>()
 
     init {
         subscribeEvent()
@@ -38,8 +39,8 @@ class FriendListViewModel(
     private fun subscribeEvent() {
         disposables.add(
             FriendEvent.addFriendToListSubject.subscribe {
-                friendList.value?.add(it)
-                friendList.postValue(friendList.value)
+                friendTable[it.id] = it
+                friendList.postValue(friendTable.values.toMutableList())
             }
         )
     }

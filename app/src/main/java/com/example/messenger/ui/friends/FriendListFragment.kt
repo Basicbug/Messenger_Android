@@ -42,13 +42,14 @@ class FriendListFragment : BaseFragment() {
         val friendAdapter = FriendAdapter()
         binding.friends.adapter = friendAdapter
         subscribeFriendInfoList(friendAdapter)
+
         friendListViewModel.loadFriendsUseCase.loadFriends("ChoMK")
         return binding.root
     }
 
     private fun subscribeFriendInfoList(adapter: FriendAdapter) {
-        friendListViewModel.friendList.observe(viewLifecycleOwner) { result: ArrayList<UserInfo> ->
-            adapter.submitList(result.toMutableList())
+        friendListViewModel.friendList.observe(viewLifecycleOwner) { result: MutableList<UserInfo> ->
+            adapter.submitList(result)
         }
     }
 }
