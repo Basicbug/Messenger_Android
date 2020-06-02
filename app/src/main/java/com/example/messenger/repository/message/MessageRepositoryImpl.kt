@@ -1,11 +1,15 @@
 package com.example.messenger.repository.message
 
 import com.example.messenger.database.message.MessageDatabase
+import com.example.messenger.network.SocketHelper
 import com.example.messenger.repository.model.Message
 import io.reactivex.Completable
+import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+
+import ua.naiksoftware.stomp.dto.StompMessage
 
 /**
  * @author bsgreentea
@@ -24,6 +28,21 @@ class MessageRepositoryImpl : MessageRepository {
     override fun getLatestFiftyMessages(roomId: String, from: Int): Single<List<Message>> {
         return messageDao
             .getLatestFiftyMessages(roomId, from)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun subscribeChattingRoom(roomID: String): Flowable<StompMessage> {
+        return SocketHelper
+            .createChattingRoomStream(roomID)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    }
+
+    override fun sendMessageToSocketServer(msg: Message): Completable {
+        return SocketHelper
+            .createMessageSendStream(msg)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

@@ -20,18 +20,6 @@ class LoadMessagesUseCase(
         disposables.add(
             messageRepository.getLatestFiftyMessages(roomId, from)
                 .doOnSuccess {
-                    for (message in it) {
-                        ChattingRoomEvent.addMessageToList(message)
-                    }
-                }
-                .subscribe()
-        )
-    }
-
-    private fun getTestMessageHistoryInfoFromLocal(roomId: String) {
-        disposables.add(
-            messageRepository.getMessageListFromLocal(roomId)
-                .doOnSuccess {
                     it.forEach { message ->
                         ChattingRoomEvent.addMessageToList(message)
                     }
@@ -39,5 +27,4 @@ class LoadMessagesUseCase(
                 .subscribe()
         )
     }
-
 }

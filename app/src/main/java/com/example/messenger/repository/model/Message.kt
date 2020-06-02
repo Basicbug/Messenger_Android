@@ -9,9 +9,11 @@ package com.example.messenger.repository.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.TypeConverters
 import com.example.messenger.MessengerApp
 import com.example.messenger.R
 import com.example.messenger.push.PushItem
+import com.example.messenger.repository.model.convertor.MessageTypeConverters
 import com.example.messenger.type.MessageType
 import com.google.gson.annotations.SerializedName
 
@@ -20,20 +22,19 @@ import com.google.gson.annotations.SerializedName
  */
 
 @Entity(tableName = "messages", primaryKeys = ["room_id", "message_time"])
+@TypeConverters(MessageTypeConverters::class)
 data class Message(
-    @SerializedName("room_id")
+    @SerializedName("roomId")
     @ColumnInfo(name = "room_id")
-    val roomId: String,
-    @SerializedName("sender_name")
+    val roomID: String,
+    @SerializedName("senderUid")
     val senderName: String,
     @SerializedName("receiver_name")
     val receiverName: String,
     @SerializedName("message_type")
-    val messageType: MessageType,
-    @SerializedName("message_content")
+    var messageType: MessageType,
+    @SerializedName("message")
     val messageContent: String,
-    @SerializedName("message_tag")
-    val messageTag: Long,
     @SerializedName("message_time")
     @ColumnInfo(name = "message_time")
     val messageTime: String
