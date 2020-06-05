@@ -22,9 +22,9 @@ class ReceiveMessageUseCase(
     private val messageRepositoryImpl: MessageRepositoryImpl,
     private val disposables: CompositeDisposable
 ) {
-    fun subscribeChattingRoom(roomID: String) {
+    fun subscribeChattingRoom(roomId: String) {
         disposables.add(
-            messageRepositoryImpl.subscribeChattingRoom(roomID)
+            messageRepositoryImpl.subscribeChattingRoom(roomId)
                 .subscribe(
                     { stompMessage ->
                         val msg = convertJsonStringToMessage(stompMessage.payload)

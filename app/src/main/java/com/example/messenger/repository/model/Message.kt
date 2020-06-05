@@ -26,7 +26,7 @@ import com.google.gson.annotations.SerializedName
 data class Message(
     @SerializedName("roomId")
     @ColumnInfo(name = "room_id")
-    val roomID: String,
+    val roomId: String,
     @SerializedName("senderUid")
     val senderName: String,
     @SerializedName("receiver_name")

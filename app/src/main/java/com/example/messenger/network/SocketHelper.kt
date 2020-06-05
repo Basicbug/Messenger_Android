@@ -33,8 +33,8 @@ object SocketHelper {
         stompClient.disconnect()
     }
 
-    fun createChattingRoomStream(roomID: String): Flowable<StompMessage> {
-        return stompClient.topic("/sub/talk/room/$roomID")
+    fun createChattingRoomStream(roomId: String): Flowable<StompMessage> {
+        return stompClient.topic("/sub/talk/room/$roomId")
     }
 
     fun createMessageSendStream(msg: Message): Completable {

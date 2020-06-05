@@ -32,9 +32,9 @@ class MessageRepositoryImpl : MessageRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun subscribeChattingRoom(roomID: String): Flowable<StompMessage> {
+    override fun subscribeChattingRoom(roomId: String): Flowable<StompMessage> {
         return SocketHelper
-            .createChattingRoomStream(roomID)
+            .createChattingRoomStream(roomId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 

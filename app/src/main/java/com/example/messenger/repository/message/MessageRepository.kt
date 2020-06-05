@@ -14,7 +14,7 @@ interface MessageRepository {
 
     fun getMessageListFromLocal(roomId: String): Single<List<Message>>
     fun getLatestFiftyMessages(roomId: String, from: Int): Single<List<Message>>
-    fun subscribeChattingRoom(roomID: String): Flowable<StompMessage>
+    fun subscribeChattingRoom(roomId: String): Flowable<StompMessage>
     fun sendMessageToSocketServer(msg: Message): Completable
 
 }
