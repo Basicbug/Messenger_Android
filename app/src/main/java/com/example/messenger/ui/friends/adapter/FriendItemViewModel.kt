@@ -7,13 +7,29 @@
 
 package com.example.messenger.ui.friends.adapter
 
-import com.example.messenger.repository.model.user.UserInfo
+import androidx.databinding.Bindable
+import com.example.messenger.BR
+import com.example.messenger.R
+import com.example.messenger.base.BaseItemViewModel
 
 /**
  * @author MyeongKi
  */
 
-class FriendItemViewModel(friendInfo: UserInfo) {
-    val name = friendInfo.name
-    val stateMessage = friendInfo.stateMessage
+class FriendItemViewModel : BaseItemViewModel() {
+    @get:Bindable
+    var name = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.name)
+        }
+
+    @get:Bindable
+    var stateMessage = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.stateMessage)
+        }
+
+    override fun getLayoutRes(): Int = R.layout.item_friend
 }
