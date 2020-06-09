@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.messenger.R
 import com.example.messenger.databinding.ActivityUserInfoBinding
-import com.example.messenger.ui.sample.helper.LoginActionHelper
+import com.example.messenger.ui.login.LoginActionHelper
 
 /**
  * @author bsgreentea

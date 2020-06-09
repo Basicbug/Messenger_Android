@@ -1,20 +1,21 @@
-package com.example.messenger
+/*
+ * NaverLoginManager.kt 2020. 6. 10
+ *
+ * Copyright 2020 BasicBug. All rights Reserved.
+ *
+ */
+
+package com.example.messenger.manager
 
 import android.util.Log
 import android.widget.Toast
+import com.example.messenger.MessengerApp
 import com.example.messenger.constants.AppInfoConstants
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
-import io.reactivex.MaybeObserver
-import io.reactivex.Observable
-import io.reactivex.ObservableConverter
 import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.lang.Exception
 
 /**
  * @author bsgreentea
@@ -44,13 +45,23 @@ object NaverLoginManager : OAuthLoginHandler() {
 
     override fun run(success: Boolean) {
         if (success) {
-            val accessToken = loginInstance?.getAccessToken(context).toString()
-            val refreshToken = loginInstance?.getRefreshToken(context).toString()
-            val loginState = loginInstance?.getState(context).toString()
+            val accessToken = loginInstance?.getAccessToken(
+                context
+            ).toString()
+            val refreshToken = loginInstance?.getRefreshToken(
+                context
+            ).toString()
+            val loginState = loginInstance?.getState(
+                context
+            ).toString()
             Toast.makeText(context, "로그인되었습니다.", Toast.LENGTH_SHORT).show()
         } else {
-            val errorCode = loginInstance?.getLastErrorCode(context)?.code.toString()
-            val descCode = loginInstance?.getLastErrorDesc(context).toString()
+            val errorCode = loginInstance?.getLastErrorCode(
+                context
+            )?.code.toString()
+            val descCode = loginInstance?.getLastErrorDesc(
+                context
+            ).toString()
             Toast.makeText(context, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
@@ -63,7 +74,9 @@ object NaverLoginManager : OAuthLoginHandler() {
 //            .subscribe(getObserver())
 
         Schedulers.newThread().createWorker().schedule {
-            loginInstance.logoutAndDeleteToken(context)
+            loginInstance.logoutAndDeleteToken(
+                context
+            )
         }
     }
 
@@ -77,9 +90,15 @@ object NaverLoginManager : OAuthLoginHandler() {
             }
 
             override fun onNext(t: String) {
-                loginInstance.logoutAndDeleteToken(context)
-                val errorCode = loginInstance?.getLastErrorCode(context)?.code.toString()
-                val descCode = loginInstance?.getLastErrorDesc(context).toString()
+                loginInstance.logoutAndDeleteToken(
+                    context
+                )
+                val errorCode = loginInstance?.getLastErrorCode(
+                    context
+                )?.code.toString()
+                val descCode = loginInstance?.getLastErrorDesc(
+                    context
+                ).toString()
                 Log.d("delete_error", errorCode + " / " + descCode)
             }
 

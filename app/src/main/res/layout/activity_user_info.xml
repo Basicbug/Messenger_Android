@@ -54,7 +54,7 @@
 
         <variable
             name="loginActionHelper"
-            type="com.example.messenger.ui.sample.helper.LoginActionHelper" />
+            type="com.example.messenger.ui.login.LoginActionHelper" />
 
         <variable
             name="userInfoActivity"

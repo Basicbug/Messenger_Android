@@ -10,6 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/test_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->loginActionHelper.onTestClick(context)}"
+            android:text="test"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
@@ -29,17 +39,8 @@
             android:layout_marginBottom="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/test_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{()->loginActionHelper.onTestClick(context)}"
-            android:text="test"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:setMangerFromHelper="@{loginActionHelper}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -51,6 +52,6 @@
 
         <variable
             name="loginActionHelper"
-            type="com.example.messenger.ui.sample.helper.LoginActionHelper" />
+            type="com.example.messenger.ui.login.LoginActionHelper" />
     </data>
 </layout>
