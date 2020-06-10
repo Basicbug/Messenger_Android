@@ -15,8 +15,6 @@ import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.usecase.LoadFriendsUseCase
 import io.reactivex.disposables.CompositeDisposable
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @author MyeongKi
@@ -37,7 +35,7 @@ class FriendListViewModel(
 
     private fun subscribeEvent() {
         disposables.add(
-            FriendEvent.addFriendToListSubject.subscribe {
+            FriendEvent.friendInfoSubject.subscribe {
                 friendTable[it.id] = it
                 friendList.postValue(friendTable.values.toMutableList())
             }

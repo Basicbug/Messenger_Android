@@ -10,16 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/test_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{()->loginActionHelper.onTestClick(context)}"
-            android:text="test"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <TextView
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
@@ -45,11 +35,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
-
-        <variable
-            name="context"
-            type="android.content.Context" />
-
         <variable
             name="loginActionHelper"
             type="com.example.messenger.ui.login.LoginActionHelper" />
