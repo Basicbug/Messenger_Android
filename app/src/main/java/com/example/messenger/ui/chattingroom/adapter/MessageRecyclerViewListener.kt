@@ -2,6 +2,7 @@ package com.example.messenger.ui.chattingroom.adapter
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.messenger.constants.AppInfoConstants
 import com.example.messenger.usecase.LoadMessagesUseCase
 
 /**
@@ -16,15 +17,20 @@ class MessageRecyclerViewListener(
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
 
-        val lastVisibleItemPosition =
-            (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+        val firstVisibleItemPosition =
+            (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+
         val itemTotalCount = recyclerView.adapter?.itemCount
 
         if (itemTotalCount != null) {
-            if (lastVisibleItemPosition == 0) {
-                loadMessagesUseCase.loadMessages(roomId, itemTotalCount)
-//                recyclerView.smoothScrollToPosition(?)
+
+            if (itemTotalCount >= AppInfoConstants.MIN_SIZE_OF_MESSAGES) {
+
+                if (firstVisibleItemPosition == AppInfoConstants.LOAD_MESSAGE_POINT) {
+                    loadMessagesUseCase.loadMessages(roomId, itemTotalCount)
+                }
             }
         }
+
     }
 }

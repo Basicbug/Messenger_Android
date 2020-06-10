@@ -1,8 +1,10 @@
 package com.example.messenger.usecase
 
+import com.example.messenger.constants.AppInfoConstants
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
 
 /**
  * @author bsgreentea
@@ -19,6 +21,7 @@ class LoadMessagesUseCase(
     private fun loadLatestFiftyMessages(roomId: String, from: Int) {
         disposables.add(
             messageRepository.getLatestFiftyMessages(roomId, from)
+                .delay(AppInfoConstants.NO_DUPLICATION, TimeUnit.MILLISECONDS)
                 .doOnSuccess {
                     it.forEach { message ->
                         ChattingRoomEvent.addMessageToList(message)
