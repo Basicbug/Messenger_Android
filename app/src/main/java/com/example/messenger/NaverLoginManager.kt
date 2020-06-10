@@ -30,7 +30,7 @@ object NaverLoginManager : OAuthLoginHandler() {
             context,
             OAUTH_CLIENT_ID,
             OAUTH_CLIENT_SECRET,
-            AppInfoConstants.AppName
+            AppInfoConstants.APP_NAME
         )
     }
 

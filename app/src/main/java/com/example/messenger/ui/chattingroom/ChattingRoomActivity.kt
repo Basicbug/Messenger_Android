@@ -24,8 +24,9 @@ class ChattingRoomActivity : BaseSocketActivity() {
             ChattingRoomViewModelInjector.provideSampleViewModelFactory("1")
                 .create(ChattingRoomViewModel::class.java)
 
-        binding.chatRoomViewModel = chattingRoomViewModel
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting_room)
+        binding.chatRoomViewModel = chattingRoomViewModel
+
         binding.lifecycleOwner = this
 
         val messageAdapter = MessageAdapter()
