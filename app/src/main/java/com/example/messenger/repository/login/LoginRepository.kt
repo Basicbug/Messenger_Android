@@ -7,6 +7,7 @@
 
 package com.example.messenger.repository.login
 
+import com.example.messenger.repository.model.login.Token
 import io.reactivex.Single
 
 /**
@@ -14,5 +15,5 @@ import io.reactivex.Single
  */
 
 interface LoginRepository {
-    fun getJwtTokenFromServer(provider:String, accessToken: String): Single<String>
+    fun getJwtTokenFromServer(provider:String, accessToken: String): Single<Token>
 }
