@@ -14,5 +14,11 @@ import com.google.gson.annotations.SerializedName
  */
 class Token {
     @SerializedName("jwtToken")
-    val jwtToken: String? = null
+    var jwtToken: String? = null
+
+    @SerializedName("accessToken")
+    var accessToken: String? = null
+
+    @SerializedName("provider")
+    var provider: String? = null
 }

@@ -11,6 +11,8 @@ import android.util.Log
 import android.widget.Toast
 import com.example.messenger.MessengerApp
 import com.example.messenger.constants.AppInfoConstants
+import com.example.messenger.event.LoginEvent
+import com.example.messenger.repository.model.login.Token
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import io.reactivex.Observer
@@ -23,10 +25,11 @@ import io.reactivex.schedulers.Schedulers
 
 object NaverLoginManager : OAuthLoginHandler() {
 
+    private const val PROVIDER = "naver"
     private const val OAUTH_CLIENT_ID = "nJg0Pj0f2rEBCBQSZe6s"
     private const val OAUTH_CLIENT_SECRET = "2Ca8FHXsj4"
     private val context = MessengerApp.applicationContext()
-    private var loginInstance = OAuthLogin.getInstance().apply {
+    private val loginInstance = OAuthLogin.getInstance().apply {
         init(
             context,
             OAUTH_CLIENT_ID,
@@ -48,12 +51,10 @@ object NaverLoginManager : OAuthLoginHandler() {
             val accessToken = loginInstance?.getAccessToken(
                 context
             ).toString()
-            val refreshToken = loginInstance?.getRefreshToken(
-                context
-            ).toString()
-            val loginState = loginInstance?.getState(
-                context
-            ).toString()
+            LoginEvent.invokeLoginSuccess(Token().also {
+                it.accessToken = accessToken
+                it.provider = PROVIDER
+            })
             Toast.makeText(context, "로그인되었습니다.", Toast.LENGTH_SHORT).show()
         } else {
             val errorCode = loginInstance?.getLastErrorCode(

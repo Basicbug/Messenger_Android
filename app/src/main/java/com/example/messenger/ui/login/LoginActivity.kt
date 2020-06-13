@@ -18,10 +18,11 @@ import com.example.messenger.databinding.ActivityLoginBinding
  */
 
 class LoginActivity : BaseActivity() {
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        loginViewModel = LoginViewModelInjector.provideLoginViewModelFactory().create(LoginViewModel::class.java)
         val binding: ActivityLoginBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_login)
 

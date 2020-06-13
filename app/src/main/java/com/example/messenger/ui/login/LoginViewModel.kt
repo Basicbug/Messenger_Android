@@ -8,7 +8,9 @@
 package com.example.messenger.ui.login
 
 import com.example.messenger.base.BaseViewModel
+import com.example.messenger.event.LoginEvent
 import com.example.messenger.repository.login.LoginRepositoryImpl
+import com.example.messenger.usecase.LoginSuccessUseCase
 
 /**
  * @author MyeongKi
@@ -17,5 +19,15 @@ import com.example.messenger.repository.login.LoginRepositoryImpl
 class LoginViewModel(
     loginRepository: LoginRepositoryImpl
 ) : BaseViewModel() {
-
+    init {
+        subscribeEvent()
+    }
+    private val loginSuccessUseCase = LoginSuccessUseCase(loginRepository, disposables)
+    private fun subscribeEvent() {
+        disposables.add(
+            LoginEvent.loginSuccessSubject.subscribe {
+                loginSuccessUseCase.successLogin(it)
+            }
+        )
+    }
 }
