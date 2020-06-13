@@ -10,6 +10,7 @@ package com.example.messenger.ui.friends
 import android.util.ArrayMap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.FriendEvent
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
@@ -23,8 +24,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 class FriendListViewModel(
     userRepository: UserRepositoryImpl
-) : ViewModel() {
-    private val disposables: CompositeDisposable = CompositeDisposable()
+) : BaseViewModel() {
     val loadFriendsUseCase = LoadFriendsUseCase(userRepository, disposables)
     val friendList = MutableLiveData<MutableList<UserInfo>>()
     private val friendTable = ArrayMap<String, UserInfo>()
@@ -41,11 +41,4 @@ class FriendListViewModel(
             }
         )
     }
-
-
-    override fun onCleared() {
-        super.onCleared()
-        disposables.clear()
-    }
-
 }
