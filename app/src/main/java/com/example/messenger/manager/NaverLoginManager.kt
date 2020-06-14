@@ -55,7 +55,6 @@ object NaverLoginManager : OAuthLoginHandler() {
                 it.accessToken = accessToken
                 it.provider = PROVIDER
             })
-            Toast.makeText(context, "로그인되었습니다.", Toast.LENGTH_SHORT).show()
         } else {
             val errorCode = loginInstance?.getLastErrorCode(
                 context

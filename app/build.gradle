@@ -74,4 +74,6 @@ dependencies {
     implementation rx_java_libraries.values()
 
     implementation lifecycle_libraries.values()
+
+    implementation preference_libraries.values()
 }

@@ -8,6 +8,9 @@
 package com.example.messenger.usecase
 
 import android.util.Log
+import android.widget.Toast
+import com.example.messenger.MessengerApp
+import com.example.messenger.manager.PreferenceManager
 import com.example.messenger.repository.login.LoginRepositoryImpl
 import com.example.messenger.repository.model.login.Token
 import io.reactivex.disposables.CompositeDisposable
@@ -24,10 +27,11 @@ class LoginSuccessUseCase(
         disposables.add(
             loginRepository.getJwtTokenFromServer(token.provider ?: "", token.accessToken ?: "")
                 .doOnSuccess {
-                    Log.d("testToken", it.jwtToken?:"")
+                    PreferenceManager.setJwtToken(it.jwtToken ?: "")
+                    Toast.makeText(MessengerApp.applicationContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show()
                 }
                 .doOnError {
-                    Log.d("testToken", it.message?:"")
+                    Log.d("testToken", it.message ?: "")
                 }
                 .subscribe()
         )
