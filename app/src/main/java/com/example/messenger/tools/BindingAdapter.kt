@@ -26,8 +26,8 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("setMangerFromHelper")
-    fun setMangerFromHelper(
+    @BindingAdapter("setManagerFromHelper")
+    fun setManagerFromHelper(
         view: View, helper: BaseHelper
     ) {
         helper.customizePropertiesView(view)
