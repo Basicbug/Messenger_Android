@@ -8,6 +8,7 @@
 package com.example.messenger.network.service.login
 
 import com.example.messenger.repository.model.ApiData
+import com.example.messenger.repository.model.login.JwtToken
 import com.example.messenger.repository.model.login.Token
 import io.reactivex.Single
 import retrofit2.http.POST
@@ -22,5 +23,5 @@ interface LoginService {
     fun getJwtToken(
         @Query("provider") provider: String,
         @Query("accessToken") accessToken: String
-    ): Single<ApiData<Token>>
+    ): Single<ApiData<JwtToken>>
 }

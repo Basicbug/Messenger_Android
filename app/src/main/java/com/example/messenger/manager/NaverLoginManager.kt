@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.messenger.MessengerApp
 import com.example.messenger.constants.AppInfoConstants
 import com.example.messenger.event.LoginEvent
+import com.example.messenger.repository.model.login.AccessToken
 import com.example.messenger.repository.model.login.Token
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
@@ -51,8 +52,8 @@ object NaverLoginManager : OAuthLoginHandler() {
             val accessToken = loginInstance?.getAccessToken(
                 context
             ).toString()
-            LoginEvent.invokeLoginSuccess(Token().also {
-                it.accessToken = accessToken
+            LoginEvent.invokeLoginSuccess(AccessToken().also {
+                it.token = accessToken
                 it.provider = PROVIDER
             })
         } else {

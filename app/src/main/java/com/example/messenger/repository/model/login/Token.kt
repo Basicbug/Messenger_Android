@@ -7,18 +7,11 @@
 
 package com.example.messenger.repository.model.login
 
-import com.google.gson.annotations.SerializedName
 
 /**
  * @author MyeongKi
  */
-class Token {
-    @SerializedName("jwtToken")
-    var jwtToken: String? = null
-
-    @SerializedName("accessToken")
-    var accessToken: String? = null
-
-    @SerializedName("provider")
-    var provider: String? = null
+interface Token {
+    var token: String?
+    var provider: String?
 }

@@ -23,11 +23,11 @@ class LoginSuccessUseCase(
     private val loginRepository: LoginRepositoryImpl,
     private val disposables: CompositeDisposable
 ) {
-    fun successLogin(token: Token) {
+    fun successLogin(accessToken: Token) {
         disposables.add(
-            loginRepository.getJwtTokenFromServer(token.provider ?: "", token.accessToken ?: "")
+            loginRepository.getJwtTokenFromServer(accessToken.provider ?: "", accessToken.token ?: "")
                 .doOnSuccess {
-                    PreferenceManager.setJwtToken(it.jwtToken ?: "")
+                    PreferenceManager.setJwtToken(it.token ?: "")
                     Toast.makeText(MessengerApp.applicationContext(), "로그인되었습니다."+PreferenceManager.getJwtToken(), Toast.LENGTH_SHORT).show()
                 }
                 .doOnError {
