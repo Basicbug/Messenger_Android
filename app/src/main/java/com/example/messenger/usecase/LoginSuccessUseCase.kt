@@ -28,7 +28,7 @@ class LoginSuccessUseCase(
             loginRepository.getJwtTokenFromServer(token.provider ?: "", token.accessToken ?: "")
                 .doOnSuccess {
                     PreferenceManager.setJwtToken(it.jwtToken ?: "")
-                    Toast.makeText(MessengerApp.applicationContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(MessengerApp.applicationContext(), "로그인되었습니다."+PreferenceManager.getJwtToken(), Toast.LENGTH_SHORT).show()
                 }
                 .doOnError {
                     Log.d("testToken", it.message ?: "")

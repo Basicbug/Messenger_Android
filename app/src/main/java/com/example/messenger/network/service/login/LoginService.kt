@@ -18,9 +18,9 @@ import retrofit2.http.Query
  * @author MyeongKi
  */
 interface LoginService {
-    @POST("/v1/social/signin/{provider}")
+    @POST("/v1/social/signin")
     fun getJwtToken(
-        @Path("provider") provider: String,
+        @Query("provider") provider: String,
         @Query("accessToken") accessToken: String
     ): Single<ApiData<Token>>
 }
