@@ -24,7 +24,7 @@ class StartBottomNavigationHelper(private val activity: BaseActivity):BaseHelper
         activity.replaceFragment(FriendListFragment::class.java, R.id.content, null)
     }
 
-    override fun setOnListener(view: View) {
+    override fun customizePropertiesView(view: View) {
 
         (view as BottomNavigationView).setOnNavigationItemSelectedListener {
             when (it.itemId) {

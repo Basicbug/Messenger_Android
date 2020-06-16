@@ -14,12 +14,14 @@
         <activity android:name=".MainActivity"></activity>
 
         <activity android:name=".ui.start.StartActivity">
+
+        </activity>
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.sample.LoginActivity"></activity>
 
         <activity android:name=".ui.sample.UserInfoActivity"></activity>
 
