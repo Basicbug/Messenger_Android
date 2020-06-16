@@ -19,7 +19,7 @@ object PreferenceManager {
     private val preference = BasicBugPreference(MessengerApp.applicationContext())
 
     fun getJwtToken(): String? {
-        return preference.getString(JWT_TOKEN_KEY)
+        return preference.getString(JWT_TOKEN_KEY, null)
     }
 
     fun setJwtToken(jwtToken: String) {

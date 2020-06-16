@@ -14,8 +14,8 @@ import io.reactivex.subjects.PublishSubject
  * @author MyeongKi
  */
 object LoginEvent {
-    val loginSuccessSubject = PublishSubject.create<Token>()
-    fun invokeLoginSuccess(token: Token) {
-        loginSuccessSubject.onNext(token)
+    val loadTokenSubject = PublishSubject.create<Token>()
+    fun invokeLoadTokenEvent(token: Token) {
+        loadTokenSubject.onNext(token)
     }
 }

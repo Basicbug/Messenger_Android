@@ -26,6 +26,6 @@ class LoginActivity : BaseActivity() {
         val binding: ActivityLoginBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-        binding.loginActionHelper = LoginActionHelper()
+        binding.loginActionHelper = LoginActivityHelper(this, disposables)
     }
 }

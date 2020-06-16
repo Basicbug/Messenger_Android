@@ -13,12 +13,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.messenger.tools.NavigationDelegate
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
  */
 
 abstract class BaseActivity : AppCompatActivity(), NavigationDelegate {
+    protected val disposables: CompositeDisposable = CompositeDisposable()
+
 
     override fun replaceFragmentSaved(target: Class<out Fragment>, containerId: Int, arguments: Bundle?) {
         val tag = target.name
@@ -47,5 +50,12 @@ abstract class BaseActivity : AppCompatActivity(), NavigationDelegate {
 
     override fun startActivity(target: Class<out Activity>, extras: Bundle?) {
         startActivity(Intent(this, target))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!disposables.isDisposed){
+            disposables.dispose()
+        }
     }
 }
