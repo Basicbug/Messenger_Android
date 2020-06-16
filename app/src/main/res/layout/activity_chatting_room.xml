@@ -23,18 +23,21 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/separating_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:setOnListener="@{chatRoomViewModel.chatListViewModel}" />
 
         <View
+            android:id="@+id/separating_line"
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginBottom="0dp"
             app:layout_constraintBottom_toTopOf="@+id/edit_text_message"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview" />
 
         <EditText
             android:id="@+id/edit_text_message"
@@ -49,6 +52,7 @@
             android:maxLines="6"
             android:minHeight="48dp"
             android:text="@={chatRoomViewModel.text}"
+            app:layout_constraintTop_toBottomOf="@+id/separating_line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_send"
             app:layout_constraintStart_toStartOf="parent" />

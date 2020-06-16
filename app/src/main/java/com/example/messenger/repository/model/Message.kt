@@ -26,18 +26,18 @@ import com.google.gson.annotations.SerializedName
 data class Message(
     @SerializedName("roomId")
     @ColumnInfo(name = "room_id")
-    val roomId: String,
+    var roomId: String = "",
     @SerializedName("senderUid")
-    val senderName: String,
+    var senderName: String = "",
     @SerializedName("receiver_name")
-    val receiverName: String,
+    var receiverName: String = "",
     @SerializedName("message_type")
-    var messageType: MessageType,
+    var messageType: MessageType = MessageType.MESSAGE,
     @SerializedName("message")
-    val messageContent: String,
+    var messageContent: String = "",
     @SerializedName("message_time")
     @ColumnInfo(name = "message_time")
-    val messageTime: String
+    var messageTime: String = ""
 ) : PushItem {
     override fun getTitle(): String {
         return senderName

@@ -22,7 +22,7 @@ class ChattingRoomViewModel(
     private val disposables: CompositeDisposable = CompositeDisposable()
 
     val loadMessageUseCase = LoadMessagesUseCase(messageRepository, disposables)
-    val messageList = MutableLiveData<ArrayList<Message>>().apply {
+    val messageList = MutableLiveData<MutableList<Message>>().apply {
         value = ArrayList()
     }
 
