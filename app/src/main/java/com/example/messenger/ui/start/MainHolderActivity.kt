@@ -11,19 +11,19 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.messenger.R
 import com.example.messenger.base.BaseActivity
-import com.example.messenger.databinding.ActivityStartBinding
+import com.example.messenger.databinding.ActivityMainHolderBinding
 
 /**
  * @author MyeongKi
  */
 
-class StartActivity :BaseActivity(){
-    lateinit var binding: ActivityStartBinding
+class MainHolderActivity :BaseActivity(){
+    lateinit var binding: ActivityMainHolderBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_start)
-        binding.helper = StartBottomNavigationHelper(this)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
+        binding.helper = MainHolderBottomNavigationHelper(this)
     }
 
 }

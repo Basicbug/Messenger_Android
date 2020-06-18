@@ -13,7 +13,7 @@ import com.example.messenger.MessengerApp
 import com.example.messenger.constants.AppInfoConstants
 import com.example.messenger.event.LoginEvent
 import com.example.messenger.repository.model.login.AccessToken
-import com.example.messenger.repository.model.login.Token
+import com.example.messenger.repository.model.login.JwtToken
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import io.reactivex.Observer
@@ -29,6 +29,7 @@ object NaverLoginManager : OAuthLoginHandler() {
     private const val PROVIDER = "naver"
     private const val OAUTH_CLIENT_ID = "nJg0Pj0f2rEBCBQSZe6s"
     private const val OAUTH_CLIENT_SECRET = "2Ca8FHXsj4"
+    private var jwtToken: JwtToken? = null
     private val context = MessengerApp.applicationContext()
     private val loginInstance = OAuthLogin.getInstance().apply {
         init(
@@ -52,7 +53,7 @@ object NaverLoginManager : OAuthLoginHandler() {
             val accessToken = loginInstance?.getAccessToken(
                 context
             ).toString()
-            LoginEvent.invokeLoginSuccess(AccessToken().also {
+            LoginEvent.invokeLoadTokenEvent(AccessToken().also {
                 it.token = accessToken
                 it.provider = PROVIDER
             })
@@ -68,16 +69,16 @@ object NaverLoginManager : OAuthLoginHandler() {
     }
 
     fun deleteToken() {
-
-//        Observable.just("1")
-//            .subscribeOn(Schedulers.newThread())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(getObserver())
-
         Schedulers.newThread().createWorker().schedule {
             loginInstance.logoutAndDeleteToken(
                 context
             )
+        }
+    }
+
+    fun setJwtToken(token: String) {
+        jwtToken = JwtToken().apply {
+            this.token = token
         }
     }
 

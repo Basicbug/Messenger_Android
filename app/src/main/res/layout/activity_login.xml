@@ -37,6 +37,6 @@
     <data>
         <variable
             name="loginActionHelper"
-            type="com.example.messenger.ui.login.LoginActionHelper" />
+            type="com.example.messenger.ui.login.LoginActivityHelper" />
     </data>
 </layout>

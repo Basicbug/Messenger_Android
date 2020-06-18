@@ -18,7 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  * @author MyeongKi
  */
 
-class StartBottomNavigationHelper(private val activity: BaseActivity):BaseHelper{
+class MainHolderBottomNavigationHelper(private val activity: BaseActivity):BaseHelper{
 
     init {
         activity.replaceFragment(FriendListFragment::class.java, R.id.content, null)
