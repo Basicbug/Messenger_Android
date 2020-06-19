@@ -29,13 +29,13 @@ class ChattingRoomActivity : BaseSocketActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting_room)
+
         chattingRoomViewModel =
             ChattingRoomViewModelInjector.provideSampleViewModelFactory("1")
                 .create(ChattingRoomViewModel::class.java)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting_room)
         binding.chatRoomViewModel = chattingRoomViewModel
-
         binding.lifecycleOwner = this
 
         val messageAdapter = MessageAdapter()
@@ -43,15 +43,15 @@ class ChattingRoomActivity : BaseSocketActivity() {
 
         subscribeMessageList(messageAdapter)
 
-//        for(i in 1..200) {
-//            val msg = Message(
-//                "1", "sender", "receiver", MessageType.MESSAGE,
-//                "test_msg", i.toString()
-//            )
-//            chattingRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
-//        }
-//
-//        chattingRoomViewModel.loadMessageUseCase.loadMessages("1",10)
+        for(i in 1..200) {
+            val msg = Message(
+                "1", "sender", "receiver", MessageType.MESSAGE,
+                "test_msg", i.toString()
+            )
+            chattingRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
+        }
+
+        chattingRoomViewModel.loadMessageUseCase.loadMessages("1",0)
     }
 
     private fun subscribeMessageList(messageAdapter: MessageAdapter) {
