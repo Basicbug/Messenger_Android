@@ -3,6 +3,7 @@ package com.example.messenger.ui.chattingroom
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.messenger.constants.AppInfoConstants
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import com.example.messenger.repository.model.Message
@@ -11,6 +12,7 @@ import com.example.messenger.usecase.LoadMessagesUseCase
 import com.example.messenger.usecase.ReceiveMessageUseCase
 import com.example.messenger.usecase.SendMessageUseCase
 import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
 
 /**
  * @author bsgreentea
@@ -57,12 +59,22 @@ class ChattingRoomViewModel(
 
     private fun subscribeEvent() {
         disposables.add(
-            ChattingRoomEvent.addMessageToListSubject.subscribe {
-                messageList.value?.add(it)
-                messageList.postValue(messageList.value)
-            }
+            ChattingRoomEvent.addMessageToListSubject
+                .subscribe {
+                    messageList.value?.add(it)
+                    messageList.postValue(messageList.value)
+                }
         )
-        receiveMessageUseCase.subscribeChattingRoom("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e")
+
+        disposables.add(
+            ChattingRoomEvent.addMessagesToListSubject
+                .debounce(AppInfoConstants.NO_DUPLICATION, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    messageList.value?.addAll(0, it)
+                    messageList.postValue(messageList.value)
+                }
+        )
+//        receiveMessageUseCase.subscribeChattingRoom("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e")
     }
 
     override fun onCleared() {
