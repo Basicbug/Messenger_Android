@@ -20,13 +20,12 @@ class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
         private const val SENT = 2
     }
 
-    var messageList = emptyList<Message>()
-
     override fun getItemViewType(position: Int): Int {
-        val message: Message = messageList[position]
+        val message: Message = this.getItem(position)
 
 //        if(message.senderName == ) return SENT
 //        else return RECEIVED
+
         return SENT
     }
 
@@ -49,21 +48,12 @@ class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
         }
     }
 
-    override fun getItemCount() = messageList.size
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (holder is MessageReceivedViewHolder) {
-//            holder.bind(getItem(position))
-            holder.bind(messageList[position])
+            holder.bind(getItem(position))
         } else if (holder is MessageSentViewHolder) {
-//            holder.bind(getItem(position))
-            holder.bind(messageList[position])
+            holder.bind(getItem(position))
         }
-    }
-
-    internal fun setMessageList(messageList: List<Message>) {
-        this.messageList = messageList
-        notifyDataSetChanged()
     }
 }
