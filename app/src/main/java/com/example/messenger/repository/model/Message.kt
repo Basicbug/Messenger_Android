@@ -11,26 +11,34 @@ import com.example.messenger.MessengerApp
 import com.example.messenger.R
 import com.example.messenger.push.PushItem
 import com.example.messenger.type.MessageType
+import com.google.gson.annotations.SerializedName
 
 /**
  * @author MyeongKi
  */
 
 data class Message(
-    val senderName: String,
-    val receiverName: String,
-    val messageType: MessageType,
-    val messageContent: String,
-    val messageTime: String
+    @SerializedName("id")
+    var id: Int = 0,
+    @SerializedName("message")
+    var message: String = "",
+    @SerializedName("rooId")
+    var roomId: String = "",
+    @SerializedName("senderUid")
+    var senderUid: String = "",
+    @SerializedName("timestamp")
+    var timestamp: String = "",
+    @SerializedName("messageType")
+    var messageType: MessageType = MessageType.MESSAGE
 ) : PushItem {
     override fun getTitle(): String {
-        return senderName
+        return senderUid
     }
 
     override fun getContent(): String {
         return when (messageType) {
             MessageType.MESSAGE -> {
-                messageContent
+                message
             }
             MessageType.IMAGE -> {
                 MessengerApp.applicationContext().resources.getString(R.string.image_message_content)
