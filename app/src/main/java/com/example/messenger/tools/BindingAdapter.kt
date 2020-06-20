@@ -18,10 +18,18 @@ import com.example.messenger.base.BaseHelper
 
 object BindingAdapter {
     @JvmStatic
-    @BindingAdapter("setOnListener")
-    fun setOnListener(
+    @BindingAdapter("setOnListenerFromHelper")
+    fun setOnListenerFromHelper(
         view: View, helper: BaseHelper
     ) {
-        helper.setOnListener(view)
+        helper.customizePropertiesView(view)
+    }
+
+    @JvmStatic
+    @BindingAdapter("setManagerFromHelper")
+    fun setManagerFromHelper(
+        view: View, helper: BaseHelper
+    ) {
+        helper.customizePropertiesView(view)
     }
 }

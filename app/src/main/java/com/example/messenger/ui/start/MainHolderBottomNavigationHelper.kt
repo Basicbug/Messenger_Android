@@ -19,13 +19,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  * @author MyeongKi
  */
 
-class StartBottomNavigationHelper(private val activity: BaseActivity):BaseHelper{
+class MainHolderBottomNavigationHelper(private val activity: BaseActivity):BaseHelper{
 
     init {
         activity.replaceFragment(FriendListFragment::class.java, R.id.content, null)
     }
 
-    override fun setOnListener(view: View) {
+    override fun customizePropertiesView(view: View) {
 
         (view as BottomNavigationView).setOnNavigationItemSelectedListener {
             when (it.itemId) {

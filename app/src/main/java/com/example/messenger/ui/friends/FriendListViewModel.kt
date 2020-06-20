@@ -7,14 +7,14 @@
 
 package com.example.messenger.ui.friends
 
+
+import android.util.ArrayMap
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.messenger.event.UserEvent
+import com.example.messenger.base.BaseViewModel
+import com.example.messenger.event.FriendEvent
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.usecase.LoadFriendsUseCase
-import io.reactivex.disposables.CompositeDisposable
-import kotlin.collections.ArrayList
 
 /**
  * @author MyeongKi
@@ -23,30 +23,21 @@ import kotlin.collections.ArrayList
 
 class FriendListViewModel(
     userRepository: UserRepositoryImpl
-) : ViewModel() {
-    private val disposables: CompositeDisposable = CompositeDisposable()
-    val loadFriendsUseCase = LoadFriendsUseCase("ChoMk", userRepository, disposables)
-    val friendList = MutableLiveData<ArrayList<UserInfo>>().apply {
-        value = ArrayList()
-    }
+) : BaseViewModel() {
+    val loadFriendsUseCase = LoadFriendsUseCase(userRepository, disposables)
+    val friendList = MutableLiveData<MutableList<UserInfo>>()
+    private val friendTable = ArrayMap<String, UserInfo>()
 
     init {
         subscribeEvent()
     }
 
-    private fun subscribeEvent(){
+    private fun subscribeEvent() {
         disposables.add(
-            UserEvent.addFriendToListSubject.subscribe {
-                friendList.value?.add(it)
-                friendList.postValue(friendList.value)
+            FriendEvent.friendInfoSubject.subscribe {
+                friendTable[it.id] = it
+                friendList.postValue(friendTable.values.toMutableList())
             }
         )
     }
-
-
-    override fun onCleared() {
-        super.onCleared()
-        disposables.clear()
-    }
-
 }
