@@ -1,25 +1,25 @@
 package com.example.messenger.ui.chattingroom
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.messenger.base.BaseViewModel
+import com.example.messenger.base.BaseHelper
 import com.example.messenger.ui.chattingroom.adapter.MessageRecyclerViewListener
 import com.example.messenger.usecase.LoadMessagesUseCase
 
 /**
  * @author bsgreentea
  */
-class ChatListViewModel(
+class ChattingRoomActivityHelper(
     private val loadMessagesUseCase: LoadMessagesUseCase,
     private val roomId: String
-) : BaseViewModel {
+) : BaseHelper {
 
-    override fun setOnListener(view: View) {
-        (view as RecyclerView).addOnScrollListener(
+    override fun customizeRecyclerView(view: RecyclerView) {
+        view.addOnScrollListener(
             MessageRecyclerViewListener(
                 loadMessagesUseCase,
                 roomId
             )
         )
     }
+
 }

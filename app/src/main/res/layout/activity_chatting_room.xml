@@ -11,6 +11,10 @@
         <variable
             name="chatRoomViewModel"
             type="com.example.messenger.ui.chattingroom.ChattingRoomViewModel" />
+
+        <variable
+            name="chatRoomHelper"
+            type="com.example.messenger.ui.chattingroom.ChattingRoomActivityHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,7 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setOnListener="@{chatRoomViewModel.chatListViewModel}" />
+            app:setOnListenerFromHelper="@{chatRoomHelper}" />
 
         <View
             android:id="@+id/separating_line"
@@ -52,10 +56,10 @@
             android:maxLines="6"
             android:minHeight="48dp"
             android:text="@={chatRoomViewModel.text}"
-            app:layout_constraintTop_toBottomOf="@+id/separating_line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_send"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/separating_line" />
 
         <Button
             android:id="@+id/btn_send"

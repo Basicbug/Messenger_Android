@@ -2,21 +2,16 @@ package com.example.messenger.ui.chattingroom
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.messenger.R
-import com.example.messenger.base.BaseActivity
 import com.example.messenger.base.BaseSocketActivity
 import com.example.messenger.databinding.ActivityChattingRoomBinding
 import com.example.messenger.repository.model.Message
 import com.example.messenger.type.MessageType
 import com.example.messenger.ui.chattingroom.adapter.MessageAdapter
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 /**
  * @author bsgreentea
@@ -38,12 +33,15 @@ class ChattingRoomActivity : BaseSocketActivity() {
         binding.chatRoomViewModel = chattingRoomViewModel
         binding.lifecycleOwner = this
 
+        binding.chatRoomHelper =
+            ChattingRoomActivityHelper(chattingRoomViewModel.loadMessageUseCase, "1")
+
         val messageAdapter = MessageAdapter()
         binding.recyclerview.adapter = messageAdapter
 
         subscribeMessageList(messageAdapter)
 
-        for(i in 1..200) {
+        for (i in 1..200) {
             val msg = Message(
                 "1", "sender", "receiver", MessageType.MESSAGE,
                 "test_msg", i.toString()
@@ -51,7 +49,7 @@ class ChattingRoomActivity : BaseSocketActivity() {
             chattingRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
         }
 
-        chattingRoomViewModel.loadMessageUseCase.loadMessages("1",0)
+        chattingRoomViewModel.loadMessageUseCase.loadMessages("1", 0)
     }
 
     private fun subscribeMessageList(messageAdapter: MessageAdapter) {
