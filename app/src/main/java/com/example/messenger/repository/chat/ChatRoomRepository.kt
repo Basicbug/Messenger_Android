@@ -17,7 +17,8 @@ import io.reactivex.Single
 
 interface ChatRoomRepository {
     fun getChatRoomListFromServer(userId: String): Single<ArrayList<ChatRoom>>
-    fun insertChatRoomListToLocal(items: ArrayList<ChatRoom>): Completable
+    fun getChatRoomDetailFromServer(roomId: String): Single<ChatRoom>
+    fun insertChatRoomToLocal(item: ChatRoom): Completable
     fun getChatRoomListFromLocal(): Single<List<ChatRoom>>
     fun deleteChatRoomToLocal(item: ChatRoom): Completable
 }

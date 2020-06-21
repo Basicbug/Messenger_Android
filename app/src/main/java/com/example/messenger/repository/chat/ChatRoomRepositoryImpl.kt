@@ -22,17 +22,6 @@ import io.reactivex.schedulers.Schedulers
 class ChatRoomRepositoryImpl : ChatRoomRepository {
     private val chatRoomDao = ChatDatabase.getDatabase().chatRoomDao()
 
-    companion object {
-        // For Singleton instantiation
-        @Volatile
-        private var instance: ChatRoomRepositoryImpl? = null
-
-        fun getInstance() =
-            instance ?: synchronized(this) {
-                instance ?: ChatRoomRepositoryImpl().also { instance = it }
-            }
-    }
-
     override fun getChatRoomListFromServer(userId: String): Single<ArrayList<ChatRoom>> {
         return ApiHelper
             .createApiByService(ChatRoomService::class)
@@ -43,9 +32,18 @@ class ChatRoomRepositoryImpl : ChatRoomRepository {
 
     }
 
-    override fun insertChatRoomListToLocal(items: ArrayList<ChatRoom>): Completable {
+    override fun getChatRoomDetailFromServer(roomId: String): Single<ChatRoom> {
+        return ApiHelper
+            .createApiByService(ChatRoomService::class)
+            .getChatRoomDetail(roomId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { it.data }
+    }
+
+    override fun insertChatRoomToLocal(item: ChatRoom): Completable {
         return chatRoomDao
-            .insertChatRoomList(items)
+            .insertChatRoom(item)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -64,4 +62,14 @@ class ChatRoomRepositoryImpl : ChatRoomRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    companion object {
+        // For Singleton instantiation
+        @Volatile
+        private var instance: ChatRoomRepositoryImpl? = null
+
+        fun getInstance() =
+            instance ?: synchronized(this) {
+                instance ?: ChatRoomRepositoryImpl().also { instance = it }
+            }
+    }
 }

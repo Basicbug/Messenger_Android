@@ -7,6 +7,7 @@
 
 package com.example.messenger.network.service.chat
 
+import com.example.messenger.repository.model.ApiData
 import com.example.messenger.repository.model.ApiDataList
 import com.example.messenger.repository.model.chat.ChatRoom
 import io.reactivex.Single
@@ -23,4 +24,9 @@ interface ChatRoomService {
     fun getChatRoomList(
         @Query("uid") userId: String
     ): Single<ApiDataList<ChatRoom>>
+
+    @GET("/v1/talk/room/detail")
+    fun getChatRoomDetail(
+        @Query("roomId") roomId: String
+    ): Single<ApiData<ChatRoom>>
 }

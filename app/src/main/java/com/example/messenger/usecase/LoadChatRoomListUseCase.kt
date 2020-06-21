@@ -29,9 +29,8 @@ class LoadChatRoomListUseCase(
         disposables.add(
             chatRoomRepositoryImpl.getChatRoomListFromServer(userId)
                 .doOnSuccess {
-                    insertChatRoomListToLocal(it)
                     it.forEach { chatRoom ->
-                        ChatEvent.addChatRoomToList(chatRoom)
+                        getChatRoomDetailFromServer(chatRoom.roomId)
                     }
                 }
                 .doOnError {
@@ -41,6 +40,22 @@ class LoadChatRoomListUseCase(
                 .subscribe()
         )
     }
+
+    private fun getChatRoomDetailFromServer(roomId: String) {
+        disposables.add(
+            chatRoomRepositoryImpl.getChatRoomDetailFromServer(roomId)
+                .doOnSuccess {
+                    insertChatRoomToLocal(it)
+                    ChatEvent.addChatRoomToList(it)
+                }
+                .doOnError {
+                    //TODO 스냅바로 실패 보여주기
+                    getChatRoomListFromLocal()
+                }
+                .subscribe()
+        )
+    }
+
 
     private fun getChatRoomListFromLocal() {
         disposables.add(
@@ -54,9 +69,9 @@ class LoadChatRoomListUseCase(
         )
     }
 
-    private fun insertChatRoomListToLocal(items: ArrayList<ChatRoom>) {
+    private fun insertChatRoomToLocal(item: ChatRoom) {
         disposables.add(
-            chatRoomRepositoryImpl.insertChatRoomListToLocal(items)
+            chatRoomRepositoryImpl.insertChatRoomToLocal(item)
                 .subscribe()
         )
     }
