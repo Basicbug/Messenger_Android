@@ -2,8 +2,7 @@ package com.example.messenger.ui.chattingroom
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.messenger.constants.AppInfoConstants
+import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import com.example.messenger.repository.model.Message
@@ -11,7 +10,6 @@ import com.example.messenger.type.MessageType
 import com.example.messenger.usecase.LoadMessagesUseCase
 import com.example.messenger.usecase.ReceiveMessageUseCase
 import com.example.messenger.usecase.SendMessageUseCase
-import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.TimeUnit
 
 /**
@@ -20,15 +18,16 @@ import java.util.concurrent.TimeUnit
 class ChattingRoomViewModel(
     messageRepository: MessageRepositoryImpl,
     roomId: String
-) : ViewModel() {
-    private val disposables: CompositeDisposable = CompositeDisposable()
+) : BaseViewModel() {
+
+    companion object {
+        private const val NO_DUPLICATION_DEBOUNCE_TIME: Long = 25
+    }
 
     val loadMessageUseCase = LoadMessagesUseCase(messageRepository, disposables)
     val messageList = MutableLiveData<MutableList<Message>>().apply {
         value = ArrayList()
     }
-
-    val chatListViewModel = ChatListViewModel(loadMessageUseCase, roomId)
 
     private val receiveMessageUseCase = ReceiveMessageUseCase(messageRepository, disposables)
     private val sendMessageUseCase = SendMessageUseCase(messageRepository, disposables)
@@ -68,7 +67,7 @@ class ChattingRoomViewModel(
 
         disposables.add(
             ChattingRoomEvent.addMessagesToListSubject
-                .debounce(AppInfoConstants.NO_DUPLICATION, TimeUnit.MILLISECONDS)
+                .debounce(NO_DUPLICATION_DEBOUNCE_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
                     messageList.value?.addAll(0, it)
                     messageList.postValue(messageList.value)
