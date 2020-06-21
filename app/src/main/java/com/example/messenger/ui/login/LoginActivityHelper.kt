@@ -43,6 +43,7 @@ class LoginActivityHelper(private val activity: BaseActivity, private val dispos
         val jwtToken = PreferenceManager.getJwtToken()
         jwtToken?.let {
             NaverLoginManager.setJwtToken(jwtToken)
+            LoginEvent.invokeSuccessLoginEvent(true)
             activity.startActivity(MainHolderActivity::class.java)
             activity.finish()
         }

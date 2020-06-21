@@ -11,25 +11,34 @@ import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.LoginEvent
 import com.example.messenger.repository.login.LoginRepositoryImpl
 import com.example.messenger.repository.model.login.AccessToken
-import com.example.messenger.repository.model.login.JwtToken
-import com.example.messenger.usecase.LoadJwtTokenUseCase
+import com.example.messenger.repository.user.UserRepositoryImpl
+import com.example.messenger.usecase.LoginUseCase
 
 /**
  * @author MyeongKi
  */
 
 class LoginViewModel(
-    loginRepository: LoginRepositoryImpl
+    loginRepository: LoginRepositoryImpl,
+    userRepository: UserRepositoryImpl
 ) : BaseViewModel() {
     init {
         subscribeEvent()
     }
-    private val loadJwtTokenUseCase = LoadJwtTokenUseCase(loginRepository, disposables)
+
+    private val loginUseCase = LoginUseCase(loginRepository, userRepository, disposables)
     private fun subscribeEvent() {
         disposables.add(
             LoginEvent.loadTokenSubject.subscribe {
-                if(it is AccessToken){
-                    loadJwtTokenUseCase.loadJwtToken(it)
+                if (it is AccessToken) {
+                    loginUseCase.loadJwtToken(it)
+                }
+            }
+        )
+        disposables.add(
+            LoginEvent.successLoginSubject.subscribe {
+                if (it) {
+                    loginUseCase.loadLoginUserInfo()
                 }
             }
         )
