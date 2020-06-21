@@ -29,7 +29,7 @@ object NaverLoginManager : OAuthLoginHandler() {
     private const val PROVIDER = "naver"
     private const val OAUTH_CLIENT_ID = "nJg0Pj0f2rEBCBQSZe6s"
     private const val OAUTH_CLIENT_SECRET = "2Ca8FHXsj4"
-    private var jwtToken: JwtToken? = null
+    var jwtToken: JwtToken? = null
     private val context = MessengerApp.applicationContext()
     private val loginInstance = OAuthLogin.getInstance().apply {
         init(
