@@ -21,6 +21,8 @@ ext {
     def lifecycle_version = '2.1.0'
     def fragment_version = '1.2.4'
     def support_version = '28.0.0'
+    def web_socket_version = '1.3.0'
+    def stomp_android_version = '1.6.4'
     def preference_version = '0.12.0'
 
     webservice_libraries = [
