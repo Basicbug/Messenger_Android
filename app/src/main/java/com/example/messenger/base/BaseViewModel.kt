@@ -1,10 +1,24 @@
+/*
+ * BaseViewModel.kt 2020. 6. 13
+ *
+ * Copyright 2020 BasicBug. All rights Reserved.
+ *
+ */
+
 package com.example.messenger.base
 
-import android.view.View
+import androidx.lifecycle.ViewModel
+import io.reactivex.disposables.CompositeDisposable
 
 /**
- * @author bsgreentea
+ * @author MyeongKi
  */
-interface BaseViewModel {
-    fun setOnListener(view: View) = Unit
+
+abstract class BaseViewModel : ViewModel(){
+    protected val disposables: CompositeDisposable = CompositeDisposable()
+
+    override fun onCleared() {
+        super.onCleared()
+        disposables.clear()
+    }
 }

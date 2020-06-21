@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ activity_start.xml 2020. 5. 3
+  ~ activity_main_holder.xml 2020. 5. 3
   ~
   ~ Copyright 2020 BasicBug. All rights Reserved.
   ~
@@ -9,7 +9,7 @@
     <data>
         <variable
             name="helper"
-            type="com.example.messenger.ui.start.StartBottomNavigationHelper" />
+            type="com.example.messenger.ui.start.MainHolderBottomNavigationHelper" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +28,7 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:setOnListener="@{helper}"
+            app:setOnListenerFromHelper="@{helper}"
             android:background="@color/bottomBackground"
             app:itemIconTint="@color/bottomIconText"
             app:itemTextColor="@color/bottomIconText"

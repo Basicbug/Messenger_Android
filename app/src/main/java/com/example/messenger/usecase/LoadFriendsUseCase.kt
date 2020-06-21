@@ -62,7 +62,7 @@ class LoadFriendsUseCase(
         disposables.add(
             userRepository.getUserInfoFromLocal(userId)
                 .doOnSuccess {
-                    FriendEvent.addFriendToList(it)
+                    FriendEvent.invokeFriendInfo(it)
                 }
                 .doOnError {
                     //TODO 스냅바로 실패
@@ -82,7 +82,7 @@ class LoadFriendsUseCase(
         disposables.add(
             userRepository.getUserInfoFromServer(userId)
                 .doOnSuccess {
-                    FriendEvent.addFriendToList(it)
+                    FriendEvent.invokeFriendInfo(it)
                     insertFriendInfoToLocal(it)
                 }
                 .doOnError {

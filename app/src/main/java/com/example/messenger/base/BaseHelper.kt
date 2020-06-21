@@ -14,5 +14,5 @@ import android.view.View
  */
 
 interface BaseHelper {
-    fun setOnListener(view: View) = Unit
+    fun customizePropertiesView(view: View) = Unit
 }

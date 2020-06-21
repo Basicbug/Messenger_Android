@@ -18,7 +18,12 @@ import com.example.messenger.repository.model.user.UserInfo
 class FriendViewHolder(
     private val binding: ItemFriendBinding
 ) : RecyclerView.ViewHolder(binding.root) {
+    private val friendViewModel = FriendItemViewModel().apply {
+        binding.friendItemViewModel = this
+    }
+
     fun bind(friendInfo: UserInfo) {
-        binding.friendItemViewModel = FriendItemViewModel(friendInfo)
+        friendViewModel.name = friendInfo.name ?: ""
+        friendViewModel.stateMessage = friendInfo.stateMessage ?: ""
     }
 }

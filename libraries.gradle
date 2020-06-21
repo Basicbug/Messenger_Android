@@ -21,8 +21,7 @@ ext {
     def lifecycle_version = '2.1.0'
     def fragment_version = '1.2.4'
     def support_version = '28.0.0'
-    def web_socket_version = '1.3.0'
-    def stomp_android_version = '1.6.4'
+    def preference_version = '0.12.0'
 
     webservice_libraries = [
             gson                   : "com.google.code.gson:gson:$gson_version",
@@ -83,5 +82,9 @@ ext {
             support_v7        : "com.android.support:support-core-utils:$support_version",
             support_core_utils: "com.android.support:customtabs:$support_version",
             customtabs        : "com.android.support:support-v4:$support_version"
+    ]
+
+    preference_libraries = [
+            preference:"net.grandcentrix.tray:tray:$preference_version"
     ]
 }

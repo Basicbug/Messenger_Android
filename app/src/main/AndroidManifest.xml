@@ -13,18 +13,17 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity"></activity>
 
-        <activity android:name=".ui.start.StartActivity">
+
+        <activity android:name=".ui.start.MainHolderActivity">
 
         </activity>
-        <activity android:name=".ui.sample.LoginActivity"></activity>
-
-        <activity android:name=".ui.sample.UserInfoActivity"></activity>
-        <activity android:name=".ui.chattingroom.ChattingRoomActivity">
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".push.fcm.FcmService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
