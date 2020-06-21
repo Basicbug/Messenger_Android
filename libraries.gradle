@@ -21,13 +21,17 @@ ext {
     def lifecycle_version = '2.1.0'
     def fragment_version = '1.2.4'
     def support_version = '28.0.0'
+    def web_socket_version = '1.3.0'
+    def stomp_android_version = '1.6.4'
     def preference_version = '0.12.0'
 
     webservice_libraries = [
             gson                   : "com.google.code.gson:gson:$gson_version",
             retrofit               : "com.squareup.retrofit2:retrofit:$retrofit_version",
             retrofit_gson_converter: "com.squareup.retrofit2:converter-gson:$retrofit_version",
-            retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+            retrofit_rx_java       : "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version",
+            web_socket             : "org.java-websocket:Java-WebSocket:$web_socket_version",
+            stomp_android          : "com.github.NaikSoftware:StompProtocolAndroid:$stomp_android_version"
     ]
     image_libraries = [
             glide           : "com.github.bumptech.glide:glide:$glide_version",

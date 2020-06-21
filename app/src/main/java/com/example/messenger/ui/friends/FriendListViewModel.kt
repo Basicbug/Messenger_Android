@@ -26,6 +26,7 @@ class FriendListViewModel(
     userRepository: UserRepositoryImpl
 ) : BaseViewModel() {
     val loadFriendsUseCase = LoadFriendsUseCase(userRepository, disposables)
+
     val friendList = MutableLiveData<MutableList<UserInfo>>()
     private val friendTable = ArrayMap<String, UserInfo>()
 

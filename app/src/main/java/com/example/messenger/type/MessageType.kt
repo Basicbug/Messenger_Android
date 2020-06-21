@@ -7,10 +7,16 @@
 
 package com.example.messenger.type
 
+import androidx.room.TypeConverter
+
 /**
  * @author MyeongKi
  */
 
-enum class MessageType (){
-    MESSAGE, IMAGE
+enum class MessageType(val code: Int?) {
+    FAIL(-1),
+    MESSAGE(1),
+    IMAGE(2);
+
+
 }
