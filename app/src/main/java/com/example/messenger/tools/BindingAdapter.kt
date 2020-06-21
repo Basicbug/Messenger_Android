@@ -9,9 +9,7 @@ package com.example.messenger.tools
 
 import android.view.View
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.base.BaseHelper
-import com.example.messenger.base.BaseViewModel
 
 
 /**
@@ -33,13 +31,5 @@ object BindingAdapter {
         view: View, helper: BaseHelper
     ) {
         helper.customizePropertiesView(view)
-    }
-
-    @JvmStatic
-    @BindingAdapter("setOnListenerFromHelper")
-    fun setOnListenerFromHelper(
-        view: RecyclerView, helper: BaseHelper
-    ) {
-        helper.customizeRecyclerView(view)
     }
 }
