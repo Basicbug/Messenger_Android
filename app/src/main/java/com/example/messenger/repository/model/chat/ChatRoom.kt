@@ -26,5 +26,7 @@ data class ChatRoom(
     @SerializedName("name")
     var name: String? = "",
     @SerializedName("lastMessage")
-    var lastMessage: Message
+    var lastMessage: Message?,
+    @SerializedName("participants")
+    var participants: List<String>?
 )
