@@ -39,20 +39,14 @@ class LoginActivityHelper(private val activity: BaseActivity, private val dispos
                 }
             }
         )
-        disposable.add(
-            LoginEvent.loginUserInfoSubject.subscribe {
-                NaverLoginManager.loginUserInfo = it
-                Toast.makeText(MessengerApp.applicationContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show()
-                startMainHolder()
-            }
-        )
     }
 
     private fun checkLogin() {
         val jwtToken = PreferenceManager.getJwtToken()
         jwtToken?.let {
             NaverLoginManager.setJwtToken(jwtToken)
-            LoginEvent.invokeStatusJwtSaved(true)
+            Toast.makeText(MessengerApp.applicationContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show()
+            startMainHolder()
         }
     }
     private fun startMainHolder(){

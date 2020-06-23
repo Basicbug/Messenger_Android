@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.messenger.MessengerApp
 import com.example.messenger.event.LoginEvent
+import com.example.messenger.manager.NaverLoginManager
 import com.example.messenger.manager.PreferenceManager
 import com.example.messenger.repository.login.LoginRepositoryImpl
 import com.example.messenger.repository.model.login.JwtToken
@@ -47,7 +48,7 @@ class LoginUseCase(
         disposables.add(
             userRepositoryImpl.getLoginUserInfoFromServer()
                 .doOnSuccess {
-                    LoginEvent.invokeLoginUserInfo(it)
+                    NaverLoginManager.loginUserInfo = it
                 }
                 .doOnError {
                     Log.d(this.javaClass.simpleName, it.message ?: "")

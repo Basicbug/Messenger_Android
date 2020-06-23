@@ -35,12 +35,5 @@ class LoginViewModel(
                 }
             }
         )
-        disposables.add(
-            LoginEvent.statusJwtSavedSubject.subscribe {
-                if (it) {
-                    loginUseCase.loadLoginUserInfo()
-                }
-            }
-        )
     }
 }

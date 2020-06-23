@@ -16,18 +16,8 @@ import io.reactivex.subjects.PublishSubject
  */
 object LoginEvent {
     val tokenSubject = PublishSubject.create<Token>()
-    val statusJwtSavedSubject = PublishSubject.create<Boolean>()
-    val loginUserInfoSubject = PublishSubject.create<UserInfo>()
 
     fun invokeToken(token: Token) {
         tokenSubject.onNext(token)
-    }
-
-    fun invokeStatusJwtSaved(success: Boolean) {
-        statusJwtSavedSubject.onNext(success)
-    }
-
-    fun invokeLoginUserInfo(userInfo: UserInfo) {
-        loginUserInfoSubject.onNext(userInfo)
     }
 }
