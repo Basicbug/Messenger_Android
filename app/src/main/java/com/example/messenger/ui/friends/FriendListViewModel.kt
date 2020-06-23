@@ -9,13 +9,11 @@ package com.example.messenger.ui.friends
 
 import android.util.ArrayMap
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.messenger.base.BaseViewModel
-import com.example.messenger.event.FriendEvent
+import com.example.messenger.event.UserEvent
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.usecase.LoadFriendsUseCase
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
@@ -36,7 +34,7 @@ class FriendListViewModel(
 
     private fun subscribeEvent() {
         disposables.add(
-            FriendEvent.friendInfoSubject.subscribe {
+            UserEvent.friendInfoSubject.subscribe {
                 friendTable[it.id] = it
                 friendList.postValue(friendTable.values.toMutableList())
             }

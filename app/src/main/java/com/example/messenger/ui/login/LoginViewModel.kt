@@ -29,14 +29,14 @@ class LoginViewModel(
     private val loginUseCase = LoginUseCase(loginRepository, userRepository, disposables)
     private fun subscribeEvent() {
         disposables.add(
-            LoginEvent.loadTokenSubject.subscribe {
+            LoginEvent.tokenSubject.subscribe {
                 if (it is AccessToken) {
                     loginUseCase.loadJwtToken(it)
                 }
             }
         )
         disposables.add(
-            LoginEvent.successLoginSubject.subscribe {
+            LoginEvent.statusJwtSavedSubject.subscribe {
                 if (it) {
                     loginUseCase.loadLoginUserInfo()
                 }

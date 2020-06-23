@@ -55,7 +55,7 @@ object NaverLoginManager : OAuthLoginHandler() {
             val accessToken = loginInstance?.getAccessToken(
                 context
             ).toString()
-            LoginEvent.invokeLoadTokenEvent(AccessToken().also {
+            LoginEvent.invokeToken(AccessToken().also {
                 it.token = accessToken
                 it.provider = PROVIDER
             })

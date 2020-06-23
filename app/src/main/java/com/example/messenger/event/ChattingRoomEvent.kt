@@ -7,13 +7,13 @@ import io.reactivex.subjects.PublishSubject
  * @author bsgreentea
  */
 object ChattingRoomEvent {
-    val addMessageToListSubject = PublishSubject.create<Message>()
-    fun addMessageToList(message: Message) {
-        addMessageToListSubject.onNext(message)
+    val messageSubject = PublishSubject.create<Message>()
+    fun invokeMessage(message: Message) {
+        messageSubject.onNext(message)
     }
 
-    val addMessagesToListSubject = PublishSubject.create<List<Message>>()
-    fun addMessagesToList(messages: List<Message>){
-        addMessagesToListSubject.onNext(messages)
+    val messageListSubject = PublishSubject.create<List<Message>>()
+    fun invokeMessageList(messages: List<Message>) {
+        messageListSubject.onNext(messages)
     }
 }

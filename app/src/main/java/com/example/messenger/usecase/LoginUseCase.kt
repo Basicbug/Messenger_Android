@@ -11,10 +11,8 @@ import android.util.Log
 import android.widget.Toast
 import com.example.messenger.MessengerApp
 import com.example.messenger.event.LoginEvent
-import com.example.messenger.manager.NaverLoginManager
 import com.example.messenger.manager.PreferenceManager
 import com.example.messenger.repository.login.LoginRepositoryImpl
-import com.example.messenger.repository.model.login.AccessToken
 import com.example.messenger.repository.model.login.JwtToken
 import com.example.messenger.repository.model.login.Token
 import com.example.messenger.repository.user.UserRepositoryImpl
@@ -35,8 +33,7 @@ class LoginUseCase(
             loginRepository.getJwtTokenFromServer(accessToken.provider ?: "", accessToken.token ?: "")
                 .doOnSuccess { jwt ->
                     PreferenceManager.setJwtToken(jwt.token ?: "")
-                    Toast.makeText(MessengerApp.applicationContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show()
-                    LoginEvent.invokeLoadTokenEvent(JwtToken().also { item ->
+                    LoginEvent.invokeToken(JwtToken().also { item ->
                         item.token = jwt.token
                     })
                 }
@@ -50,7 +47,7 @@ class LoginUseCase(
         disposables.add(
             userRepositoryImpl.getLoginUserInfoFromServer()
                 .doOnSuccess {
-                    NaverLoginManager.loginUserInfo = it
+                    LoginEvent.invokeLoginUserInfo(it)
                 }
                 .doOnError {
                     Log.d(this.javaClass.simpleName, it.message ?: "")

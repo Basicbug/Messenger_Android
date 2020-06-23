@@ -58,7 +58,7 @@ class ChattingRoomViewModel(
 
     private fun subscribeEvent() {
         disposables.add(
-            ChattingRoomEvent.addMessageToListSubject
+            ChattingRoomEvent.messageSubject
                 .subscribe {
                     messageList.value?.add(it)
                     messageList.postValue(messageList.value)
@@ -66,7 +66,7 @@ class ChattingRoomViewModel(
         )
 
         disposables.add(
-            ChattingRoomEvent.addMessagesToListSubject
+            ChattingRoomEvent.messageListSubject
                 .debounce(NO_DUPLICATION_DEBOUNCE_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
                     messageList.value?.addAll(0, it)

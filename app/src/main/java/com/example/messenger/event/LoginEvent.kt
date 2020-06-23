@@ -8,20 +8,26 @@
 package com.example.messenger.event
 
 import com.example.messenger.repository.model.login.Token
+import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.subjects.PublishSubject
 
 /**
  * @author MyeongKi
  */
 object LoginEvent {
-    val loadTokenSubject = PublishSubject.create<Token>()
-    val successLoginSubject = PublishSubject.create<Boolean>()
+    val tokenSubject = PublishSubject.create<Token>()
+    val statusJwtSavedSubject = PublishSubject.create<Boolean>()
+    val loginUserInfoSubject = PublishSubject.create<UserInfo>()
 
-    fun invokeLoadTokenEvent(token: Token) {
-        loadTokenSubject.onNext(token)
+    fun invokeToken(token: Token) {
+        tokenSubject.onNext(token)
     }
 
-    fun invokeSuccessLoginEvent(successLogin: Boolean) {
-        successLoginSubject.onNext(successLogin)
+    fun invokeStatusJwtSaved(success: Boolean) {
+        statusJwtSavedSubject.onNext(success)
+    }
+
+    fun invokeLoginUserInfo(userInfo: UserInfo) {
+        loginUserInfoSubject.onNext(userInfo)
     }
 }
