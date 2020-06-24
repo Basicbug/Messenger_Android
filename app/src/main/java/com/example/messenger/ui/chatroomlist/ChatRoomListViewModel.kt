@@ -40,7 +40,7 @@ class ChatRoomListViewModel(
                 chatRoomList.postValue(chatRoomTable.values
                     .toMutableList()
                     .also { list ->
-                        list.sortBy { chatRoom -> chatRoom.lastMessageTime }
+                        list.sortBy { chatRoom -> chatRoom.lastMessage?.timestamp }
                     }
                 )
 

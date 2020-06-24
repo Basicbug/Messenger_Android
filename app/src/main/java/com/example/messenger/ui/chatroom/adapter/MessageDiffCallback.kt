@@ -8,7 +8,7 @@ import com.example.messenger.repository.model.chat.Message
  */
 class MessageDiffCallback : DiffUtil.ItemCallback<Message>() {
     override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
-        return oldItem.messageTime == newItem.messageTime
+        return oldItem.timestamp == newItem.timestamp
     }
 
     override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {

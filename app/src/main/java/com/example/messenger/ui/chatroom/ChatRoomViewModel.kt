@@ -41,12 +41,7 @@ class ChatRoomViewModel(
     fun sendMessageToServer() {
         sendMessageUseCase.sendMessage(
             Message(
-                "a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e",
-                "mk",
-                "jw",
-                MessageType.MESSAGE,
-                "test",
-                "time"
+
             )
         )
 

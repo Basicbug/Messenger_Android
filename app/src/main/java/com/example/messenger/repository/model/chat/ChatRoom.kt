@@ -8,6 +8,7 @@
 package com.example.messenger.repository.model.chat
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -20,10 +21,14 @@ data class ChatRoom(
     @SerializedName("roomId")
     var roomId: String = "",
     @SerializedName("name")
-    var name: String? = "",
+    var name: String? = ""
+
+){
     @SerializedName("lastMessage")
-    var lastMessage: Message?,
+    @Ignore
+    var lastMessage: Message? = null
     @SerializedName("participants")
-    var participants: List<String>?
-)
+    @Ignore
+    var participants: List<String>? = null
+}
 //TODO 참가자 마지막 메시지에 대한 관계형 정의가 필요할 듯
