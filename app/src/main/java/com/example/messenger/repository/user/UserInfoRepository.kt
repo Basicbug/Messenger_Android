@@ -17,6 +17,7 @@ import io.reactivex.Single
 
 interface UserInfoRepository {
     fun getUserInfoFromServer(userId: String): Single<UserInfo>
+    fun getLoginUserInfoFromServer(): Single<UserInfo>
     fun getUserInfoFromLocal(userId: String): Single<UserInfo>
     fun insertUserInfoToLocal(item: UserInfo): Completable
 }

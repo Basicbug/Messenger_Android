@@ -7,9 +7,12 @@
 
 package com.example.messenger.repository.model
 
+import androidx.room.Entity
+import androidx.room.TypeConverters
 import com.example.messenger.MessengerApp
 import com.example.messenger.R
 import com.example.messenger.push.PushItem
+import com.example.messenger.repository.model.convertor.MessageTypeConverters
 import com.example.messenger.type.MessageType
 import com.google.gson.annotations.SerializedName
 
@@ -17,6 +20,8 @@ import com.google.gson.annotations.SerializedName
  * @author MyeongKi
  */
 
+@Entity(tableName = "messages", primaryKeys = ["room_id", "message_time"])
+@TypeConverters(MessageTypeConverters::class)
 data class Message(
     @SerializedName("id")
     var id: Int = 0,

@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.chat
+package com.example.messenger.ui.chatroomlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ import com.example.messenger.R
 import com.example.messenger.base.BaseFragment
 import com.example.messenger.databinding.FragmentChatRoomListBinding
 import com.example.messenger.repository.model.chat.ChatRoom
-import com.example.messenger.ui.chat.adapter.ChatRoomAdapter
+import com.example.messenger.ui.chatroomlist.adapter.ChatRoomAdapter
 
 /**
  * @author MyeongKi

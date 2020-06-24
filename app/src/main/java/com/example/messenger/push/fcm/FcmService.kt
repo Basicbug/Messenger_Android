@@ -10,7 +10,6 @@ package com.example.messenger.push.fcm
 import com.example.messenger.event.ChatEvent
 import com.example.messenger.push.notification.PushNotification
 import com.example.messenger.repository.model.Message
-import com.example.messenger.type.MessageType
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -24,10 +23,7 @@ class FcmService : FirebaseMessagingService() {
         when (remoteMessage.data["type"]) {
             "message" -> {
                 //data에서 파싱 과정후 노티피케이션 호출...
-                val testMessage = Message(
-                    "sender", "receiver"
-                    , MessageType.MESSAGE, "안녕", ""
-                )
+                val testMessage = Message()
                 //파싱해서 만들었다고 가정
                 ChatEvent.messagePushed(testMessage)
                 PushNotification(this, testMessage).show()
@@ -39,6 +35,7 @@ class FcmService : FirebaseMessagingService() {
 
             }
         }
+
 
     }
 

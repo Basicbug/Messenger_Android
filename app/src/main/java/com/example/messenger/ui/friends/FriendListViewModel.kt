@@ -11,7 +11,7 @@ package com.example.messenger.ui.friends
 import android.util.ArrayMap
 import androidx.lifecycle.MutableLiveData
 import com.example.messenger.base.BaseViewModel
-import com.example.messenger.event.FriendEvent
+import com.example.messenger.event.UserEvent
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.usecase.LoadFriendsUseCase
@@ -25,6 +25,7 @@ class FriendListViewModel(
     userRepository: UserRepositoryImpl
 ) : BaseViewModel() {
     val loadFriendsUseCase = LoadFriendsUseCase(userRepository, disposables)
+
     val friendList = MutableLiveData<MutableList<UserInfo>>()
     private val friendTable = ArrayMap<String, UserInfo>()
 
@@ -34,7 +35,7 @@ class FriendListViewModel(
 
     private fun subscribeEvent() {
         disposables.add(
-            FriendEvent.friendInfoSubject.subscribe {
+            UserEvent.friendInfoSubject.subscribe {
                 friendTable[it.id] = it
                 friendList.postValue(friendTable.values.toMutableList())
             }

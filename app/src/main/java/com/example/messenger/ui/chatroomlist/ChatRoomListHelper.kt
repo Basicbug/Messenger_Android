@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.chat
+package com.example.messenger.ui.chatroomlist
 
 /**
  * @author MyeongKi

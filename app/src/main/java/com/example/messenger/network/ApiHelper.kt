@@ -10,6 +10,8 @@ package com.example.messenger.network
 import com.example.messenger.BuildConfig
 import com.example.messenger.MessengerApp
 import com.example.messenger.constants.NetworkConstants
+import com.example.messenger.manager.NaverLoginManager
+import com.example.messenger.network.service.login.LoginService
 import com.facebook.stetho.Stetho
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -26,21 +28,32 @@ import kotlin.reflect.KClass
 object ApiHelper {
     @JvmStatic
     fun <T : Any> createApiByService(clazz: KClass<T>): T {
-        return build().create(clazz.java)
+        return if (clazz is LoginService) {
+            build(false).create(clazz.java)
+        } else {
+            build(true).create(clazz.java)
+        }
     }
 
-    private fun build(): Retrofit {
-        val okHttpClient = OkHttpClient.Builder().addNetworkInterceptor(StethoInterceptor()).build()
+    private fun build(needJwtToken: Boolean): Retrofit {
+        val okHttpClient = OkHttpClient.Builder().addNetworkInterceptor(StethoInterceptor())
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(MessengerApp.applicationContext())
+        }
+        if (needJwtToken) {
+            okHttpClient.addInterceptor {
+                val requestBuilder = it.request().newBuilder()
+                    .addHeader("Authorization", "Bearer ${NaverLoginManager.jwtToken?.token ?: ""}")
+                it.proceed(requestBuilder.build())
+            }
         }
         return Retrofit
             .Builder()
             .baseUrl(NetworkConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(okHttpClient)
+            .client(okHttpClient.build())
             .build()
-
     }
+
 }

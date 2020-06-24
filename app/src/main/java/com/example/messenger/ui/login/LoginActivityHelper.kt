@@ -8,6 +8,8 @@
 package com.example.messenger.ui.login
 
 import android.view.View
+import android.widget.Toast
+import com.example.messenger.MessengerApp
 import com.example.messenger.base.BaseActivity
 import com.example.messenger.base.BaseHelper
 import com.example.messenger.event.LoginEvent
@@ -26,12 +28,12 @@ class LoginActivityHelper(private val activity: BaseActivity, private val dispos
 
     init {
         checkLogin()
-        observeJwtToken()
+        observeEvent()
     }
 
-    private fun observeJwtToken() {
+    private fun observeEvent() {
         disposable.add(
-            LoginEvent.loadTokenSubject.subscribe {
+            LoginEvent.tokenSubject.subscribe {
                 if (it is JwtToken) {
                     checkLogin()
                 }
@@ -43,11 +45,14 @@ class LoginActivityHelper(private val activity: BaseActivity, private val dispos
         val jwtToken = PreferenceManager.getJwtToken()
         jwtToken?.let {
             NaverLoginManager.setJwtToken(jwtToken)
-            activity.startActivity(MainHolderActivity::class.java)
-            activity.finish()
+            Toast.makeText(MessengerApp.applicationContext(), "로그인되었습니다.", Toast.LENGTH_SHORT).show()
+            startMainHolder()
         }
     }
-
+    private fun startMainHolder(){
+        activity.startActivity(MainHolderActivity::class.java)
+        activity.finish()
+    }
     override fun customizePropertiesView(view: View) {
         (view as OAuthLoginButton).setOAuthLoginHandler(NaverLoginManager)
     }

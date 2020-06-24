@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.chat
+package com.example.messenger.ui.chatroomlist
 
 import com.example.messenger.repository.chat.ChatRoomRepositoryInjector
 

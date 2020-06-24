@@ -5,14 +5,12 @@
  *
  */
 
-package com.example.messenger.ui.chat
+package com.example.messenger.ui.chatroomlist
 
 import android.util.ArrayMap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import com.example.messenger.event.ChatEvent
-import com.example.messenger.push.notification.PushNotification
 import com.example.messenger.repository.chat.ChatRoomRepositoryImpl
 import com.example.messenger.repository.model.chat.ChatRoom
 import com.example.messenger.usecase.LoadChatRoomListUseCase

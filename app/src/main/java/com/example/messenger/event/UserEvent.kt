@@ -14,8 +14,7 @@ import io.reactivex.subjects.PublishSubject
  * @author MyeongKi
  */
 
-
-object FriendEvent {
+object UserEvent {
     val friendInfoSubject = PublishSubject.create<UserInfo>()
     fun invokeFriendInfo(friendInfo: UserInfo) {
         friendInfoSubject.onNext(friendInfo)

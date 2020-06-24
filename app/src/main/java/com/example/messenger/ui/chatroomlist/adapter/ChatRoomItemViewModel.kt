@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.chat.adapter
+package com.example.messenger.ui.chatroomlist.adapter
 
 import com.example.messenger.repository.model.chat.ChatRoom
 

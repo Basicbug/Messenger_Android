@@ -9,7 +9,6 @@ package com.example.messenger.repository.user
 
 import com.example.messenger.database.user.UserDatabase
 import com.example.messenger.network.ApiHelper
-import com.example.messenger.network.service.SampleService
 import com.example.messenger.network.service.user.FriendRelationService
 import com.example.messenger.network.service.user.UserInfoService
 import com.example.messenger.repository.model.user.FriendRelation
@@ -48,7 +47,15 @@ class UserRepositoryImpl : UserInfoRepository, FriendRelationRepository {
             .map { it.data }
 
     }
+    override fun getLoginUserInfoFromServer(): Single<UserInfo> {
+        return ApiHelper
+            .createApiByService(UserInfoService::class)
+            .getLoginUserInfo()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { it.data }
 
+    }
     override fun getUserInfoFromLocal(userId: String): Single<UserInfo> {
         return userInfoDao
             .getUserInfo(userId)
