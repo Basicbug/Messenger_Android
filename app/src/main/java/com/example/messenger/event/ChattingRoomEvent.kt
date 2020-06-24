@@ -1,6 +1,6 @@
 package com.example.messenger.event
 
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 import io.reactivex.subjects.PublishSubject
 
 /**

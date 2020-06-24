@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ activity_chatting_room.xml 2020. 4. 23
+  ~ activity_chat_room.xml 2020. 4. 23
   ~
   ~ Copyright 2020 BasicBug. All rights Reserved.
   -->
@@ -10,11 +10,11 @@
 
         <variable
             name="chatRoomViewModel"
-            type="com.example.messenger.ui.chattingroom.ChattingRoomViewModel" />
+            type="com.example.messenger.ui.chat.chatroom.ChatRoomViewModel" />
 
         <variable
             name="chatRoomHelper"
-            type="com.example.messenger.ui.chattingroom.ChattingRoomActivityHelper" />
+            type="com.example.messenger.ui.chat.chatroom.ChatRoomActivityHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

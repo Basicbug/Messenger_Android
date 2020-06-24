@@ -1,15 +1,15 @@
-package com.example.messenger.ui.chattingroom
+package com.example.messenger.ui.chat.chatroom
 
 import com.example.messenger.repository.message.MessageRepositoryInjector
 
 /**
  * @author bsgreentea
  */
-object ChattingRoomViewModelInjector {
+object ChatRoomViewModelInjector {
     fun provideSampleViewModelFactory(
         roomId: String
-    ): ChattingRoomViewModelFactory {
+    ): ChatRoomViewModelFactory {
         val repository = MessageRepositoryInjector.getMessageRepositoryImpl()
-        return ChattingRoomViewModelFactory(repository, roomId)
+        return ChatRoomViewModelFactory(repository, roomId)
     }
 }

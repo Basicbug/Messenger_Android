@@ -1,4 +1,4 @@
-package com.example.messenger.ui.chattingroom.adapter
+package com.example.messenger.ui.chat.chatroom.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 
 /**
  * @author bsgreentea

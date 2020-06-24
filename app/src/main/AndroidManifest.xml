@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.chattingroom.ChattingRoomActivity">
+
+        <activity android:name="com.example.messenger.ui.chat.chatroom.ChatRoomActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->

@@ -9,7 +9,7 @@ package com.example.messenger.usecase
 
 import android.util.Log
 import com.example.messenger.repository.message.MessageRepositoryImpl
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 import io.reactivex.disposables.CompositeDisposable
 
 /**

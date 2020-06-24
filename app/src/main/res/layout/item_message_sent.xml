@@ -9,7 +9,7 @@
 
         <variable
             name="sentItemViewModel"
-            type="com.example.messenger.ui.chattingroom.adapter.MessageSentItemViewModel" />
+            type="com.example.messenger.ui.chat.chatroom.adapter.MessageSentItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

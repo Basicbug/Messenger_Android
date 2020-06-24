@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.repository.model
+package com.example.messenger.repository.model.chat
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -24,29 +24,29 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "messages", primaryKeys = ["room_id", "message_time"])
 @TypeConverters(MessageTypeConverters::class)
 data class Message(
-    @SerializedName("roomId")
+    @SerializedName("id")
     @ColumnInfo(name = "room_id")
+    var id: Int = 0,
+    @SerializedName("message")
+    var message: String = "",
+    @SerializedName("rooId")
     var roomId: String = "",
     @SerializedName("senderUid")
-    var senderName: String = "",
-    @SerializedName("receiver_name")
-    var receiverName: String = "",
-    @SerializedName("message_type")
-    var messageType: MessageType = MessageType.MESSAGE,
-    @SerializedName("message")
-    var messageContent: String = "",
-    @SerializedName("message_time")
+    var senderUid: String = "",
+    @SerializedName("timestamp")
     @ColumnInfo(name = "message_time")
-    var messageTime: String = ""
+    var timestamp: String = "",
+    @SerializedName("messageType")
+    var messageType: MessageType = MessageType.MESSAGE
 ) : PushItem {
     override fun getTitle(): String {
-        return senderName
+        return senderUid
     }
 
     override fun getContent(): String {
         return when (messageType) {
             MessageType.MESSAGE -> {
-                messageContent
+                message
             }
             MessageType.IMAGE -> {
                 MessengerApp.applicationContext().resources.getString(R.string.image_message_content)

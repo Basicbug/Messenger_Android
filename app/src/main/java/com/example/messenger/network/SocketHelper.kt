@@ -8,7 +8,7 @@
 package com.example.messenger.network
 
 import com.example.messenger.constants.NetworkConstants.SOCKET_URL
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.tools.convertMessageToJsonString
 import io.reactivex.Completable
 import io.reactivex.Flowable

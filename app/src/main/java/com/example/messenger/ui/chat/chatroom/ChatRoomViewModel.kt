@@ -1,12 +1,11 @@
-package com.example.messenger.ui.chattingroom
+package com.example.messenger.ui.chat.chatroom
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
-import com.example.messenger.repository.model.Message
-import com.example.messenger.type.MessageType
+import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.usecase.LoadMessagesUseCase
 import com.example.messenger.usecase.ReceiveMessageUseCase
 import com.example.messenger.usecase.SendMessageUseCase
@@ -15,7 +14,7 @@ import java.util.concurrent.TimeUnit
 /**
  * @author bsgreentea
  */
-class ChattingRoomViewModel(
+class ChatRoomViewModel(
     messageRepository: MessageRepositoryImpl,
     roomId: String
 ) : BaseViewModel() {
@@ -41,12 +40,7 @@ class ChattingRoomViewModel(
     fun sendMessageToServer() {
         sendMessageUseCase.sendMessage(
             Message(
-                "a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e",
-                "mk",
-                "jw",
-                MessageType.MESSAGE,
-                "test",
-                "time"
+
             )
         )
 

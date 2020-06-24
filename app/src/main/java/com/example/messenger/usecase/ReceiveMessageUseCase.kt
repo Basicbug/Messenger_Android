@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
+ * ReceiveMessageUseCase.kt 2020. 5. 11
+=======
  * ReceiveMessageUseCase.kt 2020. 5. 19
+>>>>>>> develop
  *
  * Copyright 2020 BasicBug. All rights Reserved.
  *
@@ -8,9 +12,8 @@
 package com.example.messenger.usecase
 
 import android.util.Log
-import com.example.messenger.network.SocketHelper
 import com.example.messenger.repository.message.MessageRepositoryImpl
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.tools.convertJsonStringToMessage
 import io.reactivex.disposables.CompositeDisposable
 
