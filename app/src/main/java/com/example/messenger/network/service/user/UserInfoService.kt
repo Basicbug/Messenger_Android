@@ -22,4 +22,8 @@ interface UserInfoService {
     fun getUserInfo(
         @Path("userId") userId: String
     ): Single<ApiData<UserInfo>>
+
+    @GET("/v1/user/me")
+    fun getLoginUserInfo(
+    ): Single<ApiData<UserInfo>>
 }

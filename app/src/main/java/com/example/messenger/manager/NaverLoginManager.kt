@@ -14,6 +14,7 @@ import com.example.messenger.constants.AppInfoConstants
 import com.example.messenger.event.LoginEvent
 import com.example.messenger.repository.model.login.AccessToken
 import com.example.messenger.repository.model.login.JwtToken
+import com.example.messenger.repository.model.user.UserInfo
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import io.reactivex.Observer
@@ -30,6 +31,7 @@ object NaverLoginManager : OAuthLoginHandler() {
     private const val OAUTH_CLIENT_ID = "nJg0Pj0f2rEBCBQSZe6s"
     private const val OAUTH_CLIENT_SECRET = "2Ca8FHXsj4"
     var jwtToken: JwtToken? = null
+    var loginUserInfo: UserInfo? = null
     private val context = MessengerApp.applicationContext()
     private val loginInstance = OAuthLogin.getInstance().apply {
         init(
@@ -53,7 +55,7 @@ object NaverLoginManager : OAuthLoginHandler() {
             val accessToken = loginInstance?.getAccessToken(
                 context
             ).toString()
-            LoginEvent.invokeLoadTokenEvent(AccessToken().also {
+            LoginEvent.invokeToken(AccessToken().also {
                 it.token = accessToken
                 it.provider = PROVIDER
             })
