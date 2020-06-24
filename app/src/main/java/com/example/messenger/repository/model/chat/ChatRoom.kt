@@ -9,11 +9,7 @@ package com.example.messenger.repository.model.chat
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.example.messenger.repository.model.Message
-import com.example.messenger.repository.model.convertor.DateTypeConverter
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 /**
  * @author MyeongKi
@@ -30,3 +26,4 @@ data class ChatRoom(
     @SerializedName("participants")
     var participants: List<String>?
 )
+//TODO 참가자 마지막 메시지에 대한 관계형 정의가 필요할 듯

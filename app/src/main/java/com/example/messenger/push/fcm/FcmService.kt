@@ -9,7 +9,7 @@ package com.example.messenger.push.fcm
 
 import com.example.messenger.event.ChatEvent
 import com.example.messenger.push.notification.PushNotification
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 

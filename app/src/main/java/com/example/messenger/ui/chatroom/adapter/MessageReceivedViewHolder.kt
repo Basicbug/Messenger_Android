@@ -1,9 +1,9 @@
-package com.example.messenger.ui.chattingroom.adapter
+package com.example.messenger.ui.chatroom.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.base.BaseMessageViewHolder
 import com.example.messenger.databinding.ItemMessageReceivedBinding
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 
 /**
  * @author bsgreentea

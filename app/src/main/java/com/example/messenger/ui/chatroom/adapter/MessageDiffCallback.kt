@@ -1,7 +1,7 @@
-package com.example.messenger.ui.chattingroom.adapter
+package com.example.messenger.ui.chatroom.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 
 /**
  * @author bsgreentea

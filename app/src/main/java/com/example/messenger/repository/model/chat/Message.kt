@@ -5,8 +5,9 @@
  *
  */
 
-package com.example.messenger.repository.model
+package com.example.messenger.repository.model.chat
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.TypeConverters
 import com.example.messenger.MessengerApp
@@ -24,6 +25,7 @@ import com.google.gson.annotations.SerializedName
 @TypeConverters(MessageTypeConverters::class)
 data class Message(
     @SerializedName("id")
+    @ColumnInfo(name = "room_id")
     var id: Int = 0,
     @SerializedName("message")
     var message: String = "",
@@ -32,6 +34,7 @@ data class Message(
     @SerializedName("senderUid")
     var senderUid: String = "",
     @SerializedName("timestamp")
+    @ColumnInfo(name = "message_time")
     var timestamp: String = "",
     @SerializedName("messageType")
     var messageType: MessageType = MessageType.MESSAGE

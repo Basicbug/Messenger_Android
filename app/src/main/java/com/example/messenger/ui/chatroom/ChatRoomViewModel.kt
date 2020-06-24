@@ -1,11 +1,11 @@
-package com.example.messenger.ui.chattingroom
+package com.example.messenger.ui.chatroom
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.type.MessageType
 import com.example.messenger.usecase.LoadMessagesUseCase
 import com.example.messenger.usecase.ReceiveMessageUseCase
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 /**
  * @author bsgreentea
  */
-class ChattingRoomViewModel(
+class ChatRoomViewModel(
     messageRepository: MessageRepositoryImpl,
     roomId: String
 ) : BaseViewModel() {

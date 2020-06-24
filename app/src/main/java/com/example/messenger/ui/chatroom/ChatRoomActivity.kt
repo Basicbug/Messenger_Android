@@ -1,4 +1,4 @@
-package com.example.messenger.ui.chattingroom
+package com.example.messenger.ui.chatroom
 
 import android.content.Context
 import android.os.Bundle
@@ -8,46 +8,36 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.messenger.R
 import com.example.messenger.base.BaseSocketActivity
-import com.example.messenger.databinding.ActivityChattingRoomBinding
-import com.example.messenger.repository.model.Message
-import com.example.messenger.type.MessageType
-import com.example.messenger.ui.chattingroom.adapter.MessageAdapter
+import com.example.messenger.databinding.ActivityChatRoomBinding
+import com.example.messenger.ui.chatroom.adapter.MessageAdapter
 
 /**
  * @author bsgreentea
  */
-class ChattingRoomActivity : BaseSocketActivity() {
+class ChatRoomActivity : BaseSocketActivity() {
 
-    lateinit var binding: ActivityChattingRoomBinding
-    private lateinit var chattingRoomViewModel: ChattingRoomViewModel
+    lateinit var binding: ActivityChatRoomBinding
+    private lateinit var chattingRoomViewModel: ChatRoomViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_chatting_room)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_room)
 
         chattingRoomViewModel =
-            ChattingRoomViewModelInjector.provideSampleViewModelFactory("1")
-                .create(ChattingRoomViewModel::class.java)
+            ChatRoomViewModelInjector.provideSampleViewModelFactory("1")
+                .create(ChatRoomViewModel::class.java)
 
         binding.chatRoomViewModel = chattingRoomViewModel
         binding.lifecycleOwner = this
 
         binding.chatRoomHelper =
-            ChattingRoomActivityHelper(chattingRoomViewModel.loadMessageUseCase, "1")
+            ChatRoomActivityHelper(chattingRoomViewModel.loadMessageUseCase, "1")
 
         val messageAdapter = MessageAdapter()
         binding.recyclerview.adapter = messageAdapter
 
         subscribeMessageList(messageAdapter)
-
-        for (i in 1..200) {
-            val msg = Message(
-                "1", "sender", "receiver", MessageType.MESSAGE,
-                "test_msg", i.toString()
-            )
-            chattingRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
-        }
 
         chattingRoomViewModel.loadMessageUseCase.loadMessages("1", 0)
     }

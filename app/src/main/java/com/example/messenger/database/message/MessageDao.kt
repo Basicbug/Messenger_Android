@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 import io.reactivex.Completable
 import io.reactivex.Single
 

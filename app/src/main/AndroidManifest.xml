@@ -24,16 +24,14 @@
             </intent-filter>
         </activity>
 
-<<<<<<< HEAD
-=======
-        <activity android:name=".ui.chattingroom.ChattingRoomActivity">
+
+        <activity android:name=".ui.chatroom.ChatRoomActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
 
->>>>>>> develop
         <service android:name=".push.fcm.FcmService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
