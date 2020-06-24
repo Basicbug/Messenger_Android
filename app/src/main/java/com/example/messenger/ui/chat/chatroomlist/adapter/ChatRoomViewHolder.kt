@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.chatroomlist.adapter
+package com.example.messenger.ui.chat.chatroomlist.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.databinding.ItemChatRoomBinding

@@ -1,4 +1,4 @@
-package com.example.messenger.ui.chatroom
+package com.example.messenger.ui.chat.chatroom
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,6 @@ import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.Message
-import com.example.messenger.type.MessageType
 import com.example.messenger.usecase.LoadMessagesUseCase
 import com.example.messenger.usecase.ReceiveMessageUseCase
 import com.example.messenger.usecase.SendMessageUseCase

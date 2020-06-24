@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.chatroomlist.adapter
+package com.example.messenger.ui.chat.chatroomlist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

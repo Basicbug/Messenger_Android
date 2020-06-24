@@ -1,4 +1,4 @@
-package com.example.messenger.ui.chatroom.adapter
+package com.example.messenger.ui.chat.chatroom.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

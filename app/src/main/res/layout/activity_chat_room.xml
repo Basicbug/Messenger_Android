@@ -10,11 +10,11 @@
 
         <variable
             name="chatRoomViewModel"
-            type="com.example.messenger.ui.chatroom.ChatRoomViewModel" />
+            type="com.example.messenger.ui.chat.chatroom.ChatRoomViewModel" />
 
         <variable
             name="chatRoomHelper"
-            type="com.example.messenger.ui.chatroom.ChatRoomActivityHelper" />
+            type="com.example.messenger.ui.chat.chatroom.ChatRoomActivityHelper" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

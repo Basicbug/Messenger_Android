@@ -1,4 +1,4 @@
-package com.example.messenger.ui.chatroom
+package com.example.messenger.ui.chat.chatroom
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

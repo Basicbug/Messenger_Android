@@ -1,4 +1,4 @@
-package com.example.messenger.ui.chatroom
+package com.example.messenger.ui.chat.chatroom
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.example.messenger.R
 import com.example.messenger.base.BaseSocketActivity
 import com.example.messenger.databinding.ActivityChatRoomBinding
-import com.example.messenger.ui.chatroom.adapter.MessageAdapter
+import com.example.messenger.ui.chat.chatroom.adapter.MessageAdapter
 
 /**
  * @author bsgreentea

@@ -11,7 +11,7 @@ import android.view.View
 import com.example.messenger.R
 import com.example.messenger.base.BaseActivity
 import com.example.messenger.base.BaseHelper
-import com.example.messenger.ui.chatroomlist.ChatRoomListFragment
+import com.example.messenger.ui.chat.chatroomlist.ChatRoomListFragment
 import com.example.messenger.ui.friends.FriendListFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

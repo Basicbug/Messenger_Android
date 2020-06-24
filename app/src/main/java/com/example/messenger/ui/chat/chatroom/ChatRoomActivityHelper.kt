@@ -1,9 +1,9 @@
-package com.example.messenger.ui.chatroom
+package com.example.messenger.ui.chat.chatroom
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.base.BaseHelper
-import com.example.messenger.ui.chatroom.adapter.MessageRecyclerViewListener
+import com.example.messenger.ui.chat.chatroom.adapter.MessageRecyclerViewListener
 import com.example.messenger.usecase.LoadMessagesUseCase
 
 /**

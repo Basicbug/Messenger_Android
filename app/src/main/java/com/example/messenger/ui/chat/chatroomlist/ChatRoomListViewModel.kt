@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.chatroomlist
+package com.example.messenger.ui.chat.chatroomlist
 
 import android.util.ArrayMap
 import androidx.lifecycle.MutableLiveData

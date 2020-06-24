@@ -8,7 +8,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.messenger.ui.chatroomlist.adapter.ChatRoomItemViewModel" />
+            type="com.example.messenger.ui.chat.chatroomlist.adapter.ChatRoomItemViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.chatroomlist.adapter
+package com.example.messenger.ui.chat.chatroomlist.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.messenger.repository.model.chat.ChatRoom
