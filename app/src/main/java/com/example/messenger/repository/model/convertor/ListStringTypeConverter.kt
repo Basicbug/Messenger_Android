@@ -8,6 +8,7 @@
 package com.example.messenger.repository.model.convertor
 
 import androidx.room.TypeConverter
+import java.lang.StringBuilder
 
 /**
  * @author MyeongKi
@@ -18,8 +19,8 @@ class ListStringTypeConverter {
     @TypeConverter
     fun getListType(itemListString: String): List<String> {
         return mutableListOf<String>().apply {
-            itemListString.split(",").forEach { item ->
-                this.add(item)
+            itemListString.split(",".toRegex()).forEach { item ->
+                add(item)
             }
         }
     }
@@ -30,9 +31,6 @@ class ListStringTypeConverter {
             itemList.isEmpty() -> {
                 ""
             }
-            itemList.size == 1 -> {
-                itemList.first().toString()
-            }
             else -> {
                 itemList.first().toString() + appendRestListItemToString(itemList.subList(1, itemList.size))
             }
@@ -40,11 +38,17 @@ class ListStringTypeConverter {
     }
 
     private fun appendRestListItemToString(itemList: List<String>): String {
-        var result = ""
-        itemList.forEach {
-            result = "$result,${it}"
-
+        return when {
+            itemList.isEmpty() -> {
+                ""
+            }
+            else -> {
+                StringBuilder().apply {
+                    itemList.forEach {
+                        append(",{$it}")
+                    }
+                }.toString()
+            }
         }
-        return result
     }
 }
