@@ -27,28 +27,18 @@ class ListStringTypeConverter {
 
     @TypeConverter
     fun getAppendedListStringType(itemList: List<String>): String {
-        return when {
-            itemList.isEmpty() -> {
-                ""
-            }
-            else -> {
-                itemList.first().toString() + appendRestListItemToString(itemList.subList(1, itemList.size))
-            }
-        }
+        return itemList.takeIf { itemList.isEmpty() }?.run {
+            this.first().toString() + appendRestListItemToString(itemList.subList(1, itemList.size))
+        } ?: ""
     }
 
     private fun appendRestListItemToString(itemList: List<String>): String {
-        return when {
-            itemList.isEmpty() -> {
-                ""
-            }
-            else -> {
-                StringBuilder().apply {
-                    itemList.forEach {
-                        append(",{$it}")
-                    }
-                }.toString()
-            }
-        }
+        return itemList.takeIf { itemList.isEmpty() }?.let {
+            StringBuilder().apply {
+                it.forEach { item ->
+                    append(",{$item}")
+                }
+            }.toString()
+        } ?: ""
     }
 }
