@@ -11,14 +11,14 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.example.messenger.repository.model.convertor.ListStringTypeConverter
+import com.example.messenger.repository.model.convertor.StringListTypeConverter
 import com.google.gson.annotations.SerializedName
 
 /**
  * @author MyeongKi
  */
 @Entity
-@TypeConverters(ListStringTypeConverter::class)
+@TypeConverters(StringListTypeConverter::class)
 data class ChatRoom(
     @PrimaryKey
     @SerializedName("roomId")

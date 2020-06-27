@@ -14,29 +14,29 @@ import java.lang.StringBuilder
  * @author MyeongKi
  */
 
-class ListStringTypeConverter {
+class StringListTypeConverter {
 
     @TypeConverter
-    fun getListType(itemListString: String): List<String> {
+    fun getStringListType(items: String): List<String> {
         return mutableListOf<String>().apply {
-            itemListString.split(",".toRegex()).forEach { item ->
+            items.takeIf { items != "" }?.split(",")?.forEach { item ->
                 add(item)
             }
         }
     }
 
     @TypeConverter
-    fun getAppendedListStringType(itemList: List<String>): String {
-        return itemList.takeIf { itemList.isEmpty() }?.run {
-            this.first().toString() + appendRestListItemToString(itemList.subList(1, itemList.size))
+    fun getStringType(items: List<String>): String {
+        return items.takeIf { items.isNotEmpty() }?.run {
+            this.first().toString() + appendRestListItemToString(items.subList(1, items.size))
         } ?: ""
     }
 
     private fun appendRestListItemToString(itemList: List<String>): String {
-        return itemList.takeIf { itemList.isEmpty() }?.let {
+        return itemList.takeIf { itemList.isNotEmpty() }?.let {
             StringBuilder().apply {
                 it.forEach { item ->
-                    append(",{$item}")
+                    append(",$item")
                 }
             }.toString()
         } ?: ""
