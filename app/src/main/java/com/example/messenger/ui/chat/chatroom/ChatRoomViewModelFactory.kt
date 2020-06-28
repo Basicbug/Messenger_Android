@@ -2,7 +2,7 @@ package com.example.messenger.ui.chat.chatroom
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.messenger.repository.message.MessageRepositoryImpl
+import com.example.messenger.repository.chat.MessageRepositoryImpl
 
 /**
  * @author bsgreentea

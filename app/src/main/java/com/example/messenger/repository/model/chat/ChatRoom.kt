@@ -26,10 +26,7 @@ data class ChatRoom(
     @SerializedName("name")
     var name: String? = "",
     @SerializedName("participants")
-    var participants: List<String> = emptyList()
-){
-    @SerializedName("lastMessage")
-    @Ignore
-    var lastMessage: Message? = null
-}
-//TODO 참가자 마지막 메시지에 대한 관계형 정의가 필요할 듯
+    var participants: List<String> = emptyList(),
+    @SerializedName("lastMessageId")
+    var lastMessageId: String = ""
+)

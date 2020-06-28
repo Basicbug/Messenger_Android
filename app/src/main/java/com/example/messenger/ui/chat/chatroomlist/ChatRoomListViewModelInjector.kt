@@ -8,6 +8,7 @@
 package com.example.messenger.ui.chat.chatroomlist
 
 import com.example.messenger.repository.chat.ChatRoomRepositoryInjector
+import com.example.messenger.repository.chat.MessageRepositoryInjector
 
 /**
  * @author MyeongKi
@@ -15,7 +16,9 @@ import com.example.messenger.repository.chat.ChatRoomRepositoryInjector
 object ChatRoomListViewModelInjector {
     fun provideChatRoomViewModelFactory(
     ): ChatRoomViewModelFactory {
-        val repository = ChatRoomRepositoryInjector.getChatRoomRepositoryImpl()
-        return ChatRoomViewModelFactory(repository)
+        val charRoomRepository = ChatRoomRepositoryInjector.getChatRoomRepositoryImpl()
+        val messageRepository = MessageRepositoryInjector.getMessageRepositoryImpl()
+
+        return ChatRoomViewModelFactory(charRoomRepository, messageRepository)
     }
 }

@@ -17,10 +17,10 @@ import io.reactivex.subjects.PublishSubject
 
 object ChatEvent {
 
-    val addChatRoomToListSubject = PublishSubject.create<ChatRoom>()
+    val chatRoomAndLastMessageSubject = PublishSubject.create<Pair<ChatRoom, Message>>()
 
-    fun addChatRoomToList(chatRoom: ChatRoom) {
-        addChatRoomToListSubject.onNext(chatRoom)
+    fun invokeChatRoomAndLastMessage(chatRoom: Pair<ChatRoom, Message>) {
+        chatRoomAndLastMessageSubject.onNext(chatRoom)
     }
 
     val messagePushedSubject = PublishSubject.create<Message>()

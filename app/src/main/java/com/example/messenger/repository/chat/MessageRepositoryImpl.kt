@@ -1,14 +1,22 @@
-package com.example.messenger.repository.message
+/*
+ * MessageRepositoryImpl.kt 2020. 6. 28
+ *
+ * Copyright 2020 BasicBug. All rights Reserved.
+ *
+ */
 
-import com.example.messenger.database.message.MessageDatabase
+package com.example.messenger.repository.chat
+
+import com.example.messenger.database.chat.MessageDatabase
+import com.example.messenger.network.ApiHelper
 import com.example.messenger.network.SocketHelper
+import com.example.messenger.network.service.chat.MessageService
 import com.example.messenger.repository.model.chat.Message
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-
 import ua.naiksoftware.stomp.dto.StompMessage
 
 /**
@@ -21,6 +29,22 @@ class MessageRepositoryImpl : MessageRepository {
     override fun getMessageListFromLocal(roomId: String): Single<List<Message>> {
         return messageDao
             .getMessageList(roomId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getMessageFromServer(messageId: String, roomId: String): Single<Message> {
+        return ApiHelper
+            .createApiByService(MessageService::class)
+            .getMessage(messageId, roomId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { it.data }
+    }
+
+    override fun getMessageFromLocal(messageId: String, roomId: String): Single<Message> {
+        return messageDao
+            .getMessage(messageId, roomId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -61,7 +85,9 @@ class MessageRepositoryImpl : MessageRepository {
 
         fun getInstance() =
             instance ?: synchronized(this) {
-                instance ?: MessageRepositoryImpl().also { instance = it }
+                instance
+                    ?: MessageRepositoryImpl()
+                        .also { instance = it }
             }
     }
 }
