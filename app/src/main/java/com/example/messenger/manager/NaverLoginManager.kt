@@ -15,6 +15,7 @@ import com.example.messenger.event.LoginEvent
 import com.example.messenger.repository.model.login.AccessToken
 import com.example.messenger.repository.model.login.JwtToken
 import com.example.messenger.repository.model.user.UserInfo
+import com.example.messenger.type.LoginResultType
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import io.reactivex.Observer
@@ -60,13 +61,7 @@ object NaverLoginManager : OAuthLoginHandler() {
                 it.provider = PROVIDER
             })
         } else {
-            val errorCode = loginInstance?.getLastErrorCode(
-                appContext
-            )?.code.toString()
-            val descCode = loginInstance?.getLastErrorDesc(
-                appContext
-            ).toString()
-            Toast.makeText(appContext, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            LoginEvent.invokeLoginResult(LoginResultType.FAIL)
         }
     }
 
