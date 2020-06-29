@@ -29,7 +29,7 @@ import io.reactivex.disposables.CompositeDisposable
 class LoginActivityHelper(
     private val activity: BaseActivity,
     private val disposable: CompositeDisposable,
-    private val loginViewModel: LoginViewModel
+    private val loadingLoginViewModel: LoadingLoginViewModel
 ) :
     BaseHelper {
 
@@ -62,7 +62,7 @@ class LoginActivityHelper(
     }
 
     private fun handleLoginResult(loginResult: LoginResultType) {
-        loginViewModel.setLoginPageVisible(true)
+        loadingLoginViewModel.loginPageVisible = true
         when (loginResult) {
             LoginResultType.SUCCESS -> {
                 ToastHelper.show(R.string.login_success_message)
