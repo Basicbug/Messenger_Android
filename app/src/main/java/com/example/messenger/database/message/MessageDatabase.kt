@@ -3,7 +3,8 @@ package com.example.messenger.database.message
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.messenger.MessengerApp
+import com.example.messenger.app.AppResources
+import com.example.messenger.app.MessengerApp
 import com.example.messenger.repository.model.chat.Message
 
 /**
@@ -20,7 +21,7 @@ abstract class MessageDatabase : RoomDatabase() {
         @JvmStatic
         fun getDatabase(): MessageDatabase {
             return Room.databaseBuilder(
-                MessengerApp.applicationContext(),
+                AppResources.getContext(),
                 MessageDatabase::class.java,
                 DB_NAME
             ).build()

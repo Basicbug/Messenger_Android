@@ -9,7 +9,7 @@ package com.example.messenger.manager
 
 import android.util.Log
 import android.widget.Toast
-import com.example.messenger.MessengerApp
+import com.example.messenger.app.AppResources
 import com.example.messenger.constants.AppInfoConstants
 import com.example.messenger.event.LoginEvent
 import com.example.messenger.repository.model.login.AccessToken
@@ -32,10 +32,10 @@ object NaverLoginManager : OAuthLoginHandler() {
     private const val OAUTH_CLIENT_SECRET = "2Ca8FHXsj4"
     var jwtToken: JwtToken? = null
     var loginUserInfo: UserInfo? = null
-    private val context = MessengerApp.applicationContext()
+    private val appContext = AppResources.getContext()
     private val loginInstance = OAuthLogin.getInstance().apply {
         init(
-            context,
+            appContext,
             OAUTH_CLIENT_ID,
             OAUTH_CLIENT_SECRET,
             AppInfoConstants.APP_NAME
@@ -47,13 +47,13 @@ object NaverLoginManager : OAuthLoginHandler() {
     }
 
     fun naverLogout() {
-        loginInstance?.logout(context)
+        loginInstance?.logout(appContext)
     }
 
     override fun run(success: Boolean) {
         if (success) {
             val accessToken = loginInstance?.getAccessToken(
-                context
+                appContext
             ).toString()
             LoginEvent.invokeToken(AccessToken().also {
                 it.token = accessToken
@@ -61,19 +61,19 @@ object NaverLoginManager : OAuthLoginHandler() {
             })
         } else {
             val errorCode = loginInstance?.getLastErrorCode(
-                context
+                appContext
             )?.code.toString()
             val descCode = loginInstance?.getLastErrorDesc(
-                context
+                appContext
             ).toString()
-            Toast.makeText(context, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(appContext, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
     fun deleteToken() {
         Schedulers.newThread().createWorker().schedule {
             loginInstance.logoutAndDeleteToken(
-                context
+                appContext
             )
         }
     }
@@ -87,7 +87,7 @@ object NaverLoginManager : OAuthLoginHandler() {
     private fun getObserver(): Observer<String> {
         return object : Observer<String> {
             override fun onComplete() {
-                Toast.makeText(context, "탈퇴되었습니다", Toast.LENGTH_SHORT).show()
+                Toast.makeText(appContext, "탈퇴되었습니다", Toast.LENGTH_SHORT).show()
             }
 
             override fun onSubscribe(d: Disposable) {
@@ -95,13 +95,13 @@ object NaverLoginManager : OAuthLoginHandler() {
 
             override fun onNext(t: String) {
                 loginInstance.logoutAndDeleteToken(
-                    context
+                    appContext
                 )
                 val errorCode = loginInstance?.getLastErrorCode(
-                    context
+                    appContext
                 )?.code.toString()
                 val descCode = loginInstance?.getLastErrorDesc(
-                    context
+                    appContext
                 ).toString()
                 Log.d("delete_error", errorCode + " / " + descCode)
             }
