@@ -8,7 +8,7 @@
 package com.example.messenger.usecase
 
 import android.util.Log
-import com.example.messenger.network.SocketHelper
+import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
 import com.example.messenger.repository.model.Message
 import com.example.messenger.tools.convertJsonStringToMessage
@@ -29,10 +29,15 @@ class ReceiveMessageUseCase(
                     { stompMessage ->
                         val msg = convertJsonStringToMessage(stompMessage.payload)
                         notifyMessage(msg)
-                        //TODO 로컬 저장이나 기타 나머지 시나리오...
+
+                        msg?.let {
+                            messageRepositoryImpl.insertMessageToLocal(it)
+                            ChattingRoomEvent.addMessageToList(it)
+                        }
+
                     },
-                    {
-                            err -> Log.e(this.javaClass.simpleName, err.toString())
+                    { err ->
+                        Log.e(this.javaClass.simpleName, err.toString())
                     })
         )
     }
@@ -41,5 +46,12 @@ class ReceiveMessageUseCase(
         msg?.let {
             //TODO 이벤트 발생
         }
+    }
+
+    fun testReceiveMessage(msg: Message) {
+        disposables.add(
+            messageRepositoryImpl.insertMessageToLocal(msg).subscribe()
+        )
+        ChattingRoomEvent.addMessageToList(msg)
     }
 }
