@@ -1,7 +1,9 @@
 package com.example.messenger.ui.chattingroom
 
+import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
@@ -29,8 +31,8 @@ class ChattingRoomViewModel(
         value = ArrayList()
     }
 
-    private val receiveMessageUseCase = ReceiveMessageUseCase(messageRepository, disposables)
-    private val sendMessageUseCase = SendMessageUseCase(messageRepository, disposables)
+    val receiveMessageUseCase = ReceiveMessageUseCase(messageRepository, disposables)
+    val sendMessageUseCase = SendMessageUseCase(messageRepository, disposables)
     private var messageToSend: ObservableField<String>
 
     init {
@@ -38,10 +40,12 @@ class ChattingRoomViewModel(
         messageToSend = ObservableField("")
     }
 
-    fun sendMessageToServer() {
+    fun sendMessageToServer(view: View) {
+        testReceivedMessage(view, messageToSend.get().toString())
         sendMessageUseCase.sendMessage(
             Message(
                 "a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e",
+//                "1",
                 "mk",
                 "jw",
                 MessageType.MESSAGE,
@@ -49,11 +53,7 @@ class ChattingRoomViewModel(
                 "time"
             )
         )
-
-    }
-
-    fun getText(): ObservableField<String> {
-        return messageToSend
+        messageToSend.set("")
     }
 
     private fun subscribeEvent() {
@@ -74,6 +74,30 @@ class ChattingRoomViewModel(
                 }
         )
 //        receiveMessageUseCase.subscribeChattingRoom("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e")
+//        receiveMessageUseCase.subscribeChattingRoom("1")
+    }
+
+    var cnt = 201
+    private fun testReceivedMessage(view: View, text: String) {
+
+        val msg = Message(
+            "1", "sender", "receiver", MessageType.MESSAGE,
+            text, cnt++.toString()
+        )
+
+        receiveMessageUseCase.testReceiveMessage(msg)
+        scrollToBottom(view)
+    }
+
+    private fun scrollToBottom(view: View) {
+
+        (view as RecyclerView).adapter?.let { adapter ->
+            (adapter.itemCount - 1).takeIf { itemCount ->
+                itemCount > 0
+            }?.let { bottom ->
+                view.scrollToPosition(bottom)
+            }
+        }
     }
 
     override fun onCleared() {
