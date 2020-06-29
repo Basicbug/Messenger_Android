@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
  * @author bsgreentea
  */
 class LoadMessagesUseCase(
-    private val messageRepository: MessageRepositoryImpl,
+    private val messageRepositoryImpl: MessageRepositoryImpl,
     private val disposables: CompositeDisposable
 ) {
 
@@ -21,7 +21,7 @@ class LoadMessagesUseCase(
 
     private fun loadLatestFiftyMessages(roomId: String, from: Int) {
         disposables.add(
-            messageRepository.getLatestFiftyMessages(roomId, from)
+            messageRepositoryImpl.getLatestFiftyMessages(roomId, from)
                 .doOnSuccess {
                     ChattingRoomEvent.addMessagesToList(it.reversed())
                 }
@@ -31,7 +31,7 @@ class LoadMessagesUseCase(
 
     fun insertMessageToLocal(msg: Message) {
         disposables.add(
-            messageRepository.insertMessageToLocal(msg)
+            messageRepositoryImpl.insertMessageToLocal(msg)
                 .subscribe()
         )
     }
