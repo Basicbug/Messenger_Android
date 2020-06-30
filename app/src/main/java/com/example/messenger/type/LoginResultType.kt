@@ -11,7 +11,7 @@ package com.example.messenger.type
  * @author MyeongKi
  */
 
-enum class LoginResultType(val result: Int?) {
+enum class LoginResultType(val result: Int) {
     FAIL(-1),
     SUCCESS(1),
     ALREADY(2);
