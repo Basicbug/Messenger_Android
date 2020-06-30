@@ -9,6 +9,7 @@ package com.example.messenger.app
 
 import android.widget.Toast
 import androidx.annotation.StringRes
+import io.reactivex.android.schedulers.AndroidSchedulers
 
 /**
  * @author MyeongKi
@@ -25,15 +26,15 @@ object ToastHelper {
     @JvmStatic
     fun show(toastMessage: String) {
         cancel()
-        toast = Toast.makeText(AppResources.getContext(), toastMessage, Toast.LENGTH_SHORT).apply {
-            show()
+        AndroidSchedulers.mainThread().scheduleDirect {
+            toast = Toast.makeText(AppResources.getContext(), toastMessage, Toast.LENGTH_SHORT).apply {
+                show()
+            }
         }
     }
 
     @JvmStatic
     fun cancel() {
-        toast?.let {
-            it.cancel()
-        }
+        toast?.cancel()
     }
 }
