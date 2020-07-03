@@ -11,7 +11,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.messenger.MessengerApp
+import com.example.messenger.app.AppResources
+import com.example.messenger.app.MessengerApp
 import com.example.messenger.repository.model.chat.ChatRoom
 import com.example.messenger.repository.model.convertor.DateTypeConverter
 
@@ -28,7 +29,7 @@ abstract class ChatDatabase : RoomDatabase() {
         private const val DB_NAME = "chat_room.db"
         @JvmStatic
         fun getDatabase(): ChatDatabase {
-            return Room.databaseBuilder(MessengerApp.applicationContext(), ChatDatabase::class.java, DB_NAME).build()
+            return Room.databaseBuilder(AppResources.getContext(), ChatDatabase::class.java, DB_NAME).build()
         }
     }
 }

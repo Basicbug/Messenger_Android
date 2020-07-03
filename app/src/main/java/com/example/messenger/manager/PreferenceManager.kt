@@ -7,7 +7,8 @@
 
 package com.example.messenger.manager
 
-import com.example.messenger.MessengerApp
+import com.example.messenger.app.AppResources
+import com.example.messenger.app.MessengerApp
 import com.example.messenger.constants.PreferenceKeyConstants.JWT_TOKEN_KEY
 import com.example.messenger.preference.BasicBugPreference
 
@@ -16,7 +17,7 @@ import com.example.messenger.preference.BasicBugPreference
  */
 
 object PreferenceManager {
-    private val preference = BasicBugPreference(MessengerApp.applicationContext())
+    private val preference = BasicBugPreference(AppResources.getContext())
 
     fun getJwtToken(): String? {
         return preference.getString(JWT_TOKEN_KEY, null)

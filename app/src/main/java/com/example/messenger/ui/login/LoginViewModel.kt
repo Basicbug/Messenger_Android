@@ -11,7 +11,6 @@ import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.LoginEvent
 import com.example.messenger.repository.login.LoginRepositoryImpl
 import com.example.messenger.repository.model.login.AccessToken
-import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.usecase.LoginUseCase
 
 /**
@@ -19,21 +18,27 @@ import com.example.messenger.usecase.LoginUseCase
  */
 
 class LoginViewModel(
-    loginRepository: LoginRepositoryImpl,
-    userRepository: UserRepositoryImpl
+    loginRepository: LoginRepositoryImpl
 ) : BaseViewModel() {
+    val loadingLoginViewModel = LoadingLoginViewModel()
+
     init {
         subscribeEvent()
     }
 
-    private val loginUseCase = LoginUseCase(loginRepository, userRepository, disposables)
+    private val loginUseCase = LoginUseCase(loginRepository, disposables)
     private fun subscribeEvent() {
         disposables.add(
             LoginEvent.tokenSubject.subscribe {
                 if (it is AccessToken) {
+                    setLoginPageVisible(false)
                     loginUseCase.loadJwtToken(it)
                 }
             }
         )
+    }
+
+    fun setLoginPageVisible(visible: Boolean) {
+        loadingLoginViewModel.loginPageVisible = visible
     }
 }

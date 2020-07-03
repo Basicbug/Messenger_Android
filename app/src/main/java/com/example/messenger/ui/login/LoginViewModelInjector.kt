@@ -18,7 +18,6 @@ object LoginViewModelInjector {
     fun provideLoginViewModelFactory(
     ): LoginViewModelFactory {
         val loginRepository = LoginRepositoryInjector.getLoginRepositoryImpl()
-        val userRepository = UserRepositoryInjector.getUserRepositoryImpl()
-        return LoginViewModelFactory(loginRepository, userRepository)
+        return LoginViewModelFactory(loginRepository)
     }
 }

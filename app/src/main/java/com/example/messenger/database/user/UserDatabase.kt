@@ -10,7 +10,7 @@ package com.example.messenger.database.user
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.messenger.MessengerApp
+import com.example.messenger.app.AppResources
 import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 
@@ -27,7 +27,7 @@ abstract class UserDatabase : RoomDatabase() {
         private const val DB_NAME = "user.db"
         @JvmStatic
         fun getDatabase(): UserDatabase {
-            return Room.databaseBuilder(MessengerApp.applicationContext(), UserDatabase::class.java, DB_NAME).build()
+            return Room.databaseBuilder(AppResources.getContext(), UserDatabase::class.java, DB_NAME).build()
         }
     }
 }
