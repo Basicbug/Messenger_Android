@@ -10,8 +10,9 @@ package com.example.messenger.repository.model.chat
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.TypeConverters
-import com.example.messenger.MessengerApp
+import com.example.messenger.app.MessengerApp
 import com.example.messenger.R
+import com.example.messenger.app.AppResources
 import com.example.messenger.push.PushItem
 import com.example.messenger.repository.model.convertor.MessageTypeConverters
 import com.example.messenger.type.MessageType
@@ -50,7 +51,7 @@ data class Message(
                 message
             }
             MessageType.IMAGE -> {
-                MessengerApp.applicationContext().resources.getString(R.string.image_message_content)
+                AppResources.getStringResId(R.string.image_message_content)
             }
             else -> {
                 ""

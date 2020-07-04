@@ -16,13 +16,11 @@ import com.example.messenger.repository.user.UserRepositoryImpl
  * @author MyeongKi
  */
 class LoginViewModelFactory(
-    private val loginRepository: LoginRepositoryImpl,
-    private val userRepository: UserRepositoryImpl
-
-    ) : ViewModelProvider.NewInstanceFactory() {
+    private val loginRepository: LoginRepositoryImpl
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return LoginViewModel(loginRepository, userRepository) as T
+        return LoginViewModel(loginRepository) as T
     }
 }

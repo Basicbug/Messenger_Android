@@ -1,5 +1,5 @@
 /*
- * MessageType.kt 2020. 5. 1
+ * LoginResultType.kt 2020. 6. 29
  *
  * Copyright 2020 BasicBug. All rights Reserved.
  *
@@ -11,10 +11,10 @@ package com.example.messenger.type
  * @author MyeongKi
  */
 
-enum class MessageType(val code: Int?) {
+enum class LoginResultType(val result: Int) {
     FAIL(-1),
-    MESSAGE(1),
-    IMAGE(2);
+    SUCCESS(1),
+    ALREADY(2);
 
 
 }
