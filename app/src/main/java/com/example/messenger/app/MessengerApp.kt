@@ -9,6 +9,7 @@ package com.example.messenger.app
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 
 /**
  * @author MyeongKi
