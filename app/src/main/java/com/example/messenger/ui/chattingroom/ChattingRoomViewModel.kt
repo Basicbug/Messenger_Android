@@ -1,9 +1,7 @@
 package com.example.messenger.ui.chattingroom
 
-import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.ChattingRoomEvent
 import com.example.messenger.repository.message.MessageRepositoryImpl
@@ -19,7 +17,7 @@ import java.util.concurrent.TimeUnit
  */
 class ChattingRoomViewModel(
     messageRepository: MessageRepositoryImpl,
-    roomId: String
+    @Suppress("UNUSED_PARAMETER") roomId: String
 ) : BaseViewModel() {
 
     companion object {
@@ -31,17 +29,17 @@ class ChattingRoomViewModel(
         value = ArrayList()
     }
 
-    val receiveMessageUseCase = ReceiveMessageUseCase(messageRepository, disposables)
-    val sendMessageUseCase = SendMessageUseCase(messageRepository, disposables)
-    private var messageToSend: ObservableField<String>
+    private val receiveMessageUseCase = ReceiveMessageUseCase(messageRepository, disposables)
+    private val sendMessageUseCase = SendMessageUseCase(messageRepository, disposables)
+    var messageToSend: ObservableField<String>
 
     init {
         subscribeEvent()
         messageToSend = ObservableField("")
     }
 
-    fun sendMessageToServer(view: View) {
-        testReceivedMessage(view, messageToSend.get().toString())
+    fun sendMessageToServer() {
+        testReceivedMessage(messageToSend.get().toString())
         sendMessageUseCase.sendMessage(
             Message(
                 "a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e",
@@ -62,6 +60,8 @@ class ChattingRoomViewModel(
                 .subscribe {
                     messageList.value?.add(it)
                     messageList.postValue(messageList.value)
+
+                    ChattingRoomEvent.notifySendMessage(it.senderName)
                 }
         )
 
@@ -77,8 +77,8 @@ class ChattingRoomViewModel(
 //        receiveMessageUseCase.subscribeChattingRoom("1")
     }
 
-    var cnt = 201
-    private fun testReceivedMessage(view: View, text: String) {
+    private var cnt = 201
+    private fun testReceivedMessage(text: String) {
 
         val msg = Message(
             "1", "sender", "receiver", MessageType.MESSAGE,
@@ -86,18 +86,6 @@ class ChattingRoomViewModel(
         )
 
         receiveMessageUseCase.testReceiveMessage(msg)
-        scrollToBottom(view)
-    }
-
-    private fun scrollToBottom(view: View) {
-
-        (view as RecyclerView).adapter?.let { adapter ->
-            (adapter.itemCount - 1).takeIf { itemCount ->
-                itemCount > 0
-            }?.let { bottom ->
-                view.scrollToPosition(bottom)
-            }
-        }
     }
 
     override fun onCleared() {

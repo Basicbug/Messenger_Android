@@ -1,16 +1,11 @@
 package com.example.messenger.ui.chattingroom
 
-import android.content.Context
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.messenger.R
 import com.example.messenger.base.BaseSocketActivity
 import com.example.messenger.databinding.ActivityChattingRoomBinding
-import com.example.messenger.repository.model.Message
-import com.example.messenger.type.MessageType
 import com.example.messenger.ui.chattingroom.adapter.MessageAdapter
 
 /**
@@ -34,40 +29,32 @@ class ChattingRoomActivity : BaseSocketActivity() {
         binding.lifecycleOwner = this
 
         binding.chatRoomHelper =
-            ChattingRoomActivityHelper(chattingRoomViewModel.loadMessageUseCase, "1")
+            ChattingRoomActivityHelper(
+                chattingRoomViewModel.loadMessageUseCase,
+//                "a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e"
+                "1"
+            )
 
         val messageAdapter = MessageAdapter()
         binding.recyclerview.adapter = messageAdapter
 
         subscribeMessageList(messageAdapter)
 
-        for (i in 1..200) {
-            val msg = Message(
-                "1", "sender", "receiver", MessageType.MESSAGE,
-                "test_msg", i.toString()
-            )
-            chattingRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
-        }
+//        for (i in 1..200) {
+//            val msg = Message(
+//                "1", "sender", "receiver", MessageType.MESSAGE,
+//                "test_msg", i.toString()
+//            )
+//            chattingRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
+//        }
 
         chattingRoomViewModel.loadMessageUseCase.loadMessages("1", 0)
+//        chattingRoomViewModel.loadMessageUseCase.loadMessages("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e", 0)
     }
 
     private fun subscribeMessageList(messageAdapter: MessageAdapter) {
         chattingRoomViewModel.messageList.observe(this, Observer {
             messageAdapter.submitList(it.toMutableList())
         })
-    }
-
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        hideKeyboard()
-        return super.dispatchTouchEvent(ev)
-    }
-
-    private fun hideKeyboard() {
-        val view = this.currentFocus
-        view?.let {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-        }
     }
 }
