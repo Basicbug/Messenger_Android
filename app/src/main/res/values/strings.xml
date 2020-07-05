@@ -17,5 +17,10 @@
     <string name="login_success_message">로그인 성공!</string>
     <string name="login_fail_message">로그인 실패!</string>
 
+    <!--config-->
+    <string name="confirm">확인</string>
+
+    <!--error-->
+    <string name="load_fail_from_server">서버로부터 불러오기 실패</string>
 
 </resources>
