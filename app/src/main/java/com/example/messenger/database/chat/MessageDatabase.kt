@@ -1,4 +1,11 @@
-package com.example.messenger.database.message
+/*
+ * MessageDatabase.kt 2020. 6. 28
+ *
+ * Copyright 2020 BasicBug. All rights Reserved.
+ *
+ */
+
+package com.example.messenger.database.chat
 
 import androidx.room.Database
 import androidx.room.Room

@@ -1,6 +1,6 @@
 package com.example.messenger.ui.chat.chatroom
 
-import com.example.messenger.repository.message.MessageRepositoryInjector
+import com.example.messenger.repository.chat.MessageRepositoryInjector
 
 /**
  * @author bsgreentea

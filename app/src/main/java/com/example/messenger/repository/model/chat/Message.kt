@@ -26,11 +26,12 @@ import com.google.gson.annotations.SerializedName
 @TypeConverters(MessageTypeConverters::class)
 data class Message(
     @SerializedName("id")
-    @ColumnInfo(name = "room_id")
-    var id: Int = 0,
+    @ColumnInfo(name = "id")
+    var id: String = "",
     @SerializedName("message")
     var message: String = "",
     @SerializedName("rooId")
+    @ColumnInfo(name = "room_id")
     var roomId: String = "",
     @SerializedName("senderUid")
     var senderUid: String = "",
