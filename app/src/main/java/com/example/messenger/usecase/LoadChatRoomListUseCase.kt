@@ -7,7 +7,9 @@
 
 package com.example.messenger.usecase
 
+import com.example.messenger.R
 import com.example.messenger.event.ChatEvent
+import com.example.messenger.event.ErrorEvent
 import com.example.messenger.repository.chat.ChatRoomRepositoryImpl
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.ChatRoom
@@ -31,70 +33,77 @@ class LoadChatRoomListUseCase(
     private fun getChatRoomListFromServer(userId: String) {
         disposables.add(
             chatRoomRepositoryImpl.getChatRoomListFromServer(userId)
-                .doOnSuccess {
-                    it.forEach { chatRoom ->
-                        getChatRoomDetailFromServer(chatRoom.roomId)
+                .subscribe(
+                    { chatRooms ->
+                        chatRooms.forEach { chatRoom ->
+                            getChatRoomDetailFromServer(chatRoom.roomId)
+                        }
+                    },
+                    { error ->
+                        ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
+                        getChatRoomListFromLocal()
                     }
-                }
-                .doOnError {
-                    //TODO 스냅바로 실패 보여주기
-                    getChatRoomListFromLocal()
-                }
-                .subscribe()
+                )
         )
     }
 
     private fun getChatRoomDetailFromServer(roomId: String) {
         disposables.add(
             chatRoomRepositoryImpl.getChatRoomDetailFromServer(roomId)
-                .doOnSuccess {
-                    insertChatRoomToLocal(it)
-                    getLastMessageFromServer(it)
-                }
-                .doOnError {
-                    //TODO 스냅바로 실패 보여주기
-                    getChatRoomListFromLocal()
-                }
-                .subscribe()
+                .subscribe(
+                    { chatRoom ->
+                        insertChatRoomToLocal(chatRoom)
+                        getLastMessageFromServer(chatRoom)
+                    },
+                    { error ->
+                        ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
+                        getChatRoomListFromLocal()
+                    }
+                )
         )
     }
 
     private fun getLastMessageFromServer(chatRoom: ChatRoom) {
         disposables.add(
             messageRepositoryImpl.getMessageFromServer(chatRoom.lastMessageId, chatRoom.lastMessageId)
-                .doOnSuccess {
-                    insertLastMessageToLocal(it)
-                    ChatEvent.invokeChatRoomAndLastMessage(Pair(chatRoom, it))
-                }
-                .doOnError {
-                    getLastMessageFromLocal(chatRoom)
-                }
-                .subscribe()
+                .subscribe(
+                    { message ->
+                        insertLastMessageToLocal(message)
+                        ChatEvent.invokeChatRoomAndLastMessage(Pair(chatRoom, message))
+                    },
+                    { error ->
+                        ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
+                        getLastMessageFromLocal(chatRoom)
+                    }
+                )
         )
     }
 
     private fun getChatRoomListFromLocal() {
         disposables.add(
             chatRoomRepositoryImpl.getChatRoomListFromLocal()
-                .doOnSuccess {
-                    it.forEach { chatRoom ->
-                        getLastMessageFromLocal(chatRoom)//이미 서버와의 에러가 떨어진 상태에서 로컬로 찌르는게 나을 듯
+                .subscribe(
+                    { chatRooms ->
+                        chatRooms.forEach { chatRoom ->
+                            getLastMessageFromLocal(chatRoom)//이미 서버와의 에러가 떨어진 상태에서 로컬로 찌르는게 나을 듯
+                        }
+                    },
+                    { error ->
+                        //에러메시지
                     }
-                }
-                .doOnError {
-                    //에러메시지
-                }
-                .subscribe()
+                )
         )
     }
 
     private fun getLastMessageFromLocal(chatRoom: ChatRoom) {
         disposables.add(
             messageRepositoryImpl.getMessageFromLocal(chatRoom.lastMessageId, chatRoom.lastMessageId)
-                .doOnSuccess {
-                    ChatEvent.invokeChatRoomAndLastMessage(Pair(chatRoom, it))
-                }
-                .subscribe()
+                .subscribe(
+                    { message ->
+                        ChatEvent.invokeChatRoomAndLastMessage(Pair(chatRoom, message))
+                    },
+                    {}
+                )
         )
     }
 
