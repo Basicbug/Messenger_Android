@@ -7,8 +7,20 @@
   -->
 
 <resources>
+    <!--common-->
+    <dimen name="default_text_start_margin">10dp</dimen>
+    <dimen name="default_layout_padding">16dp</dimen>
+
+
     <!--login-->
     <dimen name="login_title_text_size">70sp</dimen>
     <dimen name="login_button_height">50dp</dimen>
+
+
+    <!--friend-->
+    <dimen name="profile_image_size">75dp</dimen>
+    <dimen name="profile_image_padding">5dp</dimen>
+    <dimen name="friend_layout_height">75dp</dimen>
+
 
 </resources>

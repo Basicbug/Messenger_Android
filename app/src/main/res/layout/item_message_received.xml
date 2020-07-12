@@ -12,8 +12,10 @@
             type="com.example.messenger.ui.chat.chatroom.adapter.MessageReceivedItemViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="2dp">
@@ -38,7 +40,8 @@
             android:text="@{receivedItemViewModel.senderName}"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/image_friend"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="friend name"/>
 
         <TextView
             android:id="@+id/text_message_body"
@@ -53,7 +56,8 @@
             android:text="@{receivedItemViewModel.messageContent}"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/image_friend"
-            app:layout_constraintTop_toBottomOf="@+id/text_friend_name" />
+            app:layout_constraintTop_toBottomOf="@+id/text_friend_name"
+            tools:text="hi ! 나는 바디다 !!@@~!@"/>
 
         <TextView
             android:id="@+id/text_message_time"
@@ -64,7 +68,8 @@
             android:text="@{receivedItemViewModel.messageTime}"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/text_message_body"
-            app:layout_constraintStart_toEndOf="@+id/text_message_body" />
+            app:layout_constraintStart_toEndOf="@+id/text_message_body"
+            tools:text="11:11"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
