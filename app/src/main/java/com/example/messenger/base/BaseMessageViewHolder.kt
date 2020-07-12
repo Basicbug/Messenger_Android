@@ -1,6 +1,6 @@
 package com.example.messenger.base
 
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.model.chat.Message
 
 /**
  * @author bsgreentea

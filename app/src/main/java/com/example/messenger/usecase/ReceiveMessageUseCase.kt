@@ -1,4 +1,5 @@
 /*
+
  * ReceiveMessageUseCase.kt 2020. 5. 19
  *
  * Copyright 2020 BasicBug. All rights Reserved.
@@ -9,8 +10,8 @@ package com.example.messenger.usecase
 
 import android.util.Log
 import com.example.messenger.event.ChattingRoomEvent
-import com.example.messenger.repository.message.MessageRepositoryImpl
-import com.example.messenger.repository.model.Message
+import com.example.messenger.repository.chat.MessageRepositoryImpl
+import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.tools.convertJsonStringToMessage
 import io.reactivex.disposables.CompositeDisposable
 
@@ -32,7 +33,7 @@ class ReceiveMessageUseCase(
 
                         msg?.let {
                             messageRepositoryImpl.insertMessageToLocal(it)
-                            ChattingRoomEvent.addMessageToList(it)
+                            ChattingRoomEvent.invokeMessage(it)
                         }
 
                     },
@@ -52,6 +53,6 @@ class ReceiveMessageUseCase(
         disposables.add(
             messageRepositoryImpl.insertMessageToLocal(msg).subscribe()
         )
-        ChattingRoomEvent.addMessageToList(msg)
+        ChattingRoomEvent.invokeMessage(msg)
     }
 }

@@ -8,7 +8,8 @@
 package com.example.messenger.network
 
 import com.example.messenger.BuildConfig
-import com.example.messenger.MessengerApp
+import com.example.messenger.app.AppResources
+import com.example.messenger.app.MessengerApp
 import com.example.messenger.constants.NetworkConstants
 import com.example.messenger.manager.NaverLoginManager
 import com.example.messenger.network.service.login.LoginService
@@ -38,7 +39,7 @@ object ApiHelper {
     private fun build(needJwtToken: Boolean): Retrofit {
         val okHttpClient = OkHttpClient.Builder().addNetworkInterceptor(StethoInterceptor())
         if (BuildConfig.DEBUG) {
-            Stetho.initializeWithDefaults(MessengerApp.applicationContext())
+            Stetho.initializeWithDefaults(AppResources.getContext())
         }
         if (needJwtToken) {
             okHttpClient.addInterceptor {

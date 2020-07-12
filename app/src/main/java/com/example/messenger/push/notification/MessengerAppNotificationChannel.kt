@@ -10,8 +10,8 @@ package com.example.messenger.push.notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
-import com.example.messenger.MessengerApp
 import com.example.messenger.R
+import com.example.messenger.app.AppResources
 
 /**
  * @author MyeongKi
@@ -22,7 +22,7 @@ enum class MessengerAppNotificationChannel(val id: String, private val nameId: I
 
     fun createNotificationChannel(notificationManager: NotificationManager) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val name = MessengerApp.applicationContext().getString(nameId)
+            val name = AppResources.getStringResId(nameId)
             val notificationChannel = NotificationChannel(id, name, channelImportance)
             notificationChannel.setShowBadge(false)
 

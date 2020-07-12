@@ -8,6 +8,7 @@
 package com.example.messenger.ui.login
 
 import com.example.messenger.repository.login.LoginRepositoryInjector
+import com.example.messenger.repository.user.UserRepositoryInjector
 
 /**
  * @author MyeongKi
@@ -16,7 +17,7 @@ import com.example.messenger.repository.login.LoginRepositoryInjector
 object LoginViewModelInjector {
     fun provideLoginViewModelFactory(
     ): LoginViewModelFactory {
-        val repository = LoginRepositoryInjector.getLoginRepositoryImpl()
-        return LoginViewModelFactory(repository)
+        val loginRepository = LoginRepositoryInjector.getLoginRepositoryImpl()
+        return LoginViewModelFactory(loginRepository)
     }
 }
