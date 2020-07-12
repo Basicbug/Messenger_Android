@@ -32,4 +32,10 @@ object BindingAdapter {
     ) {
         helper.customizePropertiesView(view)
     }
+
+    @JvmStatic
+    @BindingAdapter("visible")
+    fun setVisibility(view: View, visible: Boolean) {
+        view.visibility = if (visible) View.VISIBLE else View.GONE
+    }
 }

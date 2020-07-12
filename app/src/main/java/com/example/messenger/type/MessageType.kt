@@ -7,8 +7,6 @@
 
 package com.example.messenger.type
 
-import androidx.room.TypeConverter
-
 /**
  * @author MyeongKi
  */

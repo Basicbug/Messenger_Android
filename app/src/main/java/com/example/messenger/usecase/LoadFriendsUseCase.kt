@@ -7,7 +7,10 @@
 
 package com.example.messenger.usecase
 
-import com.example.messenger.event.FriendEvent
+import android.util.Log
+import com.example.messenger.R
+import com.example.messenger.event.ErrorEvent
+import com.example.messenger.event.UserEvent
 import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
@@ -28,46 +31,48 @@ class LoadFriendsUseCase(
     private fun getFriendRelationListFromServer(userId: String) {
         disposables.add(
             userRepository.getFriendRelationListFromServer(userId)
-                .doOnSuccess {
-                    insertFriendRelationListToLocal(it)
-                    for (item in it) {
-                        item.id?.let { friendUid: String ->
-                            getFriendInfoFromServer(friendUid)
+                .subscribe(
+                    { friendRelations ->
+                        insertFriendRelationListToLocal(friendRelations)
+                        for (item in friendRelations) {
+                            getFriendInfoFromServer(item.id)
                         }
+                    },
+                    { error ->
+                        ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
+                        Log.d(this.javaClass.simpleName, error.message)
+                        getFriendRelationListFromLocal()
                     }
-                }
-                .doOnError {
-                    //TODO 스냅바로 실패 보여주기
-                    getFriendRelationListFromLocal()
-                }
-                .subscribe()
+                )
         )
     }
 
     private fun getFriendRelationListFromLocal() {
         disposables.add(
             userRepository.getFriendRelationListFromLocal()
-                .doOnSuccess {
-                    for (item in it) {
-                        item.id?.let { friendUid: String ->
-                            getFriendInfoFromLocal(friendUid)
+                .subscribe(
+                    { friendRelations ->
+                        for (item in friendRelations) {
+                            getFriendInfoFromLocal(item.id)
                         }
-                    }
-                }
-                .subscribe()
+                    },
+                    {}
+                )
         )
     }
 
     private fun getFriendInfoFromLocal(userId: String) {
         disposables.add(
             userRepository.getUserInfoFromLocal(userId)
-                .doOnSuccess {
-                    FriendEvent.invokeFriendInfo(it)
-                }
-                .doOnError {
-                    //TODO 스냅바로 실패
-                }
-                .subscribe()
+
+                .subscribe(
+                    { userInfo ->
+                        UserEvent.invokeFriendInfo(userInfo)
+                    },
+                    { error ->
+                        //TODO 스냅바로 실패
+                    }
+                )
         )
     }
 
@@ -81,15 +86,16 @@ class LoadFriendsUseCase(
     private fun getFriendInfoFromServer(userId: String) {
         disposables.add(
             userRepository.getUserInfoFromServer(userId)
-                .doOnSuccess {
-                    FriendEvent.invokeFriendInfo(it)
-                    insertFriendInfoToLocal(it)
-                }
-                .doOnError {
-                    //TODO 스냅바로 실패
-                    getFriendInfoFromLocal(userId)
-                }
-                .subscribe()
+                .subscribe(
+                    { userInfo ->
+                        UserEvent.invokeFriendInfo(userInfo)
+                        insertFriendInfoToLocal(userInfo)
+                    },
+                    { error ->
+                        ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
+                        getFriendInfoFromLocal(userId)
+                    }
+                )
         )
     }
 

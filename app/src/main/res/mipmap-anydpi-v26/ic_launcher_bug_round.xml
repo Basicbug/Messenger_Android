@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ ic_launcher_bug_round.xml 2020. 7. 5
+  ~
+  ~ Copyright 2020 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@color/ic_launcher_bug_background"/>
+    <foreground android:drawable="@drawable/ic_launcher_bug_foreground"/>
+</adaptive-icon>

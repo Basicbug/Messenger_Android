@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ dimens.xml 2020. 6. 29
+  ~
+  ~ Copyright 2020 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<resources>
+    <!--login-->
+    <dimen name="login_title_text_size">70sp</dimen>
+    <dimen name="login_button_height">50dp</dimen>
+
+</resources>

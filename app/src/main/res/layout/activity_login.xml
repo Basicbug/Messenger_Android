@@ -4,9 +4,19 @@
   ~ Copyright 2020 BasicBug. All rights Reserved.
   -->
 <layout>
+    <data>
+        <variable
+            name="loginActionHelper"
+            type="com.example.messenger.ui.login.LoginActivityHelper" />
+        <variable
+            name="loadingLoginViewModel"
+            type="com.example.messenger.ui.login.LoadingLoginViewModel" />
+    </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,29 +24,36 @@
             android:id="@+id/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:gravity="center_vertical|center_horizontal"
             android:text="@string/app_name"
-            android:textSize="70sp"
+            android:textSize="@dimen/login_title_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:visible="@{loadingLoginViewModel.loginPageVisible}"
+            app:layout_constraintBottom_toTopOf="@id/button_login"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
             android:id="@+id/button_login"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginBottom="150dp"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/login_button_height"
+            app:visible="@{loadingLoginViewModel.loginPageVisible}"
+            app:layout_constraintTop_toBottomOf="@id/app_name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:setManagerFromHelper="@{loginActionHelper}" />
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:visible="@{!loadingLoginViewModel.loginPageVisible}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <data>
-        <variable
-            name="loginActionHelper"
-            type="com.example.messenger.ui.login.LoginActivityHelper" />
-    </data>
 </layout>
