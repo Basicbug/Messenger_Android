@@ -3,7 +3,7 @@ package com.example.messenger.ui.chat.chatroom
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.base.BaseHelper
-import com.example.messenger.event.ChattingRoomEvent
+import com.example.messenger.event.ChatRoomEvent
 import com.example.messenger.ui.chat.chatroom.adapter.MessageRecyclerViewListener
 import com.example.messenger.usecase.LoadMessagesUseCase
 
@@ -23,7 +23,7 @@ class ChatRoomActivityHelper(
             )
         )
 
-        ChattingRoomEvent.notifySendMessageRelay
+        ChatRoomEvent.notifySendMessageRelay
             .subscribe {
 
                 if (it == "sender") {

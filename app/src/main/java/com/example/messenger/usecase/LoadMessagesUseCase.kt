@@ -1,6 +1,6 @@
 package com.example.messenger.usecase
 
-import com.example.messenger.event.ChattingRoomEvent
+import com.example.messenger.event.ChatRoomEvent
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.Message
 import io.reactivex.disposables.CompositeDisposable
@@ -21,7 +21,7 @@ class LoadMessagesUseCase(
         disposables.add(
             messageRepositoryImpl.getLatestFiftyMessages(roomId, from)
                 .doOnSuccess {
-                    ChattingRoomEvent.invokeMessageList(it.reversed())
+                    ChatRoomEvent.invokeMessageList(it.reversed())
                 }
                 .subscribe()
         )

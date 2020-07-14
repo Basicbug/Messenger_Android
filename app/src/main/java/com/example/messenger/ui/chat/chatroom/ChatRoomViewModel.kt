@@ -3,7 +3,7 @@ package com.example.messenger.ui.chat.chatroom
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.example.messenger.base.BaseViewModel
-import com.example.messenger.event.ChattingRoomEvent
+import com.example.messenger.event.ChatRoomEvent
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.type.MessageType
@@ -57,17 +57,17 @@ class ChatRoomViewModel(
 
     private fun subscribeEvent() {
         disposables.add(
-            ChattingRoomEvent.messageSubject
+            ChatRoomEvent.messageSubject
                 .subscribe {
                     messageList.value?.add(it)
                     messageList.postValue(messageList.value)
 
-                    ChattingRoomEvent.notifySendMessage(it.senderUid)
+                    ChatRoomEvent.notifySendMessage(it.senderUid)
                 }
         )
 
         disposables.add(
-            ChattingRoomEvent.messageListSubject
+            ChatRoomEvent.messageListSubject
                 .debounce(NO_DUPLICATION_DEBOUNCE_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
                     messageList.value?.addAll(0, it)

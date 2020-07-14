@@ -8,7 +8,7 @@
 package com.example.messenger.usecase
 
 import android.util.Log
-import com.example.messenger.event.ChattingRoomEvent
+import com.example.messenger.event.ChatRoomEvent
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.tools.convertJsonStringToMessage
@@ -47,6 +47,6 @@ class ReceiveMessageUseCase(
         disposables.add(
             messageRepositoryImpl.insertMessageToLocal(msg).subscribe()
         )
-        ChattingRoomEvent.invokeMessage(msg)
+        ChatRoomEvent.invokeMessage(msg)
     }
 }

@@ -7,7 +7,7 @@ import io.reactivex.subjects.PublishSubject
 /**
  * @author bsgreentea
  */
-object ChattingRoomEvent {
+object ChatRoomEvent {
     val messageSubject = PublishSubject.create<Message>()
     fun invokeMessage(message: Message) {
         messageSubject.onNext(message)
