@@ -32,7 +32,7 @@ class MainHolderActivity : BaseActivity() {
     private fun observeEvent() {
         disposables.add(
             ErrorEvent.errorMessageSubject.subscribe {
-                SnackbarHelper.show(this, it)
+                SnackbarHelper.show(this, it, it)
             }
         )
     }
