@@ -19,19 +19,25 @@ import com.google.android.material.snackbar.Snackbar
  */
 
 object SnackbarHelper {
-    fun show(activity: Activity, @StringRes stringResId: Int) {
-        show(activity, AppResources.getStringResId(stringResId))
+    private var currentCallTag = ""
+
+    fun show(activity: Activity, @StringRes stringResId: Int, callTag: String) {
+        show(activity, AppResources.getStringResId(stringResId), callTag)
     }
 
-    fun show(activity: Activity, snackbarMessage: String) {
+    fun show(activity: Activity, snackbarMessage: String, callTag: String) {
         val decorView = getDecorView(activity)
         val anchorView = getAnchorView(decorView)
-        anchorView?.let {
-            val snackbar = Snackbar.make(it, snackbarMessage, Snackbar.LENGTH_INDEFINITE)
-            snackbar.setAction(R.string.confirm) {
-                snackbar.dismiss()
+        if (currentCallTag != callTag) {
+            currentCallTag = callTag
+            anchorView?.let {
+                val snackbar = Snackbar.make(it, snackbarMessage, Snackbar.LENGTH_INDEFINITE)
+                snackbar.setAction(R.string.confirm) {
+                    snackbar.dismiss()
+                    currentCallTag = ""
+                }
+                snackbar.show()
             }
-            snackbar.show()
         }
     }
 
