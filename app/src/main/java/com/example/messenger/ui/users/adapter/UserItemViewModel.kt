@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.friends.adapter
+package com.example.messenger.ui.users.adapter
 
 import androidx.databinding.Bindable
 import com.example.messenger.BR
@@ -16,7 +16,7 @@ import com.example.messenger.base.BaseItemViewModel
  * @author MyeongKi
  */
 
-class FriendItemViewModel : BaseItemViewModel() {
+open class UserItemViewModel : BaseItemViewModel() {
     @get:Bindable
     var name = ""
         set(value) {
@@ -31,5 +31,5 @@ class FriendItemViewModel : BaseItemViewModel() {
             notifyPropertyChanged(BR.stateMessage)
         }
 
-    override fun getLayoutRes(): Int = R.layout.item_friend
+    override fun getLayoutRes(): Int = R.layout.item_user
 }
