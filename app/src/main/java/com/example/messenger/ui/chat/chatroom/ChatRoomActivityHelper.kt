@@ -3,7 +3,6 @@ package com.example.messenger.ui.chat.chatroom
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.base.BaseHelper
-import com.example.messenger.event.ChatRoomEvent
 import com.example.messenger.ui.chat.chatroom.adapter.MessageRecyclerViewListener
 import com.example.messenger.usecase.LoadMessagesUseCase
 
@@ -22,20 +21,5 @@ class ChatRoomActivityHelper(
                 roomId
             )
         )
-
-        ChatRoomEvent.notifySendMessageRelay
-            .subscribe {
-
-                if (it == "sender") {
-                    view.adapter?.let { adapter ->
-                        (adapter.itemCount - 1).takeIf { itemCount ->
-                            itemCount > 0
-                        }?.let { bottom ->
-                            view.scrollToPosition(bottom)
-                        }
-                    }
-                }
-
-            }
     }
 }

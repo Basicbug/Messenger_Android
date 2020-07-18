@@ -39,7 +39,7 @@ class ChatRoomViewModel(
     }
 
     fun sendMessageToServer() {
-        testReceivedMessage(messageToSend.get().toString())
+        testReceivedMessage()
         sendMessageUseCase.sendMessage(
             Message(
                 "a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e",
@@ -61,8 +61,6 @@ class ChatRoomViewModel(
                 .subscribe {
                     messageList.value?.add(it)
                     messageList.postValue(messageList.value)
-
-                    ChatRoomEvent.notifySendMessage(it.senderUid)
                 }
         )
 
@@ -75,15 +73,15 @@ class ChatRoomViewModel(
                 }
         )
 //        receiveMessageUseCase.subscribeChattingRoom("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e")
-//        receiveMessageUseCase.subscribeChattingRoom("1")
+        receiveMessageUseCase.subscribeChattingRoom("1")
     }
 
     private var cnt = 201
-    private fun testReceivedMessage(text: String) {
+    private fun testReceivedMessage() {
 
         val msg = Message(
-            "1", "sender", "receiver",
-            text, cnt++.toString(), MessageType.MESSAGE
+            "senderUid", "test", "1",
+            "senderUid", cnt++.toString(), MessageType.MESSAGE
         )
 
         receiveMessageUseCase.testReceiveMessage(msg)

@@ -20,7 +20,10 @@ class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
         private const val SENT = 2
     }
 
+    var isInitiated: Int = 0
+
     override fun getItemViewType(position: Int): Int {
+        @Suppress("UNUSED_VARIABLE")
         val message: Message = this.getItem(position)
 
 //        if(message.senderName == ) return SENT
@@ -56,4 +59,6 @@ class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
             holder.bind(getItem(position))
         }
     }
+
+    fun isSenderIsMe(): Boolean = this.currentList.last().senderUid == "senderUid"
 }

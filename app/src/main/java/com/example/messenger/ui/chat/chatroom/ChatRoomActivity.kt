@@ -3,6 +3,7 @@ package com.example.messenger.ui.chat.chatroom
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
 import com.example.messenger.base.BaseSocketActivity
 import com.example.messenger.databinding.ActivityChatRoomBinding
@@ -21,6 +22,15 @@ class ChatRoomActivity : BaseSocketActivity() {
         super.onCreate(savedInstanceState)
 
         val messageAdapter = MessageAdapter()
+        messageAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                if (messageAdapter.isInitiated <= 1) {
+                    messageAdapter.isInitiated++
+                    binding.recyclerview.layoutManager?.scrollToPosition(messageAdapter.itemCount - 1)
+                } else if (itemCount == 1 && messageAdapter.isSenderIsMe())
+                    binding.recyclerview.layoutManager?.scrollToPosition(messageAdapter.itemCount - 1)
+            }
+        })
 
         chatRoomViewModel =
             ChatRoomViewModelInjector.provideSampleViewModelFactory("1")
@@ -42,7 +52,7 @@ class ChatRoomActivity : BaseSocketActivity() {
 
         for (i in 1..200) {
             val msg = Message(
-                "1", i.toString(), "1", "sender", i.toString()
+                "1", i.toString(), "1", "senderUid", i.toString()
             )
             chatRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
         }

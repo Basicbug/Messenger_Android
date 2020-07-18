@@ -1,7 +1,6 @@
 package com.example.messenger.event
 
 import com.example.messenger.repository.model.chat.Message
-import com.jakewharton.rxrelay3.PublishRelay
 import io.reactivex.subjects.PublishSubject
 
 /**
@@ -16,10 +15,5 @@ object ChatRoomEvent {
     val messageListSubject = PublishSubject.create<List<Message>>()
     fun invokeMessageList(messages: List<Message>) {
         messageListSubject.onNext(messages)
-    }
-
-    val notifySendMessageRelay: PublishRelay<String> = PublishRelay.create()
-    fun notifySendMessage(motion: String) {
-        notifySendMessageRelay.accept(motion)
     }
 }
