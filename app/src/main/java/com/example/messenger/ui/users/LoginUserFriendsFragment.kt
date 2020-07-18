@@ -13,23 +13,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.observe
 import com.example.messenger.R
 import com.example.messenger.base.BaseFragment
-import com.example.messenger.databinding.FragmentUsersBinding
+import com.example.messenger.databinding.FragmentLoginUserFriendsBinding
 import com.example.messenger.manager.NaverLoginManager
-import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.ui.users.adapter.UsersAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.subjects.Subject
 
 
 /**
  * @author MyeongKi
  */
 
-class UsersFragment : BaseFragment() {
-    private lateinit var binding: FragmentUsersBinding
+class LoginUserFriendsFragment : BaseFragment() {
+    private lateinit var binding: FragmentLoginUserFriendsBinding
     private lateinit var friendsViewModel: FriendsViewModel
     private lateinit var loginUserViewModel: LoginUserViewModel
 
@@ -40,7 +37,7 @@ class UsersFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_users, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login_user_friends, container, false)
         binding.lifecycleOwner = this
 
         initViewModel()
