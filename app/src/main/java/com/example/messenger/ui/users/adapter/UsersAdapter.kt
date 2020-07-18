@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.friends.adapter
+package com.example.messenger.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -18,19 +18,19 @@ import com.example.messenger.repository.model.user.UserInfo
  * @author MyeongKi
  */
 
-class FriendAdapter : ListAdapter<UserInfo, FriendViewHolder>(
-    FriendDiffCallback()
+class UsersAdapter : ListAdapter<UserInfo, UserViewHolder>(
+    UsersDiffCallback()
 ) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {
-        return FriendViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+        return UserViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_friend, parent, false
+                R.layout.item_user, parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: FriendViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }

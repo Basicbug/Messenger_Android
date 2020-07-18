@@ -18,6 +18,7 @@ import io.reactivex.subjects.PublishSubject
 object LoginEvent {
     val tokenSubject = PublishSubject.create<Token>()
     val loginResultSubject = PublishSubject.create<LoginResultType>()
+
     fun invokeToken(token: Token) {
         tokenSubject.onNext(token)
     }
@@ -25,4 +26,6 @@ object LoginEvent {
     fun invokeLoginResult(loginResult: LoginResultType) {
         loginResultSubject.onNext(loginResult)
     }
+
+
 }

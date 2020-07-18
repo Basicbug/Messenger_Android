@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ fragment_friend_list.xml 2020. 4. 22
+  ~ fragment_login_user_friends.xml 2020. 4. 22
   ~
   ~ Copyright 2020 BasicBug. All rights Reserved.
   -->
 <layout>
     <data>
         <variable
-            name="friendListViewModel"
-            type="com.example.messenger.ui.friends.FriendListViewModel" />
+            name="friendsViewModel"
+            type="com.example.messenger.ui.users.FriendsViewModel" />
+        <variable
+            name="loginUserViewModel"
+            type="com.example.messenger.ui.users.LoginUserViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,6 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/login_user_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/friends"
+            layout = "@layout/item_user"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/friends"
@@ -22,7 +32,7 @@
             android:layout_width="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_user_layout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 

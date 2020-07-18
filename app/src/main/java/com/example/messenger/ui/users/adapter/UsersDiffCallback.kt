@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.ui.friends.adapter
+package com.example.messenger.ui.users.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.messenger.repository.model.user.UserInfo
@@ -14,7 +14,7 @@ import com.example.messenger.repository.model.user.UserInfo
  * @author MyeongKi
  */
 
-class FriendDiffCallback : DiffUtil.ItemCallback<UserInfo>() {
+class UsersDiffCallback : DiffUtil.ItemCallback<UserInfo>() {
     override fun areItemsTheSame(oldItem: UserInfo, newItem: UserInfo): Boolean {
         return oldItem.id == newItem.id
     }

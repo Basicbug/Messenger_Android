@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ item_friend.xml 2020. 4. 22
+  ~ item_user.xml 2020. 4. 22
   ~
   ~ Copyright 2020 BasicBug. All rights Reserved.
   -->
@@ -7,54 +7,54 @@
 <layout>
     <data>
         <variable
-            name="friendItemViewModel"
-            type="com.example.messenger.ui.friends.adapter.FriendItemViewModel" />
+            name="userItemViewModel"
+            type="com.example.messenger.ui.users.adapter.UserItemViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/friend_layout_height">
+        android:layout_height="@dimen/user_layout_height">
 
         <ImageView
-            android:id="@+id/image_friend"
+            android:id="@+id/profile_image"
             android:layout_width="@dimen/profile_image_size"
             android:layout_height="@dimen/profile_image_size"
             android:padding="@dimen/profile_image_padding"
-            app:layout_constraintEnd_toStartOf="@+id/text_friend_name"
+            app:layout_constraintEnd_toStartOf="@+id/user_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:src="@mipmap/ic_launcher_bug" />
 
         <TextView
-            android:id="@+id/text_friend_name"
+            android:id="@+id/user_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center_vertical"
-            android:text="@{friendItemViewModel.name}"
+            android:text="@{userItemViewModel.name}"
             android:layout_marginStart="@dimen/default_text_start_margin"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/text_friend_state_message"
+            app:layout_constraintBottom_toTopOf="@id/user_state_message"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_friend"
+            app:layout_constraintStart_toEndOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text = "testName"/>
 
         <TextView
-            android:id="@+id/text_friend_state_message"
+            android:id="@+id/user_state_message"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="@{friendItemViewModel.stateMessage}"
+            android:text="@{userItemViewModel.stateMessage}"
             android:layout_marginStart="@dimen/default_text_start_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/image_friend"
-            app:layout_constraintTop_toBottomOf="@id/text_friend_name"
+            app:layout_constraintStart_toEndOf="@id/profile_image"
+            app:layout_constraintTop_toBottomOf="@id/user_name"
             tools:text = "test stateMessage"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

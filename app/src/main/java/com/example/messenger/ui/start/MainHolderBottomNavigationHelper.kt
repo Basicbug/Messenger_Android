@@ -12,7 +12,7 @@ import com.example.messenger.R
 import com.example.messenger.base.BaseActivity
 import com.example.messenger.base.BaseHelper
 import com.example.messenger.ui.chat.chatroomlist.ChatRoomListFragment
-import com.example.messenger.ui.friends.FriendListFragment
+import com.example.messenger.ui.users.LoginUserFriendsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
@@ -22,7 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainHolderBottomNavigationHelper(private val activity: BaseActivity):BaseHelper{
 
     init {
-        activity.replaceFragment(FriendListFragment::class.java, R.id.content, null)
+        activity.replaceFragment(LoginUserFriendsFragment::class.java, R.id.content, null)
     }
 
     override fun customizePropertiesView(view: View) {
@@ -30,7 +30,7 @@ class MainHolderBottomNavigationHelper(private val activity: BaseActivity):BaseH
         (view as BottomNavigationView).setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.friends_item -> {
-                    activity.replaceFragment(FriendListFragment::class.java, R.id.content, null)
+                    activity.replaceFragment(LoginUserFriendsFragment::class.java, R.id.content, null)
                     true
                 }
                 R.id.chatting_rooms_item -> {
