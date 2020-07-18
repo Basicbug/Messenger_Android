@@ -16,7 +16,7 @@ import com.example.messenger.base.BaseItemViewModel
  * @author MyeongKi
  */
 
-open class UserItemViewModel : BaseItemViewModel() {
+class UserItemViewModel : BaseItemViewModel() {
     @get:Bindable
     var name = ""
         set(value) {
