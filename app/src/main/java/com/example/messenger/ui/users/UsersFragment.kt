@@ -17,6 +17,7 @@ import androidx.lifecycle.observe
 import com.example.messenger.R
 import com.example.messenger.base.BaseFragment
 import com.example.messenger.databinding.FragmentUsersBinding
+import com.example.messenger.manager.NaverLoginManager
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.ui.users.adapter.UsersAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -76,10 +77,10 @@ class UsersFragment : BaseFragment() {
             friendsViewModel.friendsObservable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                    {friends->
+                    { friends ->
                         adapter.submitList(friends)
                     },
-                    {error->
+                    { error ->
                         Log.e(this.javaClass.simpleName, error.message ?: "")
                     })
         )
@@ -87,7 +88,7 @@ class UsersFragment : BaseFragment() {
     }
 
     private fun executeUseCase() {
-        friendsViewModel.loadFriendsUseCase.loadFriends("ChoMK")
+        friendsViewModel.loadFriendsUseCase.loadFriends(NaverLoginManager.loginUserInfo?.id ?: "")
         loginUserViewModel.loadLoginUserUseCase.loadLoginUserInfo()
     }
 }
