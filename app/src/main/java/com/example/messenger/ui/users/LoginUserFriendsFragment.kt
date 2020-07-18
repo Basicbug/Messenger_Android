@@ -60,9 +60,11 @@ class LoginUserFriendsFragment : BaseFragment() {
     }
 
     private fun injectViewModel() {
-        binding.friendsViewModel = friendsViewModel
-        binding.loginUserViewModel = loginUserViewModel
-        binding.loginUserLayout.userItemViewModel = loginUserViewModel.getItemViewModel()
+        binding.apply {
+            friendsViewModel = friendsViewModel
+            loginUserViewModel = loginUserViewModel
+            loginUserLayout.userItemViewModel = loginUserViewModel.getItemViewModel()
+        }
     }
 
     private fun injectAdapter() {
