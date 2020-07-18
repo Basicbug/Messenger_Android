@@ -16,6 +16,7 @@ import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.ui.users.adapter.UserItemViewModel
 import com.example.messenger.usecase.LoadFriendsUseCase
+import io.reactivex.subjects.PublishSubject
 
 /**
  * @author MyeongKi
@@ -27,7 +28,7 @@ class FriendsViewModel(
 ) : BaseViewModel() {
 
     val loadFriendsUseCase = LoadFriendsUseCase(userRepository, disposables)
-    val friendList = MutableLiveData<MutableList<UserInfo>>()
+    val friendsObservable = PublishSubject.create<MutableList<UserInfo>>()
     private val friendTable = ArrayMap<String, UserInfo>()
 
     init {
@@ -38,7 +39,7 @@ class FriendsViewModel(
         disposables.add(
             UserEvent.friendInfoSubject.subscribe {
                 friendTable[it.id] = it
-                friendList.postValue(friendTable.values.toMutableList())
+                friendsObservable.onNext(friendTable.values.toMutableList())
             }
         )
     }

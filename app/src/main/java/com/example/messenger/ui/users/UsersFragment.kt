@@ -8,6 +8,7 @@
 package com.example.messenger.ui.users
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,8 @@ import com.example.messenger.base.BaseFragment
 import com.example.messenger.databinding.FragmentUsersBinding
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.ui.users.adapter.UsersAdapter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.subjects.Subject
 
 
 /**
@@ -28,6 +31,7 @@ class UsersFragment : BaseFragment() {
     private lateinit var binding: FragmentUsersBinding
     private lateinit var friendsViewModel: FriendsViewModel
     private lateinit var loginUserViewModel: LoginUserViewModel
+
     private val friendAdapter = UsersAdapter()
 
     override fun onCreateView(
@@ -46,7 +50,8 @@ class UsersFragment : BaseFragment() {
 
         return binding.root
     }
-    private fun initViewModel(){
+
+    private fun initViewModel() {
         friendsViewModel =
             UserViewModelInjector.provideUsersViewModelFactory()
                 .create(FriendsViewModel::class.java)
@@ -55,21 +60,33 @@ class UsersFragment : BaseFragment() {
                 .create(LoginUserViewModel::class.java)
 
     }
-    private fun injectViewModel(){
+
+    private fun injectViewModel() {
         binding.friendsViewModel = friendsViewModel
         binding.loginUserViewModel = loginUserViewModel
         binding.loginUserLayout.userItemViewModel = loginUserViewModel.getItemViewModel()
     }
-    private fun injectAdapter(){
+
+    private fun injectAdapter() {
         binding.friends.adapter = friendAdapter
     }
+
     private fun subscribeFriendInfoList(adapter: UsersAdapter) {
-        friendsViewModel.friendList.observe(viewLifecycleOwner) { result: MutableList<UserInfo> ->
-            adapter.submitList(result)
-        }
+        disposables.add(
+            friendsViewModel.friendsObservable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {friends->
+                        adapter.submitList(friends)
+                    },
+                    {error->
+                        Log.e(this.javaClass.simpleName, error.message ?: "")
+                    })
+        )
+
     }
 
-    private fun executeUseCase(){
+    private fun executeUseCase() {
         friendsViewModel.loadFriendsUseCase.loadFriends("ChoMK")
         loginUserViewModel.loadLoginUserUseCase.loadLoginUserInfo()
     }

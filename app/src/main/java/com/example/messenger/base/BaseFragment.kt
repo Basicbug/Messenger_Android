@@ -12,6 +12,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.messenger.tools.NavigationDelegate
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * @author MyeongKi
@@ -19,6 +20,7 @@ import com.example.messenger.tools.NavigationDelegate
 
 abstract class BaseFragment : Fragment() {
     lateinit var navigationDelegate: NavigationDelegate
+    protected val disposables: CompositeDisposable = CompositeDisposable()
 
     fun replaceFragment(target: Class<out Fragment>, containerId: Int, arguments: Bundle?) {
         if (!this::navigationDelegate.isInitialized) return
@@ -36,5 +38,11 @@ abstract class BaseFragment : Fragment() {
             intent.putExtras(extras)
         }
         startActivity(intent)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!disposables.isDisposed){
+            disposables.dispose()
+        }
     }
 }
