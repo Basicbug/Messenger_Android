@@ -11,7 +11,6 @@ import android.util.Log
 import com.example.messenger.R
 import com.example.messenger.event.ErrorEvent
 import com.example.messenger.event.UserEvent
-import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import io.reactivex.disposables.CompositeDisposable
@@ -25,49 +24,36 @@ class LoadFriendsUseCase(
     private val disposables: CompositeDisposable
 ) {
     fun loadFriends(userId: String) {
-        getFriendRelationListFromServer(userId)
+        getFriendsFromServer(userId)
     }
 
-    private fun getFriendRelationListFromServer(userId: String) {
+    private fun getFriendsFromServer(userId: String) {
         disposables.add(
-            userRepository.getFriendRelationListFromServer(userId)
+            userRepository.getFriendsFromServer(userId)
                 .subscribe(
-                    { friendRelations ->
-                        insertFriendRelationListToLocal(friendRelations)
-                        for (item in friendRelations) {
-                            getFriendInfoFromServer(item.id)
+                    { friends ->
+                        friends.map {
+                            it.isFriend = true
                         }
+                        //확인 필
+                        UserEvent.invokeFriendsInfo(friends)
+                        insertFriendsInfoToLocal(friends)
                     },
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
-                        Log.d(this.javaClass.simpleName, error.message)
-                        getFriendRelationListFromLocal()
+                        Log.d(this.javaClass.simpleName, error.message?:"")
+                        getFriendsInfoFromLocal()
                     }
                 )
         )
     }
 
-    private fun getFriendRelationListFromLocal() {
+    private fun getFriendsInfoFromLocal() {
         disposables.add(
-            userRepository.getFriendRelationListFromLocal()
-                .subscribe(
-                    { friendRelations ->
-                        for (item in friendRelations) {
-                            getFriendInfoFromLocal(item.id)
-                        }
-                    },
-                    {}
-                )
-        )
-    }
-
-    private fun getFriendInfoFromLocal(userId: String) {
-        disposables.add(
-            userRepository.getUserInfoFromLocal(userId)
-
+            userRepository.getFriendsInfoFromLocal()
                 .subscribe(
                     { userInfo ->
-                        UserEvent.invokeFriendInfo(userInfo)
+                        UserEvent.invokeFriendsInfo(userInfo as ArrayList<UserInfo>)
                     },
                     { error ->
                         //TODO 스냅바로 실패
@@ -76,37 +62,11 @@ class LoadFriendsUseCase(
         )
     }
 
-    private fun insertFriendRelationListToLocal(items: ArrayList<FriendRelation>) {
+    private fun insertFriendsInfoToLocal(friends:List<UserInfo>) {
         disposables.add(
-            userRepository.insertFriendRelationListToLocal(items)
-                .subscribe()
-        )
-    }
-
-    private fun getFriendInfoFromServer(userId: String) {
-        disposables.add(
-            userRepository.getUserInfoFromServer(userId)
-                .subscribe(
-                    { userInfo ->
-                        UserEvent.invokeFriendInfo(userInfo)
-                        insertFriendInfoToLocal(userInfo)
-                    },
-                    { error ->
-                        ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
-                        getFriendInfoFromLocal(userId)
-                    }
-                )
-        )
-    }
-
-    private fun insertFriendInfoToLocal(item: UserInfo) {
-        disposables.add(
-            userRepository.insertUserInfoToLocal(item)
+            userRepository.insertUsersInfoToLocal(friends)
                 .subscribe()
         )
     }
 
 }
-
-//TODO 매 userInfo 별로 이벤트를 발생하기 때문에 recyclerview notify 최적화 필요
-//TODO 뷰를 갱신하는 경우마다 api를 찌르기 때문에 이에 대한 최적화가 필요

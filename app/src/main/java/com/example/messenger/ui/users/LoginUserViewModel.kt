@@ -35,7 +35,7 @@ class LoginUserViewModel(
         disposables.add(
             UserEvent.loginUserInfoSubject.subscribe {
                 userItemViewModel.name = it.name ?: ""
-                userItemViewModel.stateMessage = it.stateMessage ?: ""
+                userItemViewModel.stateMessage = it.status ?: ""
             }
         )
     }

@@ -37,9 +37,8 @@ class FriendsViewModel(
 
     private fun subscribeEvent() {
         disposables.add(
-            UserEvent.friendInfoSubject.subscribe {
-                friendTable[it.id] = it
-                friendsObservable.onNext(friendTable.values.toMutableList())
+            UserEvent.friendsInfoSubject.subscribe {
+                friendsObservable.onNext(it.toMutableList())
             }
         )
     }

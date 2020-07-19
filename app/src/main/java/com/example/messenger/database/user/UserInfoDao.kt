@@ -25,12 +25,14 @@ interface UserInfoDao {
     fun insertUserInfo(userInfo: UserInfo?): Completable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserInfoList(userInfoList: ArrayList<UserInfo>?): Completable
+    fun insertUsersInfo(userInfoList: List<UserInfo>?): Completable
 
     @Query("SELECT * FROM UserInfo")
-    fun getUserInfoList(): Single<List<UserInfo>>
+    fun getUsersInfo(): Single<List<UserInfo>>
 
     @Query("SELECT * FROM UserInfo WHERE uid LIKE :userId")
     fun getUserInfo(userId: String): Single<UserInfo>
 
+    @Query("SELECT * FROM UserInfo WHERE isFriend == 1")
+    fun getFriendsInfo(): Single<List<UserInfo>>
 }

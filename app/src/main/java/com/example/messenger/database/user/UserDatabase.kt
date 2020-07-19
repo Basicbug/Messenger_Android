@@ -11,17 +11,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.messenger.app.AppResources
-import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 
 /**
  * @author MyeongKi
  */
 
-@Database(entities = [UserInfo::class, FriendRelation::class], version = 1, exportSchema = false)
+@Database(entities = [UserInfo::class], version = 1, exportSchema = false)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun userInfoDao(): UserInfoDao
-    abstract fun friendRelationDao(): FriendRelationDao
 
     companion object {
         private const val DB_NAME = "user.db"

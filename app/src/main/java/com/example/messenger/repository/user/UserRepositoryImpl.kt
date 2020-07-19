@@ -9,9 +9,7 @@ package com.example.messenger.repository.user
 
 import com.example.messenger.database.user.UserDatabase
 import com.example.messenger.network.ApiHelper
-import com.example.messenger.network.service.user.FriendRelationService
 import com.example.messenger.network.service.user.UserInfoService
-import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -21,9 +19,8 @@ import io.reactivex.schedulers.Schedulers
 /**
  * @author MyeongKi
  */
-class UserRepositoryImpl : UserInfoRepository, FriendRelationRepository {
+class UserRepositoryImpl : UserInfoRepository {
     private val userInfoDao = UserDatabase.getDatabase().userInfoDao()
-    private val friendRelationDao = UserDatabase.getDatabase().friendRelationDao()
 
 
     companion object {
@@ -47,6 +44,7 @@ class UserRepositoryImpl : UserInfoRepository, FriendRelationRepository {
             .map { it.data }
 
     }
+
     override fun getLoginUserInfoFromServer(): Single<UserInfo> {
         return ApiHelper
             .createApiByService(UserInfoService::class)
@@ -56,9 +54,17 @@ class UserRepositoryImpl : UserInfoRepository, FriendRelationRepository {
             .map { it.data }
 
     }
+
     override fun getUserInfoFromLocal(userId: String): Single<UserInfo> {
         return userInfoDao
             .getUserInfo(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getFriendsInfoFromLocal(): Single<List<UserInfo>> {
+        return userInfoDao
+            .getFriendsInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -70,36 +76,21 @@ class UserRepositoryImpl : UserInfoRepository, FriendRelationRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getFriendRelationListFromServer(userId: String): Single<ArrayList<FriendRelation>> {
+    override fun insertUsersInfoToLocal(items: List<UserInfo>): Completable {
+        return userInfoDao
+            .insertUsersInfo(items)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getFriendsFromServer(userId: String): Single<ArrayList<UserInfo>> {
         return ApiHelper
-            .createApiByService(FriendRelationService::class)
-            .getFriendRelationList(userId)
+            .createApiByService(UserInfoService::class)
+            .getFriendsInfo(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { it.dataList }
 
     }
-
-    override fun insertFriendRelationListToLocal(items: ArrayList<FriendRelation>): Completable {
-        return friendRelationDao
-            .insertFriendRelationList(items)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
-
-    override fun getFriendRelationListFromLocal(): Single<List<FriendRelation>> {
-        return friendRelationDao
-            .getFriendRelationList()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
-
-    override fun deleteFriendRelationToLocal(item: FriendRelation): Completable {
-        return friendRelationDao
-            .deleteFriendRelation(item)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
-
 
 }

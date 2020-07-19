@@ -63,7 +63,7 @@ class LoginUserFriendsFragment : BaseFragment() {
         binding.apply {
             friendsViewModel = friendsViewModel
             loginUserViewModel = loginUserViewModel
-            loginUserLayout.userItemViewModel = loginUserViewModel.getItemViewModel()
+            loginUserLayout.userItemViewModel = loginUserViewModel?.getItemViewModel()
         }
     }
 
@@ -87,7 +87,7 @@ class LoginUserFriendsFragment : BaseFragment() {
     }
 
     private fun executeUseCase() {
-        friendsViewModel.loadFriendsUseCase.loadFriends(NaverLoginManager.loginUserInfo?.id ?: "")
+        friendsViewModel.loadFriendsUseCase.loadFriends(NaverLoginManager.loginUserInfo?.uid ?: "")
         loginUserViewModel.loadLoginUserUseCase.loadLoginUserInfo()
     }
 }

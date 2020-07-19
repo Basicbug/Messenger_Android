@@ -21,17 +21,25 @@ data class UserInfo(
     @PrimaryKey
     @SerializedName("id")
     override var id: String = "",
+
     @SerializedName("name")
     var name: String? ="",
+
     @SerializedName("imageUrl")
     var imageUrl: String? = "",
-    @SerializedName("stateMessage")
-    var stateMessage: String? = "",
+
+    @SerializedName("status")
+    var status: String? = "",
+
     @SerializedName("uid")
     override var uid: String? = "",
+
     @SerializedName("roles")
     @Ignore
     val roles: List<String> = Collections.emptyList(),
+
     @SerializedName("provider")
-    var provider: String? = ""
+    var provider: String? = "",
+
+    var isFriend:Boolean = false
  ):User
