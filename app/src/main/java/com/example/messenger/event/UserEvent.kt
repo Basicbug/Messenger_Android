@@ -7,6 +7,7 @@
 
 package com.example.messenger.event
 
+import com.example.messenger.manager.NaverLoginManager
 import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.subjects.PublishSubject
 
@@ -23,6 +24,7 @@ object UserEvent {
     }
 
     fun invokeLoginUserInfo(loginUserInfo: UserInfo) {
+        NaverLoginManager.loginUserInfo = loginUserInfo
         loginUserInfoSubject.onNext(loginUserInfo)
     }
 }
