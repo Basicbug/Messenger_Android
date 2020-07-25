@@ -10,6 +10,7 @@ package com.example.messenger.usecase
 import android.util.Log
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.Message
+import com.example.messenger.tools.errorLog
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -27,7 +28,9 @@ class SendMessageUseCase(
         disposables.add(
             messageRepositoryImpl.sendMessageToSocketServer(msg).subscribe(
                 {},//TODO 여기에는 성공시 이후 시나리오
-                { err -> Log.e(this.javaClass.simpleName, err.toString()) }
+                { error ->
+                    errorLog(this, error)
+                }
             )
         )
     }

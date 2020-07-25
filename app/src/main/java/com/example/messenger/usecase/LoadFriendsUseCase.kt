@@ -14,6 +14,7 @@ import com.example.messenger.event.UserEvent
 import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
+import com.example.messenger.tools.errorLog
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -40,8 +41,8 @@ class LoadFriendsUseCase(
                     },
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
-                        Log.d(this.javaClass.simpleName, error.message)
                         getFriendRelationListFromLocal()
+                        errorLog(this, error)
                     }
                 )
         )
@@ -56,7 +57,9 @@ class LoadFriendsUseCase(
                             getFriendInfoFromLocal(item.id)
                         }
                     },
-                    {}
+                    { error ->
+                        errorLog(this, error)
+                    }
                 )
         )
     }
@@ -70,7 +73,7 @@ class LoadFriendsUseCase(
                         UserEvent.invokeFriendInfo(userInfo)
                     },
                     { error ->
-                        //TODO 스냅바로 실패
+                        errorLog(this, error)
                     }
                 )
         )
@@ -94,6 +97,7 @@ class LoadFriendsUseCase(
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
                         getFriendInfoFromLocal(userId)
+                        errorLog(this, error)
                     }
                 )
         )
