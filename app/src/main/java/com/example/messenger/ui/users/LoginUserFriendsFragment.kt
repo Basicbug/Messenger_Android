@@ -17,6 +17,7 @@ import com.example.messenger.R
 import com.example.messenger.base.BaseFragment
 import com.example.messenger.databinding.FragmentLoginUserFriendsBinding
 import com.example.messenger.manager.NaverLoginManager
+import com.example.messenger.tools.errorLog
 import com.example.messenger.ui.users.adapter.UsersAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -80,7 +81,7 @@ class LoginUserFriendsFragment : BaseFragment() {
                         adapter.submitList(friends)
                     },
                     { error ->
-                        Log.e(this.javaClass.simpleName, error.message ?: "")
+                        errorLog(this, error)
                     })
         )
 

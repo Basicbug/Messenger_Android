@@ -13,6 +13,7 @@ import com.example.messenger.manager.PreferenceManager
 import com.example.messenger.repository.login.LoginRepositoryImpl
 import com.example.messenger.repository.model.login.JwtToken
 import com.example.messenger.repository.model.login.Token
+import com.example.messenger.tools.errorLog
 import com.example.messenger.type.LoginResultType
 import io.reactivex.disposables.CompositeDisposable
 
@@ -35,8 +36,8 @@ class LoginUseCase(
                         })
                     },
                     { error ->
-                        Log.e(this.javaClass.simpleName, error.message ?: "")
                         LoginEvent.invokeLoginResult(LoginResultType.FAIL)
+                        errorLog(this, error)
                     })
         )
     }

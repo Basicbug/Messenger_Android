@@ -7,6 +7,7 @@
 
 package com.example.messenger.usecase
 
+import android.util.Log
 import com.example.messenger.R
 import com.example.messenger.event.ChatEvent
 import com.example.messenger.event.ErrorEvent
@@ -14,6 +15,7 @@ import com.example.messenger.repository.chat.ChatRoomRepositoryImpl
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.ChatRoom
 import com.example.messenger.repository.model.chat.Message
+import com.example.messenger.tools.errorLog
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -42,6 +44,7 @@ class LoadChatRoomListUseCase(
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
                         getChatRoomListFromLocal()
+                        errorLog(this, error)
                     }
                 )
         )
@@ -58,6 +61,7 @@ class LoadChatRoomListUseCase(
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
                         getChatRoomListFromLocal()
+                        errorLog(this, error)
                     }
                 )
         )
@@ -74,6 +78,7 @@ class LoadChatRoomListUseCase(
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
                         getLastMessageFromLocal(chatRoom)
+                        errorLog(this, error)
                     }
                 )
         )
@@ -89,7 +94,7 @@ class LoadChatRoomListUseCase(
                         }
                     },
                     { error ->
-                        //에러메시지
+                        errorLog(this, error)
                     }
                 )
         )
@@ -102,7 +107,9 @@ class LoadChatRoomListUseCase(
                     { message ->
                         ChatEvent.invokeChatRoomAndLastMessage(Pair(chatRoom, message))
                     },
-                    {}
+                    { error ->
+                        errorLog(this, error)
+                    }
                 )
         )
     }
