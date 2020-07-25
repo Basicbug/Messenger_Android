@@ -87,7 +87,7 @@ class LoginUserFriendsFragment : BaseFragment() {
     }
 
     private fun executeUseCase() {
-        friendsViewModel.loadFriendsUseCase.loadFriends(NaverLoginManager.loginUserInfo?.uid ?: "")
+        friendsViewModel.loadFriendsUseCase.loadFriends()
         loginUserViewModel.loadLoginUserUseCase.loadLoginUserInfo()
     }
 }

@@ -28,9 +28,8 @@ interface UserInfoService {
     fun getLoginUserInfo(
     ): Single<ApiData<UserInfo>>
 
-    @GET("/v1/friends/{userId}")
+    @GET("/v1/friends/list")
     fun getFriendsInfo(
-        @Path("userId") userId: String
     ): Single<ApiDataList<UserInfo>>
 
 }

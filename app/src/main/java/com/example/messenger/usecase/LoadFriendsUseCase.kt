@@ -23,13 +23,13 @@ class LoadFriendsUseCase(
     private val userRepository: UserRepositoryImpl,
     private val disposables: CompositeDisposable
 ) {
-    fun loadFriends(userId: String) {
-        getFriendsFromServer(userId)
+    fun loadFriends() {
+        getFriendsFromServer()
     }
 
-    private fun getFriendsFromServer(userId: String) {
+    private fun getFriendsFromServer() {
         disposables.add(
-            userRepository.getFriendsFromServer(userId)
+            userRepository.getFriendsFromServer()
                 .subscribe(
                     { friends ->
                         friends.map {

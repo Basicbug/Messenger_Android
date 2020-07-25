@@ -83,10 +83,10 @@ class UserRepositoryImpl : UserInfoRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getFriendsFromServer(userId: String): Single<ArrayList<UserInfo>> {
+    override fun getFriendsFromServer(): Single<ArrayList<UserInfo>> {
         return ApiHelper
             .createApiByService(UserInfoService::class)
-            .getFriendsInfo(userId)
+            .getFriendsInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { it.dataList }
