@@ -42,17 +42,14 @@ class ChatRoomViewModel(
 
         if (messageToSend.get().toString() == "") return
 
-        testReceivedMessage()
         sendMessageUseCase.sendMessage(
             Message(
-                "a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e",
-//                "1",
+                "1",
                 "mk",
                 "jw",
                 "test",
                 "time",
                 MessageType.MESSAGE
-
             )
         )
         messageToSend.set("")
@@ -75,19 +72,7 @@ class ChatRoomViewModel(
                     messageList.postValue(messageList.value)
                 }
         )
-//        receiveMessageUseCase.subscribeChattingRoom("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e")
         receiveMessageUseCase.subscribeChattingRoom("1")
-    }
-
-    private var cnt = 201
-    private fun testReceivedMessage() {
-
-        val msg = Message(
-            "senderUid", "test", "1",
-            "senderUid", cnt++.toString(), MessageType.MESSAGE
-        )
-
-        receiveMessageUseCase.testReceiveMessage(msg)
     }
 
     override fun onCleared() {

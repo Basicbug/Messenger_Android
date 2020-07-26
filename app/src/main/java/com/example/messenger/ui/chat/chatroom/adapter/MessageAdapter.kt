@@ -60,5 +60,5 @@ class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
         }
     }
 
-    fun isSenderIsMe(): Boolean = this.currentList.last().senderUid == "senderUid"
+    fun senderIsMe(): Boolean = this.currentList.last().senderUid == "senderUid"
 }

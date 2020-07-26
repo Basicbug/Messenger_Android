@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
 import com.example.messenger.base.BaseSocketActivity
 import com.example.messenger.databinding.ActivityChatRoomBinding
-import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.ui.chat.chatroom.adapter.MessageAdapter
 
 /**
@@ -27,7 +26,7 @@ class ChatRoomActivity : BaseSocketActivity() {
                 if (messageAdapter.isInitiated <= 1) {
                     messageAdapter.isInitiated++
                     binding.recyclerview.layoutManager?.scrollToPosition(messageAdapter.itemCount - 1)
-                } else if (itemCount == 1 && messageAdapter.isSenderIsMe())
+                } else if (itemCount == 1 && messageAdapter.senderIsMe())
                     binding.recyclerview.layoutManager?.scrollToPosition(messageAdapter.itemCount - 1)
             }
         })
@@ -50,15 +49,7 @@ class ChatRoomActivity : BaseSocketActivity() {
 
         subscribeMessageList(messageAdapter)
 
-        for (i in 1..200) {
-            val msg = Message(
-                "1", i.toString(), "1", "senderUid", i.toString()
-            )
-            chatRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
-        }
-
         chatRoomViewModel.loadMessageUseCase.loadMessages("1", 0)
-//        chattingRoomViewModel.loadMessageUseCase.loadMessages("a5f4974e-bdbe-4f58-8d66-c7fd1ea4449e", 0)
     }
 
     private fun subscribeMessageList(messageAdapter: MessageAdapter) {
