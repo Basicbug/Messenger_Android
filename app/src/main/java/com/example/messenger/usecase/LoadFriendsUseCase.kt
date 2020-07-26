@@ -31,17 +31,18 @@ class LoadFriendsUseCase(
         disposables.add(
             userRepository.getFriendsFromServer()
                 .subscribe(
-                    { friends ->
-                        friends.map {
-                            it.isFriend = true
+                    { result ->
+                        result.dataList?.let { friends ->
+                            friends.forEach { friend ->
+                                friend.isFriend = true
+                            }
+                            UserEvent.invokeFriendsInfo(friends)
+                            insertFriendsInfoToLocal(friends)
                         }
-                        //확인 필
-                        UserEvent.invokeFriendsInfo(friends)
-                        insertFriendsInfoToLocal(friends)
                     },
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
-                        Log.d(this.javaClass.simpleName, error.message?:"")
+                        Log.d(this.javaClass.simpleName, error.message ?: "")
                         getFriendsInfoFromLocal()
                     }
                 )
@@ -62,7 +63,7 @@ class LoadFriendsUseCase(
         )
     }
 
-    private fun insertFriendsInfoToLocal(friends:List<UserInfo>) {
+    private fun insertFriendsInfoToLocal(friends: List<UserInfo>) {
         disposables.add(
             userRepository.insertUsersInfoToLocal(friends)
                 .subscribe()

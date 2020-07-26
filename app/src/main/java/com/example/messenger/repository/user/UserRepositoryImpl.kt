@@ -10,6 +10,7 @@ package com.example.messenger.repository.user
 import com.example.messenger.database.user.UserDatabase
 import com.example.messenger.network.ApiHelper
 import com.example.messenger.network.service.user.UserInfoService
+import com.example.messenger.repository.model.ApiDataList
 import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -83,14 +84,12 @@ class UserRepositoryImpl : UserInfoRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getFriendsFromServer(): Single<ArrayList<UserInfo>> {
+    override fun getFriendsFromServer(): Single<ApiDataList<UserInfo>> {
         return ApiHelper
             .createApiByService(UserInfoService::class)
             .getFriendsInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataList }
-
     }
 
 }
