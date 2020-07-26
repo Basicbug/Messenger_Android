@@ -28,11 +28,14 @@ class LoginUseCase(
         disposables.add(
             loginRepository.getJwtTokenFromServer(accessToken.provider ?: "", accessToken.token ?: "")
                 .subscribe(
-                    { jwt ->
-                        PreferenceManager.setJwtToken(jwt.token ?: "")
-                        LoginEvent.invokeToken(JwtToken().also { item ->
-                            item.token = jwt.token
-                        })
+                    { result ->
+                        result.data?.let { jwt ->
+                            PreferenceManager.setJwtToken(jwt.token ?: "")
+                            LoginEvent.invokeToken(JwtToken().also { item ->
+                                item.token = jwt.token
+                            })
+                        }
+
                     },
                     { error ->
                         Log.e(this.javaClass.simpleName, error.message ?: "")

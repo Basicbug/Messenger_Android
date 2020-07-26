@@ -10,6 +10,7 @@ package com.example.messenger.repository.user
 import com.example.messenger.database.user.UserDatabase
 import com.example.messenger.network.ApiHelper
 import com.example.messenger.network.service.user.UserInfoService
+import com.example.messenger.repository.model.ApiData
 import com.example.messenger.repository.model.ApiDataList
 import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.Completable
@@ -36,24 +37,20 @@ class UserRepositoryImpl : UserInfoRepository {
             }
     }
 
-    override fun getUserInfoFromServer(userId: String): Single<UserInfo> {
+    override fun getUserInfoFromServer(userId: String): Single<ApiData<UserInfo>> {
         return ApiHelper
             .createApiByService(UserInfoService::class)
             .getUserInfo(userId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.data }
-
     }
 
-    override fun getLoginUserInfoFromServer(): Single<UserInfo> {
+    override fun getLoginUserInfoFromServer(): Single<ApiData<UserInfo>> {
         return ApiHelper
             .createApiByService(UserInfoService::class)
             .getLoginUserInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.data }
-
     }
 
     override fun getUserInfoFromLocal(userId: String): Single<UserInfo> {

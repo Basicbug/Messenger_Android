@@ -9,6 +9,8 @@ package com.example.messenger.repository.login
 
 import com.example.messenger.network.ApiHelper
 import com.example.messenger.network.service.login.LoginService
+import com.example.messenger.repository.model.ApiData
+import com.example.messenger.repository.model.login.JwtToken
 import com.example.messenger.repository.model.login.Token
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,13 +21,12 @@ import io.reactivex.schedulers.Schedulers
  */
 
 class LoginRepositoryImpl : LoginRepository {
-    override fun getJwtTokenFromServer(provider: String, accessToken: String): Single<Token> {
+    override fun getJwtTokenFromServer(provider: String, accessToken: String): Single<ApiData<JwtToken>> {
         return ApiHelper
             .createApiByService(LoginService::class)
             .getJwtToken(provider, accessToken)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.data }
     }
 
     companion object {

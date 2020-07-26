@@ -7,6 +7,7 @@
 
 package com.example.messenger.repository.chat
 
+import com.example.messenger.repository.model.ApiData
 import com.example.messenger.repository.model.chat.Message
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -19,7 +20,7 @@ import ua.naiksoftware.stomp.dto.StompMessage
 interface MessageRepository {
     fun insertMessageToLocal(msg: Message): Completable
     fun getMessageListFromLocal(roomId: String): Single<List<Message>>
-    fun getMessageFromServer(messageId: String, roomId: String): Single<Message>
+    fun getMessageFromServer(messageId: String, roomId: String): Single<ApiData<Message>>
     fun getMessageFromLocal(messageId: String, roomId: String): Single<Message>
     fun getLatestFiftyMessages(roomId: String, from: Int): Single<List<Message>>
     fun subscribeChattingRoom(roomId: String): Flowable<StompMessage>

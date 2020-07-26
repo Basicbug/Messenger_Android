@@ -34,9 +34,11 @@ class LoadChatRoomListUseCase(
         disposables.add(
             chatRoomRepositoryImpl.getChatRoomListFromServer(userId)
                 .subscribe(
-                    { chatRooms ->
-                        chatRooms.forEach { chatRoom ->
-                            getChatRoomDetailFromServer(chatRoom.roomId)
+                    { result ->
+                        result.dataList?.let { chatRooms ->
+                            chatRooms.forEach { chatRoom ->
+                                getChatRoomDetailFromServer(chatRoom.roomId)
+                            }
                         }
                     },
                     { error ->
@@ -51,9 +53,12 @@ class LoadChatRoomListUseCase(
         disposables.add(
             chatRoomRepositoryImpl.getChatRoomDetailFromServer(roomId)
                 .subscribe(
-                    { chatRoom ->
-                        insertChatRoomToLocal(chatRoom)
-                        getLastMessageFromServer(chatRoom)
+                    { result ->
+                        result.data?.let { chatRoom ->
+                            insertChatRoomToLocal(chatRoom)
+                            getLastMessageFromServer(chatRoom)
+                        }
+
                     },
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
@@ -67,9 +72,11 @@ class LoadChatRoomListUseCase(
         disposables.add(
             messageRepositoryImpl.getMessageFromServer(chatRoom.lastMessageId, chatRoom.lastMessageId)
                 .subscribe(
-                    { message ->
-                        insertLastMessageToLocal(message)
-                        ChatEvent.invokeChatRoomAndLastMessage(Pair(chatRoom, message))
+                    { result ->
+                        result.data?.let { message ->
+                            insertLastMessageToLocal(message)
+                            ChatEvent.invokeChatRoomAndLastMessage(Pair(chatRoom, message))
+                        }
                     },
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
