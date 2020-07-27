@@ -7,6 +7,7 @@
     <color name="green">#2f9d27</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="white_opa80">#ccffffff</color>
     <color name="bottomIconText">#e4f9f5</color>
     <color name="bottomBackground">#000000</color>
 </resources>

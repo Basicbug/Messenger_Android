@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ bottom_navigation_selector.xml 2020. 7. 27
+  ~
+  ~ Copyright 2020 BasicBug. All rights Reserved.
+  ~
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/white" android:state_checked="true"/>
+    <item android:color="@color/white_opa80" android:state_checked="false"/>
+</selector>

@@ -9,9 +9,11 @@ package com.example.messenger.ui.start
 
 import android.view.View
 import com.example.messenger.R
+import com.example.messenger.app.AppResources
 import com.example.messenger.base.BaseActivity
 import com.example.messenger.base.BaseHelper
 import com.example.messenger.ui.chat.chatroomlist.ChatRoomListFragment
+import com.example.messenger.ui.common.AppBarViewModel
 import com.example.messenger.ui.users.LoginUserFriendsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -19,10 +21,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  * @author MyeongKi
  */
 
-class MainHolderBottomNavigationHelper(private val activity: BaseActivity):BaseHelper{
+class MainHolderBottomNavigationHelper(private val activity: BaseActivity, private val appBarViewModel: AppBarViewModel):BaseHelper{
 
     init {
         activity.replaceFragment(LoginUserFriendsFragment::class.java, R.id.content, null)
+        appBarViewModel.title = AppResources.getStringResId(R.string.navigation_friends_item)
     }
 
     override fun customizePropertiesView(view: View) {
@@ -31,13 +34,16 @@ class MainHolderBottomNavigationHelper(private val activity: BaseActivity):BaseH
             when (it.itemId) {
                 R.id.friends_item -> {
                     activity.replaceFragment(LoginUserFriendsFragment::class.java, R.id.content, null)
+                    appBarViewModel.title = AppResources.getStringResId(R.string.navigation_friends_item)
                     true
                 }
                 R.id.chatting_rooms_item -> {
                     activity.replaceFragment(ChatRoomListFragment::class.java, R.id.content, null)
+                    appBarViewModel.title = AppResources.getStringResId(R.string.navigation_chatting_rooms_item)
                     true
                 }
                 R.id.settings_item -> {
+                    appBarViewModel.title = AppResources.getStringResId(R.string.navigation_settings_item)
                     true
                 }
                 else -> {

@@ -19,6 +19,7 @@ import com.example.messenger.databinding.FragmentLoginUserFriendsBinding
 import com.example.messenger.manager.NaverLoginManager
 import com.example.messenger.ui.users.adapter.UsersAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.common_app_bar.view.*
 
 
 /**
@@ -39,7 +40,6 @@ class LoginUserFriendsFragment : BaseFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login_user_friends, container, false)
         binding.lifecycleOwner = this
-
         initViewModel()
         injectViewModel()
         injectAdapter()

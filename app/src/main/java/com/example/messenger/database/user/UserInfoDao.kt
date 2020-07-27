@@ -33,6 +33,6 @@ interface UserInfoDao {
     @Query("SELECT * FROM UserInfo WHERE uid LIKE :userId")
     fun getUserInfo(userId: String): Single<UserInfo>
 
-    @Query("SELECT * FROM UserInfo WHERE isFriend == 1")
+    @Query("SELECT * FROM UserInfo WHERE isFriend")
     fun getFriendsInfo(): Single<List<UserInfo>>
 }
