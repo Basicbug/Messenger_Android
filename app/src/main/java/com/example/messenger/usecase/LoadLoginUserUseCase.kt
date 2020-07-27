@@ -10,6 +10,7 @@ package com.example.messenger.usecase
 import android.util.Log
 import com.example.messenger.event.UserEvent
 import com.example.messenger.repository.user.UserRepositoryImpl
+import com.example.messenger.tools.errorLog
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -30,7 +31,7 @@ class LoadLoginUserUseCase(
 
                     },
                     { error ->
-                        Log.e(this.javaClass.simpleName, error.message ?: "")
+                        errorLog(this, error)
                     }
                 )
         )

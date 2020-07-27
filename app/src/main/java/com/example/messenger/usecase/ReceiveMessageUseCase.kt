@@ -15,6 +15,7 @@ import android.util.Log
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.Message
 import com.example.messenger.tools.convertJsonStringToMessage
+import com.example.messenger.tools.errorLog
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -34,8 +35,8 @@ class ReceiveMessageUseCase(
                         notifyMessage(msg)
                         //TODO 로컬 저장이나 기타 나머지 시나리오...
                     },
-                    { err ->
-                        Log.e(this.javaClass.simpleName, err.toString())
+                    { error ->
+                        errorLog(this, error)
                     })
         )
     }
