@@ -29,7 +29,7 @@ abstract class BaseFragment : Fragment() {
 
     fun replaceFragmentSaved(target: Class<out Fragment>, containerId: Int, arguments: Bundle?) {
         if (!this::navigationDelegate.isInitialized) return
-        navigationDelegate.replaceFragmentSaved(target, containerId, arguments)
+        navigationDelegate.replaceFragmentSavedInBackStack(target, containerId, arguments)
     }
 
     fun startActivity(target: Class<out Activity>, extras: Bundle? = null) {

@@ -24,7 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainHolderBottomNavigationHelper(private val activity: BaseActivity, private val appBarViewModel: AppBarViewModel):BaseHelper{
 
     init {
-        activity.replaceFragment(LoginUserFriendsFragment::class.java, R.id.content, null)
+        activity.replaceFragmentSaved(LoginUserFriendsFragment::class.java, R.id.content, null)
         appBarViewModel.title = AppResources.getStringResId(R.string.navigation_friends_item)
     }
 
@@ -33,12 +33,12 @@ class MainHolderBottomNavigationHelper(private val activity: BaseActivity, priva
         (view as BottomNavigationView).setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.friends_item -> {
-                    activity.replaceFragment(LoginUserFriendsFragment::class.java, R.id.content, null)
+                    activity.replaceFragmentSaved(LoginUserFriendsFragment::class.java, R.id.content, null)
                     appBarViewModel.title = AppResources.getStringResId(R.string.navigation_friends_item)
                     true
                 }
                 R.id.chatting_rooms_item -> {
-                    activity.replaceFragment(ChatRoomListFragment::class.java, R.id.content, null)
+                    activity.replaceFragmentSaved(ChatRoomListFragment::class.java, R.id.content, null)
                     appBarViewModel.title = AppResources.getStringResId(R.string.navigation_chatting_rooms_item)
                     true
                 }
