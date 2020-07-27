@@ -41,7 +41,6 @@ class ChatRoomViewModel(
     fun sendMessageToServer() {
 
         if (messageToSend.get().toString() == "") return
-
         sendMessageUseCase.sendMessage(
             Message(
                 "1",

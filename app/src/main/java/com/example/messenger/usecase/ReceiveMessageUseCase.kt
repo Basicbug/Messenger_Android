@@ -42,11 +42,4 @@ class ReceiveMessageUseCase(
             //TODO 이벤트 발생
         }
     }
-
-    fun testReceiveMessage(msg: Message) {
-        disposables.add(
-            messageRepositoryImpl.insertMessageToLocal(msg).subscribe()
-        )
-        ChatRoomEvent.invokeMessage(msg)
-    }
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
 import com.example.messenger.repository.model.chat.Message
+import com.example.messenger.type.ChatRoomListStateType
 
 /**
  * @author bsgreentea
@@ -21,6 +22,8 @@ class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
     }
 
     var isInitiated: Int = 0
+
+    var state: ChatRoomListStateType = ChatRoomListStateType.RAW
 
     override fun getItemViewType(position: Int): Int {
         @Suppress("UNUSED_VARIABLE")
