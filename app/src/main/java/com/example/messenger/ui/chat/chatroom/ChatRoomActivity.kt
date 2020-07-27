@@ -63,13 +63,6 @@ class ChatRoomActivity : BaseSocketActivity() {
 
         subscribeMessageList(messageAdapter)
 
-        for (i in 1..200) {
-            val msg = Message(
-                "1", i.toString(), "1", "sender", i.toString()
-            )
-            chatRoomViewModel.loadMessageUseCase.insertMessageToLocal(msg)
-        }
-
         chatRoomViewModel.loadMessageUseCase.loadMessages("1", 0)
     }
 
