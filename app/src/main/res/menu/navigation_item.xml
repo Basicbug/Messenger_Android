@@ -5,7 +5,7 @@
         android:id="@+id/friends_item"
         app:showAsAction="ifRoom"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/bottom_friend_icon_black"
         android:title="@string/navigation_friends_item" />
     <item
         android:id="@+id/chatting_rooms_item"

@@ -22,18 +22,19 @@
             android:layout_width="@dimen/profile_image_size"
             android:layout_height="@dimen/profile_image_size"
             android:padding="@dimen/profile_image_padding"
+            app:srcCompat = "@drawable/default_profile_black"
             app:layout_constraintEnd_toStartOf="@+id/user_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:src="@mipmap/ic_launcher_bug" />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/user_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:gravity="center_vertical"
+            android:gravity="bottom"
             android:text="@{userItemViewModel.name}"
+            android:textColor="@color/black"
             android:layout_marginStart="@dimen/default_text_start_margin"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/user_state_message"
@@ -47,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ellipsize="end"
-            android:gravity="center_vertical"
+            android:gravity="top"
             android:maxLines="1"
             android:text="@{userItemViewModel.stateMessage}"
             android:layout_marginStart="@dimen/default_text_start_margin"

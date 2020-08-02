@@ -9,7 +9,6 @@ package com.example.messenger.database.chat
 
 import androidx.room.*
 import com.example.messenger.repository.model.chat.ChatRoom
-import com.example.messenger.repository.model.user.FriendRelation
 import io.reactivex.Completable
 import io.reactivex.Single
 

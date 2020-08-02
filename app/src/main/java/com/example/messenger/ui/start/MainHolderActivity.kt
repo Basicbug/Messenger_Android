@@ -14,6 +14,7 @@ import com.example.messenger.app.SnackbarHelper
 import com.example.messenger.base.BaseActivity
 import com.example.messenger.databinding.ActivityMainHolderBinding
 import com.example.messenger.event.ErrorEvent
+import com.example.messenger.ui.common.AppBarViewModel
 
 /**
  * @author MyeongKi
@@ -21,11 +22,16 @@ import com.example.messenger.event.ErrorEvent
 
 class MainHolderActivity : BaseActivity() {
     lateinit var binding: ActivityMainHolderBinding
+    lateinit var appBarViewModel: AppBarViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_holder)
-        binding.helper = MainHolderBottomNavigationHelper(this)
+        appBarViewModel = AppBarViewModel()
+        binding.apply {
+            appBar.viewModel = appBarViewModel
+            helper = MainHolderBottomNavigationHelper(this@MainHolderActivity, appBarViewModel)
+        }
         observeEvent()
     }
 

@@ -20,6 +20,7 @@ import com.example.messenger.manager.NaverLoginManager
 import com.example.messenger.tools.errorLog
 import com.example.messenger.ui.users.adapter.UsersAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.common_app_bar.view.*
 
 
 /**
@@ -40,7 +41,6 @@ class LoginUserFriendsFragment : BaseFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login_user_friends, container, false)
         binding.lifecycleOwner = this
-
         initViewModel()
         injectViewModel()
         injectAdapter()
@@ -64,7 +64,7 @@ class LoginUserFriendsFragment : BaseFragment() {
         binding.apply {
             friendsViewModel = friendsViewModel
             loginUserViewModel = loginUserViewModel
-            loginUserLayout.userItemViewModel = loginUserViewModel.getItemViewModel()
+            loginUserLayout.userItemViewModel = loginUserViewModel?.getItemViewModel()
         }
     }
 
@@ -88,7 +88,7 @@ class LoginUserFriendsFragment : BaseFragment() {
     }
 
     private fun executeUseCase() {
-        friendsViewModel.loadFriendsUseCase.loadFriends(NaverLoginManager.loginUserInfo?.id ?: "")
+        friendsViewModel.loadFriendsUseCase.loadFriends()
         loginUserViewModel.loadLoginUserUseCase.loadLoginUserInfo()
     }
 }

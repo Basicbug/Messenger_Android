@@ -11,6 +11,7 @@ import com.example.messenger.database.chat.MessageDatabase
 import com.example.messenger.network.ApiHelper
 import com.example.messenger.network.SocketHelper
 import com.example.messenger.network.service.chat.MessageService
+import com.example.messenger.repository.model.ApiData
 import com.example.messenger.repository.model.chat.Message
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -33,13 +34,13 @@ class MessageRepositoryImpl : MessageRepository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getMessageFromServer(messageId: String, roomId: String): Single<Message> {
+    override fun getMessageFromServer(messageId: String, roomId: String): Single<ApiData<Message>> {
         return ApiHelper
             .createApiByService(MessageService::class)
             .getMessage(messageId, roomId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.data }
+
     }
 
     override fun getMessageFromLocal(messageId: String, roomId: String): Single<Message> {

@@ -7,6 +7,7 @@
 
 package com.example.messenger.event
 
+import com.example.messenger.manager.NaverLoginManager
 import com.example.messenger.repository.model.user.UserInfo
 import io.reactivex.subjects.PublishSubject
 
@@ -15,14 +16,15 @@ import io.reactivex.subjects.PublishSubject
  */
 
 object UserEvent {
-    val friendInfoSubject = PublishSubject.create<UserInfo>()
+    val friendsInfoSubject = PublishSubject.create<List<UserInfo>>()
     val loginUserInfoSubject = PublishSubject.create<UserInfo>()
 
-    fun invokeFriendInfo(friendInfo: UserInfo) {
-        friendInfoSubject.onNext(friendInfo)
+    fun invokeFriendsInfo(friendsInfo: List<UserInfo>) {
+        friendsInfoSubject.onNext(friendsInfo)
     }
 
     fun invokeLoginUserInfo(loginUserInfo: UserInfo) {
+        NaverLoginManager.loginUserInfo = loginUserInfo
         loginUserInfoSubject.onNext(loginUserInfo)
     }
 }

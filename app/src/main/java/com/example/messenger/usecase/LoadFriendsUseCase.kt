@@ -11,7 +11,6 @@ import android.util.Log
 import com.example.messenger.R
 import com.example.messenger.event.ErrorEvent
 import com.example.messenger.event.UserEvent
-import com.example.messenger.repository.model.user.FriendRelation
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
 import com.example.messenger.tools.errorLog
@@ -25,52 +24,38 @@ class LoadFriendsUseCase(
     private val userRepository: UserRepositoryImpl,
     private val disposables: CompositeDisposable
 ) {
-    fun loadFriends(userId: String) {
-        getFriendRelationListFromServer(userId)
+    fun loadFriends() {
+        getFriendsFromServer()
     }
 
-    private fun getFriendRelationListFromServer(userId: String) {
+    private fun getFriendsFromServer() {
         disposables.add(
-            userRepository.getFriendRelationListFromServer(userId)
+            userRepository.getFriendsFromServer()
                 .subscribe(
-                    { friendRelations ->
-                        insertFriendRelationListToLocal(friendRelations)
-                        for (item in friendRelations) {
-                            getFriendInfoFromServer(item.id)
+                    { result ->
+                        result.dataList?.let { friends ->
+                            friends.forEach { friend ->
+                                friend.isFriend = true
+                            }
+                            UserEvent.invokeFriendsInfo(friends)
+                            insertFriendsInfoToLocal(friends)
                         }
                     },
                     { error ->
                         ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
-                        getFriendRelationListFromLocal()
                         errorLog(this, error)
+                        getFriendsInfoFromLocal()
                     }
                 )
         )
     }
 
-    private fun getFriendRelationListFromLocal() {
+    private fun getFriendsInfoFromLocal() {
         disposables.add(
-            userRepository.getFriendRelationListFromLocal()
-                .subscribe(
-                    { friendRelations ->
-                        for (item in friendRelations) {
-                            getFriendInfoFromLocal(item.id)
-                        }
-                    },
-                    { error ->
-                        errorLog(this, error)
-                    }
-                )
-        )
-    }
-
-    private fun getFriendInfoFromLocal(userId: String) {
-        disposables.add(
-            userRepository.getUserInfoFromLocal(userId)
-
+            userRepository.getFriendsInfoFromLocal()
                 .subscribe(
                     { userInfo ->
-                        UserEvent.invokeFriendInfo(userInfo)
+                        UserEvent.invokeFriendsInfo(userInfo as ArrayList<UserInfo>)
                     },
                     { error ->
                         errorLog(this, error)
@@ -79,38 +64,12 @@ class LoadFriendsUseCase(
         )
     }
 
-    private fun insertFriendRelationListToLocal(items: ArrayList<FriendRelation>) {
-        disposables.add(
-            userRepository.insertFriendRelationListToLocal(items)
-                .subscribe()
-        )
-    }
 
-    private fun getFriendInfoFromServer(userId: String) {
+    private fun insertFriendsInfoToLocal(friends: List<UserInfo>) {
         disposables.add(
-            userRepository.getUserInfoFromServer(userId)
-                .subscribe(
-                    { userInfo ->
-                        UserEvent.invokeFriendInfo(userInfo)
-                        insertFriendInfoToLocal(userInfo)
-                    },
-                    { error ->
-                        ErrorEvent.invokeErrorMessage(R.string.load_fail_from_server)
-                        getFriendInfoFromLocal(userId)
-                        errorLog(this, error)
-                    }
-                )
-        )
-    }
-
-    private fun insertFriendInfoToLocal(item: UserInfo) {
-        disposables.add(
-            userRepository.insertUserInfoToLocal(item)
+            userRepository.insertUsersInfoToLocal(friends)
                 .subscribe()
         )
     }
 
 }
-
-//TODO 매 userInfo 별로 이벤트를 발생하기 때문에 recyclerview notify 최적화 필요
-//TODO 뷰를 갱신하는 경우마다 api를 찌르기 때문에 이에 대한 최적화가 필요

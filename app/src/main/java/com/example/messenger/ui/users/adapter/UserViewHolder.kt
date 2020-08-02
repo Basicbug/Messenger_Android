@@ -25,6 +25,6 @@ class UserViewHolder(
 
     fun bind(userInfo: UserInfo) {
         userItemViewModel.name = userInfo.name ?: ""
-        userItemViewModel.stateMessage = userInfo.stateMessage ?: ""
+        userItemViewModel.stateMessage = userInfo.status ?: ""
     }
 }

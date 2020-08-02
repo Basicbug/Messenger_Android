@@ -16,16 +16,19 @@ import io.reactivex.disposables.CompositeDisposable
 /**
  * @author MyeongKi
  */
-class LoadLoginUserUseCase (
+class LoadLoginUserUseCase(
     private val userRepositoryImpl: UserRepositoryImpl,
     private val disposables: CompositeDisposable
-){
+) {
     fun loadLoginUserInfo() {
         disposables.add(
             userRepositoryImpl.getLoginUserInfoFromServer()
                 .subscribe(
-                    { userInfo ->
-                        UserEvent.invokeLoginUserInfo(userInfo)
+                    { result ->
+                        result.data?.let { loginUserInfo ->
+                            UserEvent.invokeLoginUserInfo(loginUserInfo)
+                        }
+
                     },
                     { error ->
                         errorLog(this, error)
