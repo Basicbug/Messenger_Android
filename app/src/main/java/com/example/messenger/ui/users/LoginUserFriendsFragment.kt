@@ -32,8 +32,6 @@ class LoginUserFriendsFragment : BaseFragment() {
     private lateinit var friendsViewModel: FriendsViewModel
     private lateinit var loginUserViewModel: LoginUserViewModel
 
-    private val friendAdapter = UsersAdapter()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,12 +39,9 @@ class LoginUserFriendsFragment : BaseFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login_user_friends, container, false)
         binding.lifecycleOwner = this
-        initViewModel()
         injectViewModel()
         injectAdapter()
-        subscribeFriendInfoList(friendAdapter)
         executeUseCase()
-
         return binding.root
     }
 
@@ -61,6 +56,7 @@ class LoginUserFriendsFragment : BaseFragment() {
     }
 
     private fun injectViewModel() {
+        initViewModel()
         binding.apply {
             friendsViewModel = friendsViewModel
             loginUserViewModel = loginUserViewModel
@@ -69,7 +65,11 @@ class LoginUserFriendsFragment : BaseFragment() {
     }
 
     private fun injectAdapter() {
-        binding.friends.adapter = friendAdapter
+        binding.apply {
+            friends.adapter = UsersAdapter().also {
+                subscribeFriendInfoList(it)
+            }
+        }
     }
 
     private fun subscribeFriendInfoList(adapter: UsersAdapter) {

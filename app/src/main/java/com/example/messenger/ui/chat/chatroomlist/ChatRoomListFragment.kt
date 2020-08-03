@@ -28,21 +28,42 @@ class ChatRoomListFragment : BaseFragment() {
     private lateinit var chatRoomListViewModel: ChatRoomListViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chat_room_list, container, false)
+        binding.lifecycleOwner = this
+        injectViewModel()
+        injectAdapter()
+        executeUseCase()
+        return binding.root
+    }
+
+    private fun initViewModel() {
         chatRoomListViewModel =
             ChatRoomListViewModelInjector.provideChatRoomViewModelFactory().create(ChatRoomListViewModel::class.java)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_chat_room_list, container, false)
-        binding.viewModel = chatRoomListViewModel
-        binding.lifecycleOwner = this
-        val adapter = ChatRoomAdapter()
-        binding.chatRoomList.adapter = adapter
-        subscribeFriendInfoList(adapter)
-        chatRoomListViewModel.loadChatRoomUseCase.loadChatRoomList()
-        return binding.root
+    }
+
+    private fun injectViewModel() {
+        initViewModel()
+        binding.apply {
+            viewModel = chatRoomListViewModel
+        }
+    }
+
+    private fun injectAdapter() {
+        binding.apply {
+            chatRoomList.adapter = ChatRoomAdapter().also {
+                subscribeFriendInfoList(it)
+            }
+        }
     }
 
     private fun subscribeFriendInfoList(adapter: ChatRoomAdapter) {
         chatRoomListViewModel.chatRoomList.observe(viewLifecycleOwner) { result: MutableList<ChatRoom> ->
             adapter.submitList(result)
         }
+    }
+
+    private fun executeUseCase() {
+        chatRoomListViewModel.loadChatRoomUseCase.loadChatRoomList()
+
     }
 }
