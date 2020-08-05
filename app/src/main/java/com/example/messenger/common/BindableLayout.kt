@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.base
+package com.example.messenger.common
 
 import androidx.annotation.LayoutRes
 

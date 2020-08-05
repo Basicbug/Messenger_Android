@@ -11,11 +11,10 @@
 
 package com.example.messenger.usecase
 
-import android.util.Log
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.Message
-import com.example.messenger.tools.convertJsonStringToMessage
-import com.example.messenger.tools.errorLog
+import com.example.messenger.util.convertJsonStringToMessage
+import com.example.messenger.util.errorLog
 import io.reactivex.disposables.CompositeDisposable
 
 /**

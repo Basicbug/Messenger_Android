@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.tools
+package com.example.messenger.util
 
 import android.view.View
 import androidx.databinding.BindingAdapter

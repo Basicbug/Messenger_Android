@@ -10,13 +10,16 @@ package com.example.messenger.ui.users.adapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.databinding.ItemUserBinding
 import com.example.messenger.repository.model.user.UserInfo
+import com.example.messenger.util.bus.RxAction
+import com.jakewharton.rxrelay2.Relay
 
 /**
  * @author MyeongKi
  */
 
 class UserViewHolder(
-    private val binding: ItemUserBinding
+    private val binding: ItemUserBinding,
+    private val itemEventRelay: Relay<RxAction>
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val userItemViewModel = UserItemViewModel().apply {
@@ -24,7 +27,7 @@ class UserViewHolder(
     }
 
     fun bind(userInfo: UserInfo) {
-        userItemViewModel.name = userInfo.name ?: ""
-        userItemViewModel.stateMessage = userInfo.status ?: ""
+        userItemViewModel.userInfo = userInfo
+        userItemViewModel.itemEventRelay = itemEventRelay
     }
 }

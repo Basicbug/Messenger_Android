@@ -7,7 +7,6 @@
 
 package com.example.messenger.usecase
 
-import android.util.Log
 import com.example.messenger.R
 import com.example.messenger.event.ChatEvent
 import com.example.messenger.event.ErrorEvent
@@ -15,7 +14,7 @@ import com.example.messenger.repository.chat.ChatRoomRepositoryImpl
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.ChatRoom
 import com.example.messenger.repository.model.chat.Message
-import com.example.messenger.tools.errorLog
+import com.example.messenger.util.errorLog
 import io.reactivex.disposables.CompositeDisposable
 
 /**

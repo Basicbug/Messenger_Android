@@ -13,12 +13,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.messenger.R
 import com.example.messenger.repository.model.user.UserInfo
+import com.example.messenger.util.bus.RxAction
+import com.jakewharton.rxrelay2.Relay
 
 /**
  * @author MyeongKi
  */
 
-class UsersAdapter : ListAdapter<UserInfo, UserViewHolder>(
+class UsersAdapter(
+    private val itemEventRelay: Relay<RxAction>
+) : ListAdapter<UserInfo, UserViewHolder>(
     UsersDiffCallback()
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -26,7 +30,8 @@ class UsersAdapter : ListAdapter<UserInfo, UserViewHolder>(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.item_user, parent, false
-            )
+            ),
+            itemEventRelay
         )
     }
 

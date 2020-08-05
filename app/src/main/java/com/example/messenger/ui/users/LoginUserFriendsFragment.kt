@@ -8,19 +8,22 @@
 package com.example.messenger.ui.users
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.messenger.R
+import com.example.messenger.app.ToastHelper
 import com.example.messenger.base.BaseFragment
+import com.example.messenger.common.event.DefaultItemActionEvent
 import com.example.messenger.databinding.FragmentLoginUserFriendsBinding
-import com.example.messenger.manager.NaverLoginManager
-import com.example.messenger.tools.errorLog
+import com.example.messenger.repository.model.user.UserInfo
+import com.example.messenger.type.ItemEvent
+import com.example.messenger.util.errorLog
 import com.example.messenger.ui.users.adapter.UsersAdapter
+import com.example.messenger.util.bus.RxAction
+import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.common_app_bar.view.*
 
 
 /**
@@ -32,7 +35,8 @@ class LoginUserFriendsFragment : BaseFragment() {
     private lateinit var friendsViewModel: FriendsViewModel
     private lateinit var loginUserViewModel: LoginUserViewModel
 
-    private val friendAdapter = UsersAdapter()
+    private val itemEventRelay = PublishRelay.create<RxAction>()
+    private val friendAdapter = UsersAdapter(itemEventRelay)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +50,7 @@ class LoginUserFriendsFragment : BaseFragment() {
         injectAdapter()
         subscribeFriendInfoList(friendAdapter)
         executeUseCase()
-
+        observeEvent()
         return binding.root
     }
 
@@ -56,7 +60,9 @@ class LoginUserFriendsFragment : BaseFragment() {
                 .create(FriendsViewModel::class.java)
         loginUserViewModel =
             UserViewModelInjector.provideUsersViewModelFactory()
-                .create(LoginUserViewModel::class.java)
+                .create(LoginUserViewModel::class.java).apply {
+                    this.getItemViewModel().itemEventRelay = itemEventRelay
+                }
 
     }
 
@@ -90,5 +96,15 @@ class LoginUserFriendsFragment : BaseFragment() {
     private fun executeUseCase() {
         friendsViewModel.loadFriendsUseCase.loadFriends()
         loginUserViewModel.loadLoginUserUseCase.loadLoginUserInfo()
+    }
+
+    private fun observeEvent() {
+        disposables.add(itemEventRelay.ofType(DefaultItemActionEvent::class.java)
+            .filter { it.getEventType() == ItemEvent.CLICK.type }
+            .subscribe {
+                ToastHelper.show((it.getValue() as UserInfo).name ?: "")
+            })
+
+
     }
 }

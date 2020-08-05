@@ -7,13 +7,12 @@
 
 package com.example.messenger.usecase
 
-import android.util.Log
 import com.example.messenger.event.LoginEvent
 import com.example.messenger.manager.PreferenceManager
 import com.example.messenger.repository.login.LoginRepositoryImpl
 import com.example.messenger.repository.model.login.JwtToken
 import com.example.messenger.repository.model.login.Token
-import com.example.messenger.tools.errorLog
+import com.example.messenger.util.errorLog
 import com.example.messenger.type.LoginResultType
 import io.reactivex.disposables.CompositeDisposable
 

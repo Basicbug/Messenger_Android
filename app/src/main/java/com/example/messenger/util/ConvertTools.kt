@@ -5,7 +5,7 @@
  *
  */
 
-package com.example.messenger.tools
+package com.example.messenger.util
 
 import com.example.messenger.repository.model.chat.Message
 import com.google.gson.Gson

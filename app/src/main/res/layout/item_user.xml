@@ -6,6 +6,7 @@
 
 <layout>
     <data>
+
         <variable
             name="userItemViewModel"
             type="com.example.messenger.ui.users.adapter.UserItemViewModel" />
@@ -15,48 +16,49 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/user_layout_height">
+        android:layout_height="@dimen/user_layout_height"
+        android:onClick="@{()->userItemViewModel.onClickItemView()}">
 
         <ImageView
             android:id="@+id/profile_image"
             android:layout_width="@dimen/profile_image_size"
             android:layout_height="@dimen/profile_image_size"
             android:padding="@dimen/profile_image_padding"
-            app:srcCompat = "@drawable/default_profile_black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/user_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:srcCompat="@drawable/default_profile_black" />
 
         <TextView
             android:id="@+id/user_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="@dimen/default_text_start_margin"
             android:gravity="bottom"
             android:text="@{userItemViewModel.name}"
             android:textColor="@color/black"
-            android:layout_marginStart="@dimen/default_text_start_margin"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/user_state_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text = "testName"/>
+            tools:text="testName" />
 
         <TextView
             android:id="@+id/user_state_message"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="@dimen/default_text_start_margin"
             android:ellipsize="end"
             android:gravity="top"
             android:maxLines="1"
             android:text="@{userItemViewModel.stateMessage}"
-            android:layout_marginStart="@dimen/default_text_start_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/profile_image"
             app:layout_constraintTop_toBottomOf="@id/user_name"
-            tools:text = "test stateMessage"/>
+            tools:text="test stateMessage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

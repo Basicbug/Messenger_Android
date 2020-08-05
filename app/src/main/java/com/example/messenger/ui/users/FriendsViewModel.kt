@@ -8,13 +8,10 @@
 package com.example.messenger.ui.users
 
 
-import android.util.ArrayMap
-import androidx.lifecycle.MutableLiveData
 import com.example.messenger.base.BaseViewModel
 import com.example.messenger.event.UserEvent
 import com.example.messenger.repository.model.user.UserInfo
 import com.example.messenger.repository.user.UserRepositoryImpl
-import com.example.messenger.ui.users.adapter.UserItemViewModel
 import com.example.messenger.usecase.LoadFriendsUseCase
 import io.reactivex.subjects.PublishSubject
 
@@ -29,7 +26,7 @@ class FriendsViewModel(
 
     val loadFriendsUseCase = LoadFriendsUseCase(userRepository, disposables)
     val friendsObservable = PublishSubject.create<MutableList<UserInfo>>()
-    private val friendTable = ArrayMap<String, UserInfo>()
+
 
     init {
         subscribeEvent()
