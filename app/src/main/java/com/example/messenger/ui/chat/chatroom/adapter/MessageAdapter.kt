@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
 import com.example.messenger.repository.model.chat.Message
+import com.example.messenger.type.ChatRoomListStateType
 
 /**
  * @author bsgreentea
@@ -20,7 +21,12 @@ class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
         private const val SENT = 2
     }
 
+    var isInitiated: Int = 0
+
+    var state: ChatRoomListStateType = ChatRoomListStateType.RAW
+
     override fun getItemViewType(position: Int): Int {
+        @Suppress("UNUSED_VARIABLE")
         val message: Message = this.getItem(position)
 
 //        if(message.senderName == ) return SENT
@@ -56,4 +62,6 @@ class MessageAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(
             holder.bind(getItem(position))
         }
     }
+
+    fun senderIsMe(): Boolean = this.currentList.last().senderUid == "senderUid"
 }

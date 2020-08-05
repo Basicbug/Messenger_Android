@@ -74,4 +74,6 @@ dependencies {
     implementation lifecycle_libraries.values()
 
     implementation preference_libraries.values()
+
+    implementation rx_relay_libraries.values()
 }

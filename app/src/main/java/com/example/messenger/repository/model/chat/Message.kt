@@ -10,7 +10,6 @@ package com.example.messenger.repository.model.chat
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.TypeConverters
-import com.example.messenger.app.MessengerApp
 import com.example.messenger.R
 import com.example.messenger.app.AppResources
 import com.example.messenger.push.PushItem

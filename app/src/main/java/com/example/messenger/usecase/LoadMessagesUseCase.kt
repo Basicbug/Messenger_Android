@@ -1,6 +1,6 @@
 package com.example.messenger.usecase
 
-import com.example.messenger.event.ChattingRoomEvent
+import com.example.messenger.event.ChatRoomEvent
 import com.example.messenger.repository.chat.MessageRepositoryImpl
 import com.example.messenger.repository.model.chat.Message
 import io.reactivex.disposables.CompositeDisposable
@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable
  * @author bsgreentea
  */
 class LoadMessagesUseCase(
-    private val messageRepository: MessageRepositoryImpl,
+    private val messageRepositoryImpl: MessageRepositoryImpl,
     private val disposables: CompositeDisposable
 ) {
 
@@ -19,9 +19,9 @@ class LoadMessagesUseCase(
 
     private fun loadLatestFiftyMessages(roomId: String, from: Int) {
         disposables.add(
-            messageRepository.getLatestFiftyMessages(roomId, from)
+            messageRepositoryImpl.getLatestFiftyMessages(roomId, from)
                 .doOnSuccess {
-                    ChattingRoomEvent.invokeMessageList(it.reversed())
+                    ChatRoomEvent.invokeMessageList(it.reversed())
                 }
                 .subscribe()
         )
@@ -29,7 +29,7 @@ class LoadMessagesUseCase(
 
     fun insertMessageToLocal(msg: Message) {
         disposables.add(
-            messageRepository.insertMessageToLocal(msg)
+            messageRepositoryImpl.insertMessageToLocal(msg)
                 .subscribe()
         )
     }

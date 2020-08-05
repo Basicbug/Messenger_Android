@@ -1,14 +1,15 @@
 package com.example.messenger.ui.chat.chatroom
 
-import android.content.Context
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.example.messenger.R
 import com.example.messenger.base.BaseSocketActivity
 import com.example.messenger.databinding.ActivityChatRoomBinding
+import com.example.messenger.repository.model.chat.Message
+import com.example.messenger.type.ChatRoomListStateType
 import com.example.messenger.ui.chat.chatroom.adapter.MessageAdapter
 
 /**
@@ -17,47 +18,57 @@ import com.example.messenger.ui.chat.chatroom.adapter.MessageAdapter
 class ChatRoomActivity : BaseSocketActivity() {
 
     lateinit var binding: ActivityChatRoomBinding
-    private lateinit var chattingRoomViewModel: ChatRoomViewModel
+    private lateinit var chatRoomViewModel: ChatRoomViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_room)
+        val messageAdapter = MessageAdapter()
+        messageAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
 
-        chattingRoomViewModel =
+                when (messageAdapter.state) {
+                    ChatRoomListStateType.RAW -> {
+                        messageAdapter.state = ChatRoomListStateType.INITIATED
+                    }
+                    ChatRoomListStateType.INITIATED -> {
+                        messageAdapter.state = ChatRoomListStateType.DONE
+                        binding.recyclerview.layoutManager?.scrollToPosition(messageAdapter.itemCount - 1)
+                    }
+                    ChatRoomListStateType.DONE -> {
+                        if (itemCount == 1) {
+                            if (positionStart != 0 || messageAdapter.itemCount <= 0)
+                                binding.recyclerview.layoutManager?.scrollToPosition(messageAdapter.itemCount - 1)
+                        }
+                    }
+                }
+            }
+        })
+
+        chatRoomViewModel =
             ChatRoomViewModelInjector.provideSampleViewModelFactory("1")
                 .create(ChatRoomViewModel::class.java)
 
-        binding.chatRoomViewModel = chattingRoomViewModel
-        binding.lifecycleOwner = this
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_room)
 
-        binding.chatRoomHelper =
-            ChatRoomActivityHelper(chattingRoomViewModel.loadMessageUseCase, "1")
-
-        val messageAdapter = MessageAdapter()
-        binding.recyclerview.adapter = messageAdapter
+        binding.apply {
+            lifecycleOwner = this@ChatRoomActivity
+            chatRoomViewModel = this@ChatRoomActivity.chatRoomViewModel
+            recyclerview.adapter = messageAdapter
+            chatRoomHelper = ChatRoomActivityHelper(
+                this@ChatRoomActivity.chatRoomViewModel.loadMessageUseCase,
+                "1"
+            )
+        }
 
         subscribeMessageList(messageAdapter)
 
-        chattingRoomViewModel.loadMessageUseCase.loadMessages("1", 0)
+        chatRoomViewModel.loadMessageUseCase.loadMessages("1", 0)
     }
 
     private fun subscribeMessageList(messageAdapter: MessageAdapter) {
-        chattingRoomViewModel.messageList.observe(this, Observer {
+        chatRoomViewModel.messageList.observe(this, Observer {
             messageAdapter.submitList(it.toMutableList())
         })
-    }
-
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        hideKeyboard()
-        return super.dispatchTouchEvent(ev)
-    }
-
-    private fun hideKeyboard() {
-        val view = this.currentFocus
-        view?.let {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-        }
     }
 }

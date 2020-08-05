@@ -24,6 +24,7 @@ ext {
     def web_socket_version = '1.3.0'
     def stomp_android_version = '1.6.4'
     def preference_version = '0.12.0'
+    def rx_relay_version = '3.0.0'
 
     webservice_libraries = [
             gson                   : "com.google.code.gson:gson:$gson_version",
@@ -73,6 +74,10 @@ ext {
             rx_android: "io.reactivex.rxjava2:rxjava:$rx_version",
     ]
 
+    rx_relay_libraries = [
+            rx_relay: "com.jakewharton.rxrelay3:rxrelay:$rx_relay_version"
+    ]
+
     lifecycle_libraries = [
             lifecycle           : "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
             lifecycle_view_model: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
@@ -87,6 +92,6 @@ ext {
     ]
 
     preference_libraries = [
-            preference:"net.grandcentrix.tray:tray:$preference_version"
+            preference: "net.grandcentrix.tray:tray:$preference_version"
     ]
 }
