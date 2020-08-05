@@ -12,5 +12,3 @@ package com.example.messenger.util.bus
  */
 
 interface RxAction
-
-fun RxAction.post() = RxActionBus.post(this)

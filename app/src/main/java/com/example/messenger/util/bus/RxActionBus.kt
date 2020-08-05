@@ -7,9 +7,6 @@
 
 package com.example.messenger.util.bus
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.Observable
-
 /**
  * @author MyeongKi
  */
@@ -17,10 +14,5 @@ import io.reactivex.Observable
 object RxActionBus {
     fun post(event : RxAction){
         RxBus.post(event)
-    }
-    fun <T : RxAction>toObservable(eventType:Class<T>):Observable<T>{
-        return RxBus.toObservable(eventType)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(AndroidSchedulers.mainThread())
     }
 }

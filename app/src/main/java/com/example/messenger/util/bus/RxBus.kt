@@ -9,7 +9,6 @@ package com.example.messenger.util.bus
 
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
-import io.reactivex.Observable
 
 /**
  * @author MyeongKi
@@ -20,13 +19,5 @@ object RxBus {
 
     fun post(event: Any) {
         bus.accept(event)
-    }
-
-    fun <T> toObservable(eventType: Class<T>): Observable<T> {
-        return bus.ofType(eventType)
-    }
-
-    fun toObservable(): Observable<Any> {
-        return bus
     }
 }
